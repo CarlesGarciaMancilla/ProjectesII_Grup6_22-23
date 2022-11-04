@@ -10,9 +10,11 @@ public class Grid : MonoBehaviour
     public TileSprite tile;
     public Transform worldCoords; // La camera
 
+    private Dictionary<Vector2, TileSprite> tiles;
 
     void GenerateGrid()
     {
+        tiles = new Dictionary<Vector2, TileSprite>();
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
@@ -22,11 +24,22 @@ public class Grid : MonoBehaviour
 
                 bool isOffset = (x % 2 == 0 && y % 2 != 0) || (x % 2 != 0 && y % 2 == 0);
                 spawnedTile.Init(isOffset);
+
+                tiles[new Vector2(x, y)] = spawnedTile;
             }
         }
 
         worldCoords.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
 
+    }
+
+    public TileSprite GetTilePosition(Vector2 pos)
+    {
+        if(tiles.TryGetValue(pos, out var tile))
+        {
+            return tile;
+        }
+        return null;
     }
 
     void Start()
