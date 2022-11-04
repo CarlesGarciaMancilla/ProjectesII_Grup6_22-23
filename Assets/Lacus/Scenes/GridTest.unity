@@ -155,6 +155,7 @@ MonoBehaviour:
   width: 7
   height: 5
   tile: {fileID: 5460757738132442192, guid: da794e831c1da4f469018c9a0c53a2fa, type: 3}
+  tileFletxa: {fileID: 5460757738132442192, guid: 7be8f8c35cf340848b45265a14d00b59, type: 3}
   worldCoords: {fileID: 2127200982}
 --- !u!4 &1221152728
 Transform:

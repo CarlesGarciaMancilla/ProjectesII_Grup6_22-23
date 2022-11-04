@@ -8,6 +8,7 @@ public class Grid : MonoBehaviour
     public int height;
 
     public TileSprite tile;
+    public TileSpriteFletxa tileFletxa;
     public Transform worldCoords; // La camera
 
     private Dictionary<Vector2, TileSprite> tiles;
@@ -20,14 +21,20 @@ public class Grid : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 TileSprite spawnedTile = Instantiate(tile, new Vector3(x, y), Quaternion.identity);
+                
                 spawnedTile.name = $"Tile {x} {y}";
 
                 bool isOffset = (x % 2 == 0 && y % 2 != 0) || (x % 2 != 0 && y % 2 == 0);
                 spawnedTile.Init(isOffset);
 
+
                 tiles[new Vector2(x, y)] = spawnedTile;
+
+                
             }
         }
+
+        Instantiate(tileFletxa, new Vector3(2, 3), Quaternion.identity);
 
         worldCoords.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
 
