@@ -8,6 +8,7 @@ public class Grid : MonoBehaviour
     public int height;
 
     public TileSprite tile;
+    public TileSprite bateria;
     public TileSpriteFletxa tileFletxa;
     public Transform worldCoords; // La camera
 
@@ -34,7 +35,22 @@ public class Grid : MonoBehaviour
             }
         }
 
-        Instantiate(tileFletxa, new Vector3(2, 3), Quaternion.identity);
+        Instantiate(tileFletxa, new Vector3(0, 4), Quaternion.identity);
+        Instantiate(tileFletxa, new Vector3(4, 4), Quaternion.identity);
+        Instantiate(tileFletxa, new Vector3(1, 0), Quaternion.identity);
+        Instantiate(tileFletxa, new Vector3(1, 2), Quaternion.identity);
+        Instantiate(tileFletxa, new Vector3(3, 0), Quaternion.identity);
+        Instantiate(tileFletxa, new Vector3(3, 1), Quaternion.identity);
+        Instantiate(tileFletxa, new Vector3(3, 2), Quaternion.identity);
+        Instantiate(tileFletxa, new Vector3(3, 3), Quaternion.identity);
+        Instantiate(tileFletxa, new Vector3(4, 1), Quaternion.identity);
+        Instantiate(tileFletxa, new Vector3(5, 0), Quaternion.identity);
+        Instantiate(tileFletxa, new Vector3(5, 4), Quaternion.identity);
+        Instantiate(tileFletxa, new Vector3(6, 2), Quaternion.identity);
+        Instantiate(tileFletxa, new Vector3(6, 3), Quaternion.identity);
+
+        Instantiate(bateria, new Vector3(1, 1), Quaternion.identity);
+        Instantiate(bateria, new Vector3(5, 2), Quaternion.identity);
 
         worldCoords.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
 
