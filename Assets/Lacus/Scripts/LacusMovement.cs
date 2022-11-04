@@ -6,13 +6,13 @@ using System.Security.Cryptography;
 
 public class LacusMovement : MonoBehaviour
 {
-    public Transform rotationValues;
-    public Vector3 desiredRotation;
+    public Transform globalRotation;
+    private Vector3 desiredRotation;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        desiredRotation = new Vector3(0f, 0f, 90f);
     }
 
     // Update is called once per frame
@@ -42,12 +42,13 @@ public class LacusMovement : MonoBehaviour
     // Funció que rota en Lacus donat una rotació amb un valor Z
     void Rotate(Vector3 rotation)
     {
-        
+        Vector3 lacusDirection = new Vector3(0f, 0f, globalRotation.transform.localRotation.z);
+
         // Rotar amb DoTween
-        rotationValues.transform.DOLocalRotate(rotation, 0.5f, RotateMode.Fast);
+        globalRotation.transform.DOLocalRotate(lacusDirection + rotation, 0.5f, RotateMode.Fast);
 
         // Rotar amb Unity
-        //rotationValues.transform.rotation = Quaternion.Euler(rotation);
+        //rotationValues.transform.rotation = Quaternion.Euler(lacusDirection + rotation);
     }
 
 
