@@ -40,15 +40,16 @@ public class TileSpriteFletxa : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            rotationRight.z += 90f;
+            this.rotationRight.z += 90f;
             CheckIfObjectClickedRight();
+            this.rotationRight.z = 0;
 
         }
         else if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            rotationLeft.z -= 90f;
+            this.rotationLeft.z -= 90f;
             CheckIfObjectClickedLeft();
-
+            this.rotationRight.z = 0;
         }
 
     }
@@ -73,7 +74,7 @@ public class TileSpriteFletxa : MonoBehaviour
         {
             
             Debug.Log("rotacion");
-            col.gameObject.transform.DORotate(rotationRight, 1.5f, RotateMode.Fast);
+            col.gameObject.transform.DORotate(rotationRight, 1.5f, RotateMode.LocalAxisAdd);
 
 
         }
