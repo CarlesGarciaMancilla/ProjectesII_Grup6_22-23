@@ -4,10 +4,8 @@ using UnityEngine;
 using DG.Tweening;
 using System.Security.Cryptography;
 
-public class LacusMovement : MonoBehaviour
+public class LacusMovement2 : MonoBehaviour
 {
-    public Transform lacusParent;
-    private Vector3 desiredRotation;
     public LacusStats lacusStats;
 
 
@@ -25,14 +23,15 @@ public class LacusMovement : MonoBehaviour
     // Funció que fa avançar en Lacus en direcció X
     void Forward()
     {
-
+       
         // Limitar el moviment del Lacus (Implementar vida/bateria)
         // Moure's amb DoTween
         if (lacusStats.batteryLeft > 0 && Input.GetKeyDown(KeyCode.Space))
         {
             //transform.DOLocalMoveX(transform.localPosition.x + lacusStats.batteryLeft, 4, false);
-            //lacusParent.transform.DOMoveX(lacusParent.transform.localPosition.x + 1f, 1f, false);
-            transform.DOLocalMoveX(lacusParent.transform.position.x + 1f, 1f, false);
+            transform.DOMoveX(transform.localPosition.x + 1f, 1f, false);
+            
+            
         }
 
         // Moure's amb Unity
@@ -42,9 +41,9 @@ public class LacusMovement : MonoBehaviour
     // Funció que rota en Lacus donat una rotació amb un valor Z
     public void Rotate(Quaternion rotation)
     {
-
+        Debug.Log("Hello im under the water");
         // Rotar amb DoTween
-        transform.DORotateQuaternion(rotation, 0.5f);
+        transform.DORotateQuaternion(rotation, 0f);
 
         // Rotar amb Unity
         //rotationValues.transform.rotation = Quaternion.Euler(lacusDirection + rotation);

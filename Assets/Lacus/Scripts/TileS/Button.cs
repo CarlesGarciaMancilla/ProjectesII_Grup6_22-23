@@ -27,28 +27,4 @@ public class Button : MonoBehaviour
     {
         highlight.SetActive(false);
     }
-
-    public void CheckIfObjectClickedRight()
-    {
-        Vector2 mousePosScreenSpace = Input.mousePosition;
-        Vector2 mousePosWorldSpace = Camera.main.ScreenToWorldPoint(mousePosScreenSpace);
-
-
-
-        Collider2D col = Physics2D.OverlapPoint(mousePosWorldSpace);
-
-        if (col == colliderLacus)
-        {
-
-            Debug.Log("activa cosas :)");
-            
-
-
-        }
-
-    }
-
-
-
-
 }

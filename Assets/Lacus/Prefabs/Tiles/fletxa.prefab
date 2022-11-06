@@ -130,7 +130,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 5758262996604025845}
   highlight: {fileID: 5160621258465148684}
   cooldown: 0.5
-  collider: {fileID: 387756994557142212}
+  colliderArrow: {fileID: 387756994557142212}
 --- !u!1 &5160621258465148684
 GameObject:
   m_ObjectHideFlags: 0
