@@ -67,7 +67,6 @@ public class LacusMovement : MonoBehaviour
        if(collider.CompareTag("Arrow"))
         {
             Debug.Log("Arrow");
-            Rotate(desiredRotation);
         }
 
         if (collider.CompareTag("Battery"))
