@@ -9,7 +9,7 @@ public class Grid : MonoBehaviour
 
     public TileSprite tile;
     public TileSprite bateria;
-    public TileSprite final;
+    public FinishTile final;
     public TileSpriteFletxa tileFletxa;
     public Button button;
     public Transform worldCoords; // La camera

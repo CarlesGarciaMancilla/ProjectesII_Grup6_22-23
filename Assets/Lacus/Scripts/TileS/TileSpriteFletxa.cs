@@ -10,8 +10,10 @@ public class TileSpriteFletxa : MonoBehaviour
     public Color color2;
     public SpriteRenderer spriteRenderer;
     public GameObject highlight;
+    public float cooldown;
     private Vector3 rotationRight = new Vector3(0, 0, 0f);
     private Vector3 rotationLeft = new Vector3(0, 0, 0f);
+    private float timeRotation;
     public Collider2D collider;
 
     public void Init(bool isOffset)
@@ -40,6 +42,11 @@ public class TileSpriteFletxa : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            if (Time.time - timeRotation < cooldown) 
+            {
+                return;
+            }
+            timeRotation = Time.time;
             this.rotationRight.z += 90f;
             CheckIfObjectClickedRight();
             this.rotationRight.z = 0;
@@ -47,6 +54,11 @@ public class TileSpriteFletxa : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Mouse1))
         {
+            if (Time.time - timeRotation < cooldown)
+            {
+                return;
+            }
+            timeRotation = Time.time;
             this.rotationLeft.z -= 90f;
             CheckIfObjectClickedLeft();
             this.rotationRight.z = 0;
