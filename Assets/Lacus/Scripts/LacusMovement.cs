@@ -9,6 +9,7 @@ public class LacusMovement : MonoBehaviour
     public Transform globalRotation;
     private Vector3 desiredRotation;
     public LacusStats lacusStats;
+    Grid tile;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +28,9 @@ public class LacusMovement : MonoBehaviour
             Rotate(desiredRotation);
         }
         */
+        
         Forward();
+        
     }
 
     // Funció que fa avançar en Lacus en direcció X
@@ -40,7 +43,7 @@ public class LacusMovement : MonoBehaviour
         {
             //transform.DOLocalMoveX(transform.localPosition.x + lacusStats.batteryLeft, 4, false);
             transform.DOLocalMoveX(transform.localPosition.x + 1f, 1f, false);
-
+            
         }
 
         // Moure's amb Unity
@@ -57,5 +60,35 @@ public class LacusMovement : MonoBehaviour
 
         // Rotar amb Unity
         //rotationValues.transform.rotation = Quaternion.Euler(lacusDirection + rotation);
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+       if(collider.CompareTag("Arrow"))
+        {
+            Debug.Log("Arrow");
+            Rotate(desiredRotation);
+        }
+
+        if (collider.CompareTag("Battery"))
+        {
+            Debug.Log("Battery");
+        }
+
+        if (collider.CompareTag("Button"))
+        {
+            Debug.Log("Button");
+        }
+
+        if (collider.CompareTag("Stop"))
+        {
+            Debug.Log("Stop");
+        }
+
+        if (collider.CompareTag("End"))
+        {
+            Debug.Log("End");
+        }
+
     }
 }
