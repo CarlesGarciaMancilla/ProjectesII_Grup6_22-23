@@ -10,6 +10,8 @@ public class LacusMovement : MonoBehaviour
     public LacusStats lacusStats;
     public Transform destination;
 
+    private bool isMoving = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -19,11 +21,12 @@ public class LacusMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Forward();
+        //Forward();
+        //ForwardWithSpaceKey();
     }
 
-    // Funció que fa avançar en Lacus en direcció X
-    void Forward()
+    // Funció que fa avançar en Lacus en direcció al empty una única casella 
+    void ForwardWithSpaceKey()
     {
         // Limitar el moviment del Lacus (Implementar vida/bateria)
         // Moure's amb DoTween
@@ -34,10 +37,38 @@ public class LacusMovement : MonoBehaviour
         }
     }
 
+    // Funció que fa avançar en Lacus en direcció al empty seguit però no és precís 
+    public void Forward()
+    {
+        // Inici del moviment   
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isMoving = true;
+        }
+
+        // Moure's amb DoTween
+        if (lacusStats.batteryLeft > 1 && isMoving)
+        {
+            transform.DOLocalMoveX(destination.transform.position.x, 4f, false);
+            transform.DOLocalMoveY(destination.transform.position.y, 4f, false);
+        }
+    }
+
+    // Funció que fa avançar en Lacus en direcció al empty una única casella però no es crida al Update() sino en les colisions
+    public void ForwardWithJumps()
+    {
+        // Moure's amb DoTween
+        if (lacusStats.batteryLeft > 1)
+        {
+            transform.DOLocalMoveX(destination.transform.position.x, 1.5f, false);
+            transform.DOLocalMoveY(destination.transform.position.y, 1.5f, false);
+        }
+    }
+
     // Funció que rota en Lacus donat una rotació amb un valor Z
     public void Rotate(Quaternion rotation)
     {
         // Rotar amb DoTween
-        transform.DORotateQuaternion(rotation, 0.5f);
+        transform.DORotateQuaternion(rotation, 0.2f);
     }
 }
