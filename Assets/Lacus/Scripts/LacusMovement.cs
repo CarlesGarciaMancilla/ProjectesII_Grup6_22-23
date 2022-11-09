@@ -10,7 +10,7 @@ public class LacusMovement : MonoBehaviour
     public LacusStats lacusStats;
     public Transform destination;
 
-    private bool isMoving = false;
+    public bool isMoving = false;
 
 
     // Start is called before the first frame update
@@ -21,8 +21,10 @@ public class LacusMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        InitiateMovementWithJumps();
         //Forward();
         //ForwardWithSpaceKey();
+
     }
 
     // Funció que fa avançar en Lacus en direcció al empty una única casella 
@@ -58,7 +60,7 @@ public class LacusMovement : MonoBehaviour
     public void ForwardWithJumps()
     {
         // Moure's amb DoTween
-        if (lacusStats.batteryLeft > 1)
+        if (lacusStats.batteryLeft > 1 && isMoving)
         {
             transform.DOLocalMoveX(destination.transform.position.x, 1.5f, false);
             transform.DOLocalMoveY(destination.transform.position.y, 1.5f, false);
@@ -70,5 +72,14 @@ public class LacusMovement : MonoBehaviour
     {
         // Rotar amb DoTween
         transform.DORotateQuaternion(rotation, 0.2f);
+    }
+    
+    private void InitiateMovementWithJumps()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && isMoving == false)
+        {
+            isMoving = true;
+            ForwardWithJumps();
+        }
     }
 }

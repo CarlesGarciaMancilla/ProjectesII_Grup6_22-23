@@ -6,6 +6,7 @@ public class LacusStats : MonoBehaviour
 {
     public int maxBattery = 6;
     public int batteryLeft;
+    public GameObject tempFinish;
     void Start()
     {
         batteryLeft = maxBattery;

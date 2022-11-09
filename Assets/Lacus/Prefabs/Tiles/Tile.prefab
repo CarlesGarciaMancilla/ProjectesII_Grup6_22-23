@@ -140,7 +140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4808606409109695021}
   - component: {fileID: 6642655656981832825}
-  m_Layer: 1
+  m_Layer: 0
   m_Name: ColisionLacus
   m_TagString: Tile
   m_Icon: {fileID: 0}

@@ -30,11 +30,13 @@ public class LacusCheckTile : MonoBehaviour
 
         if (collider.CompareTag("Stop"))
         {
+            Lacus.isMoving = false;
             Debug.Log("Stop");
         }
 
         if (collider.CompareTag("End"))
         {
+            LacusS.tempFinish.SetActive(true);
             Debug.Log("End");
         }
         if (collider.CompareTag("Tile"))
