@@ -8,6 +8,9 @@ public class LacusCheckTile : MonoBehaviour
 
     public LacusMovement Lacus;
     public LacusStats LacusS;
+    public FinishTile final;
+    public Grid grid;
+
 
     void OnTriggerEnter2D(Collider2D collider)
     {
@@ -25,11 +28,13 @@ public class LacusCheckTile : MonoBehaviour
 
         if (collider.CompareTag("Button"))
         {
+            grid.GenerateFinal();
             Debug.Log("Button");
         }
 
         if (collider.CompareTag("Stop"))
         {
+
             Lacus.isMoving = false;
             Debug.Log("Stop");
         }

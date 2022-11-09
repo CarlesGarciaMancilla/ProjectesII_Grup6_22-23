@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7285691334061593525}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: LacusDestination
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 7285691334192592304}
   - component: {fileID: 7285691334192592303}
   - component: {fileID: 7285691334192592302}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Lacus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,6 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lacusStats: {fileID: 7285691334192592305}
   destination: {fileID: 7285691334061593525}
+  isMoving: 0
 --- !u!114 &7285691334192592305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxBattery: 7
   batteryLeft: 0
+  tempFinish: {fileID: 0}
 --- !u!61 &7285691334192592304
 BoxCollider2D:
   m_ObjectHideFlags: 0

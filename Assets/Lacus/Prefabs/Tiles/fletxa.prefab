@@ -129,7 +129,7 @@ MonoBehaviour:
   color2: {r: 0.16470589, g: 1, b: 0, a: 0}
   spriteRenderer: {fileID: 5758262996604025845}
   highlight: {fileID: 5160621258465148684}
-  cooldown: 0.5
+  cooldown: 1.5
   colliderArrow: {fileID: 387756994557142212}
 --- !u!1 &5160621258465148684
 GameObject:

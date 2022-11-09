@@ -258,6 +258,7 @@ MonoBehaviour:
   tile: {fileID: 3988286950483447663, guid: da794e831c1da4f469018c9a0c53a2fa, type: 3}
   bateria: {fileID: -7141033666810951463, guid: 853f1cd7ab1e647479ec063834063114, type: 3}
   final: {fileID: 504165413333842546, guid: 2a00261fa9102a840ba53e9790a70af4, type: 3}
+  finalb: {fileID: -5927196032959092373, guid: 63405679a22a8624db3dc692d7f101e0, type: 3}
   tileFletxa: {fileID: 6999351870808495239, guid: 7be8f8c35cf340848b45265a14d00b59, type: 3}
   button: {fileID: 887289923731312251, guid: d0022ed3b2a22a447bf3f6ae84df9307, type: 3}
   worldCoords: {fileID: 2127200982}
@@ -819,6 +820,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7285691334192592302, guid: 3236183fa7626e348b06f23630f1f786, type: 3}
+      propertyPath: grid
+      value: 
+      objectReference: {fileID: 1221152727}
+    - target: {fileID: 7285691334192592302, guid: 3236183fa7626e348b06f23630f1f786, type: 3}
+      propertyPath: final
+      value: 
+      objectReference: {fileID: 504165413333842546, guid: 2a00261fa9102a840ba53e9790a70af4, type: 3}
     - target: {fileID: 7285691334192592305, guid: 3236183fa7626e348b06f23630f1f786, type: 3}
       propertyPath: tempFinish
       value: 

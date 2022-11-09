@@ -10,6 +10,7 @@ public class Grid : MonoBehaviour
     public TileSprite tile;
     public TileSprite bateria;
     public FinishTile final;
+    public TileSprite finalb;
     public TileSpriteFletxa tileFletxa;
     public Button button;
     public Transform worldCoords; // La camera
@@ -56,9 +57,17 @@ public class Grid : MonoBehaviour
 
         Instantiate(button, new Vector3(2, 0), Quaternion.identity);
 
-        Instantiate(final, new Vector3(0, 1), Quaternion.identity);
+        Instantiate(finalb, new Vector3(0, 1), Quaternion.identity);
+
 
         worldCoords.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
+
+    }
+
+    public void GenerateFinal() 
+    {
+        Instantiate(final, new Vector3(0, 1), Quaternion.identity);
+
 
     }
 
