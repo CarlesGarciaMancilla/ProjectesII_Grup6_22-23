@@ -6,17 +6,18 @@ public class Grid : MonoBehaviour
 {
     public int width;
     public int height;
-
+    public TileSpriteStop stopTile;
     public TileSprite tile;
     public TileSprite bateria;
     public FinishTile final;
+    public TileSprite finalb;
     public TileSpriteFletxa tileFletxa;
     public Button button;
     public Transform worldCoords; // La camera
 
     private Dictionary<Vector2, TileSprite> tiles;
 
-    void GenerateGrid()
+    public void GenerateGrid()
     {
         tiles = new Dictionary<Vector2, TileSprite>();
         for (int x = 0; x < width; x++)
@@ -38,7 +39,7 @@ public class Grid : MonoBehaviour
         }
 
         Instantiate(tileFletxa, new Vector3(0, 4), Quaternion.identity);
-        Instantiate(tileFletxa, new Vector3(4, 4), Quaternion.identity);
+        Instantiate(stopTile, new Vector3(3, 4), Quaternion.identity);
         Instantiate(tileFletxa, new Vector3(1, 0), Quaternion.identity);
         Instantiate(tileFletxa, new Vector3(1, 2), Quaternion.identity);
         Instantiate(tileFletxa, new Vector3(3, 0), Quaternion.identity);
@@ -56,9 +57,17 @@ public class Grid : MonoBehaviour
 
         Instantiate(button, new Vector3(2, 0), Quaternion.identity);
 
-        Instantiate(final, new Vector3(0, 1), Quaternion.identity);
+        Instantiate(finalb, new Vector3(0, 1), Quaternion.identity);
+
 
         worldCoords.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
+
+    }
+
+    public void GenerateFinal() 
+    {
+        Instantiate(final, new Vector3(0, 1), Quaternion.identity);
+
 
     }
 

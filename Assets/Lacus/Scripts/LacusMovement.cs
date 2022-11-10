@@ -6,88 +6,81 @@ using System.Security.Cryptography;
 
 public class LacusMovement : MonoBehaviour
 {
-    public Transform globalRotation;
-    private Vector3 desiredRotation;
+    //public Transform lacusParent;
     public LacusStats lacusStats;
-    Grid tile;
+    public Transform destination;
+    public GameObject Lacus;
+
+    public bool isMoving = false;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        desiredRotation = new Vector3(0f, 0f, 90f);
-        //Rotate(desiredRotation);
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Observar els inputs del teclat (WASD o arrows)
-        /*
-        if(detectedRotation)
-        {
-            Rotate(desiredRotation);
-        }
-        */
-        
-        Forward();
-        
+        InitiateMovementWithJumps();
+        //Forward();
+        //ForwardWithSpaceKey();
+
     }
 
-    // Funció que fa avançar en Lacus en direcció X
-    void Forward()
+    // Funció que fa avançar en Lacus en direcció al empty una única casella 
+    void ForwardWithSpaceKey()
     {
-       
         // Limitar el moviment del Lacus (Implementar vida/bateria)
         // Moure's amb DoTween
-        if (lacusStats.batteryLeft > 0)
+        if (lacusStats.batteryLeft > 0 && Input.GetKeyDown(KeyCode.Space))
         {
-            //transform.DOLocalMoveX(transform.localPosition.x + lacusStats.batteryLeft, 4, false);
-            transform.DOLocalMoveX(transform.localPosition.x + 1f, 1f, false);
-            
+            transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
+            transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
+        }
+    }
+
+    // Funció que fa avançar en Lacus en direcció al empty seguit però no és precís 
+    public void Forward()
+    {
+        // Inici del moviment   
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isMoving = true;
         }
 
-        // Moure's amb Unity
-        //transform.localPosition = transform.localPosition + new Vector3(1f * Time.deltaTime, 0f, 0f);
+        // Moure's amb DoTween
+        if (lacusStats.batteryLeft > 1 && isMoving)
+        {
+            transform.DOLocalMoveX(destination.transform.position.x, 4f, false);
+            transform.DOLocalMoveY(destination.transform.position.y, 4f, false);
+        }
+    }
+
+    // Funció que fa avançar en Lacus en direcció al empty una única casella però no es crida al Update() sino en les colisions
+    public void ForwardWithJumps()
+    {
+        // Moure's amb DoTween
+        if (lacusStats.batteryLeft > 1 && isMoving)
+        {
+            Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
+            Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
+        }
     }
 
     // Funció que rota en Lacus donat una rotació amb un valor Z
-    void Rotate(Vector3 rotation)
+    public void Rotate(Quaternion rotation)
     {
-        Vector3 lacusDirection = new Vector3(0f, 0f, rotation.z);
-
         // Rotar amb DoTween
-        globalRotation.transform.DOLocalRotate(rotation, 0.5f, RotateMode.Fast);
-
-        // Rotar amb Unity
-        //rotationValues.transform.rotation = Quaternion.Euler(lacusDirection + rotation);
+        Lacus.transform.DORotateQuaternion(rotation, 0.3f);
     }
-
-    void OnTriggerEnter2D(Collider2D collider)
+    
+    private void InitiateMovementWithJumps()
     {
-       if(collider.CompareTag("Arrow"))
+        if (Input.GetKeyDown(KeyCode.Space) && isMoving == false)
         {
-            Debug.Log("Arrow");
+            isMoving = true;
+            ForwardWithJumps();
         }
-
-        if (collider.CompareTag("Battery"))
-        {
-            Debug.Log("Battery");
-        }
-
-        if (collider.CompareTag("Button"))
-        {
-            Debug.Log("Button");
-        }
-
-        if (collider.CompareTag("Stop"))
-        {
-            Debug.Log("Stop");
-        }
-
-        if (collider.CompareTag("End"))
-        {
-            Debug.Log("End");
-        }
-
     }
 }

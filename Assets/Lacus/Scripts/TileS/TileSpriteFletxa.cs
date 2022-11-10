@@ -14,7 +14,7 @@ public class TileSpriteFletxa : MonoBehaviour
     private Vector3 rotationRight = new Vector3(0, 0, 0f);
     private Vector3 rotationLeft = new Vector3(0, 0, 0f);
     private float timeRotation;
-    public Collider2D collider;
+    public Collider2D colliderArrow;
 
     public void Init(bool isOffset)
     {
@@ -82,13 +82,11 @@ public class TileSpriteFletxa : MonoBehaviour
 
         Collider2D col = Physics2D.OverlapPoint(mousePosWorldSpace);
 
-        if (col == collider)
+        if (col == colliderArrow)
         {
             
             Debug.Log("rotacion");
             col.gameObject.transform.DORotate(rotationRight, 1.5f, RotateMode.LocalAxisAdd);
-
-
         }
 
     }
@@ -101,12 +99,10 @@ public class TileSpriteFletxa : MonoBehaviour
 
         Collider2D col = Physics2D.OverlapPoint(mousePosWorldSpace);
 
-        if (col == collider)
+        if (col == colliderArrow)
         {
             Debug.Log("rotacion");
             col.gameObject.transform.DORotate(rotationLeft, 1.5f, RotateMode.Fast);
-
-
         }
 
     }

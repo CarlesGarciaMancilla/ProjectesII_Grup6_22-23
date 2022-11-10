@@ -26,12 +26,6 @@ public class TileSprite: MonoBehaviour
     {
         highlight.SetActive(false);
     }
-
-
-  
-
-  
- 
 }
 
     
