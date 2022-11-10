@@ -2,18 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LacusCheckTileRotation : MonoBehaviour
+public class LacusPlayAudio : MonoBehaviour
 {
-
-    public LacusMovement LacusM;
-
+    public AudioSource moveAudio;
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.CompareTag("Arrow"))
+        if (collider.CompareTag("Tile"))
         {
-            LacusM.Rotate(collider.transform.rotation);
-            Debug.Log("Arrow");
+            moveAudio.Play();
         }
     }
 }
