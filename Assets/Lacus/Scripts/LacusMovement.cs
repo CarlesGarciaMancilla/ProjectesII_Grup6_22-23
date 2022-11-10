@@ -9,6 +9,7 @@ public class LacusMovement : MonoBehaviour
     //public Transform lacusParent;
     public LacusStats lacusStats;
     public Transform destination;
+    public GameObject Lacus;
 
     public bool isMoving = false;
 
@@ -62,8 +63,8 @@ public class LacusMovement : MonoBehaviour
         // Moure's amb DoTween
         if (lacusStats.batteryLeft > 1 && isMoving)
         {
-            transform.DOLocalMoveX(destination.transform.position.x, 1.5f, false);
-            transform.DOLocalMoveY(destination.transform.position.y, 1.5f, false);
+            Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
+            Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
         }
     }
 
@@ -71,7 +72,7 @@ public class LacusMovement : MonoBehaviour
     public void Rotate(Quaternion rotation)
     {
         // Rotar amb DoTween
-        transform.DORotateQuaternion(rotation, 0.2f);
+        Lacus.transform.DORotateQuaternion(rotation, 0.3f);
     }
     
     private void InitiateMovementWithJumps()

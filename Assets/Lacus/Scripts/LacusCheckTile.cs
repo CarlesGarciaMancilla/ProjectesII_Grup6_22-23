@@ -14,12 +14,6 @@ public class LacusCheckTile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.CompareTag("Arrow"))
-        {
-            Lacus.Rotate(collider.transform.rotation);
-            Debug.Log("Arrow");
-        }
-
         if (collider.CompareTag("Battery"))
         {
             Debug.Log("Battery");
