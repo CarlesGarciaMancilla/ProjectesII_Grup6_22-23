@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3146181567164665423}
   - component: {fileID: 5758262996604025845}
   - component: {fileID: 387756994557142212}
-  - component: {fileID: 6999351870808495239}
+  - component: {fileID: 9208457546547781520}
   m_Layer: 0
   m_Name: fletxa
   m_TagString: Arrow
@@ -113,7 +113,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &6999351870808495239
+--- !u!114 &9208457546547781520
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,14 +122,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3422180045459200256}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 761bef726a821c546b4e523f4a35ce91, type: 3}
+  m_Script: {fileID: 11500000, guid: 9411d678fdf1ada4494e6792ba5a456c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color1: {r: 0.47882482, g: 0.9150943, b: 0.3927999, a: 1}
-  color2: {r: 0.16470589, g: 1, b: 0, a: 0}
+  color1: {r: 0, g: 0, b: 0, a: 0}
+  color2: {r: 0, g: 0, b: 0, a: 0}
   spriteRenderer: {fileID: 5758262996604025845}
   highlight: {fileID: 5160621258465148684}
-  cooldown: 1.5
+  cooldown: 0
   colliderArrow: {fileID: 387756994557142212}
 --- !u!1 &5160621258465148684
 GameObject:
