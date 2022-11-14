@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
-    public int width;
-    public int height;
-    public TileSpriteStop stopTile;
-    public TileSprite tile;
-    public TileSprite bateria;
-    public FinishTile final;
-    public TileSprite finalb;
-    public TileSpriteFletxa tileFletxa;
-    public Button button;
-    public Transform worldCoords; // La camera
+    [SerializeField] private int width;
+    [SerializeField] private int height;
+    [SerializeField] private TileSprite tile;
+    [SerializeField] private FinishTile final;
+    [SerializeField] private TileSprite finalb;
+    [SerializeField] private Transform worldCoords; // La camera
 
     private Dictionary<Vector2, TileSprite> tiles;
 
@@ -22,7 +18,7 @@ public class Grid : MonoBehaviour
         tiles = new Dictionary<Vector2, TileSprite>();
         for (int x = 0; x < width; x++)
         {
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y > -height; y--)
             {
                 TileSprite spawnedTile = Instantiate(tile, new Vector3(x, y), Quaternion.identity);
                 
@@ -38,37 +34,16 @@ public class Grid : MonoBehaviour
             }
         }
 
-        Instantiate(tileFletxa, new Vector3(0, 4), Quaternion.identity);
-        Instantiate(stopTile, new Vector3(3, 4), Quaternion.identity);
-        Instantiate(tileFletxa, new Vector3(1, 0), Quaternion.identity);
-        Instantiate(tileFletxa, new Vector3(1, 2), Quaternion.identity);
-        Instantiate(tileFletxa, new Vector3(3, 0), Quaternion.identity);
-        Instantiate(tileFletxa, new Vector3(3, 1), Quaternion.identity);
-        Instantiate(tileFletxa, new Vector3(3, 2), Quaternion.identity);
-        Instantiate(tileFletxa, new Vector3(3, 3), Quaternion.identity);
-        Instantiate(tileFletxa, new Vector3(4, 1), Quaternion.identity);
-        Instantiate(tileFletxa, new Vector3(5, 0), Quaternion.identity);
-        Instantiate(tileFletxa, new Vector3(5, 4), Quaternion.identity);
-        Instantiate(tileFletxa, new Vector3(6, 2), Quaternion.identity);
-        Instantiate(tileFletxa, new Vector3(6, 3), Quaternion.identity);
-
-        Instantiate(bateria, new Vector3(1, 1), Quaternion.identity);
-        Instantiate(bateria, new Vector3(5, 2), Quaternion.identity);
-
-        Instantiate(button, new Vector3(2, 0), Quaternion.identity);
-
-        Instantiate(finalb, new Vector3(0, 1), Quaternion.identity);
+        //Instantiate(finalb, new Vector3(0, 1), Quaternion.identity);
 
 
-        worldCoords.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
+        worldCoords.transform.position = new Vector3(2, -3, -10);
 
     }
 
     public void GenerateFinal() 
     {
         Instantiate(final, new Vector3(0, 1), Quaternion.identity);
-
-
     }
 
     public TileSprite GetTilePosition(Vector2 pos)
