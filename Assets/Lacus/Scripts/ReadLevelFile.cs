@@ -14,12 +14,13 @@ public class ReadLevelFile : MonoBehaviour
     [SerializeField] private GameObject button;
     [SerializeField] private GameObject exit;
     [SerializeField] private GameObject stop;
+    [SerializeField] private String levelName;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        ReadTxt();
+        ReadTxt(5, levelName);
     }
 
     // Update is called once per frame
@@ -28,86 +29,99 @@ public class ReadLevelFile : MonoBehaviour
         
     }
 
-    void ReadTxt()
+    void ReadTxt(int width, string fileName)
     {
-        string[] lines = { };
-        float x = 0.5f;
-        float y = 0.5f;
+        float x = 0f;
+        float y = 0f;
+        string line = "";
 
         try
         {
-            lines = System.IO.File.ReadAllLines(@"C:\Users\Public\TestFolder\WriteLines2.txt"); // Preguntar sobre lo de dirname
+            var textFile = Resources.Load<TextAsset>("Text/"+fileName);
+            line = textFile.text;
         }
         catch (Exception e)
         {
             Debug.LogError($"The process failed: {e.ToString()}");
         }
 
-        foreach (string line in lines)
+        foreach (char tile in line)
         {
-            x = 0.5f;
-            foreach(char tile in line)
+            /*if (tile != ' ')
             {
-                switch (tile)
-                {
-                    case '<': // Arrow
-                        {
-                            Instantiate(arrow, new Vector3(x, y, 0), Quaternion.identity);
-                            break;
-                        }
-                    case '_': // Normal tile
-                        {
-                            Instantiate(normalTile, new Vector3(x, y, 0), Quaternion.identity);
-                            break;
-                        }
-                    case 'B': // Battery
-                        {
-                            Instantiate(battery, new Vector3(x, y, 0), Quaternion.identity);
-                            break;
-                        }
-                    case 'L': // Lacus
-                        {
-                            Instantiate(lacus, new Vector3(x, y, 0), Quaternion.identity);
-                            break;
-                        }
-                    case '?': // Button
-                        {
-                            Instantiate(button, new Vector3(x, y, 0), Quaternion.identity);
-                            break;
-                        }
-                    case '!': // Deactivated Arrow
-                        {
-                            Instantiate(arrow, new Vector3(x, y, 0), Quaternion.identity);
-                            break;
-                        }
-                    case 'E': // Exit
-                        {
-                            Instantiate(exit, new Vector3(x, y, 0), Quaternion.identity);
-                            break;
-                        }
-                    case 'S': // Stop
-                        {
-                            Instantiate(stop, new Vector3(x, y, 0), Quaternion.identity);
-                            break;
-                        }
+                Debug.Log(tile);
+            }*/
 
-                    // En el cas de fer més caselles, seguir la estructura
+            switch (tile)
+            {
+                case '<': // Arrow
+                    {
+                        Instantiate(arrow, new Vector3(x, y, 0), Quaternion.identity);
+                        break;
+                    }
+                case '_': // Normal tile
+                    {
+                        //Instantiate(normalTile, new Vector3(x, y, 0), Quaternion.identity);
+                        break;
+                    }
+                case 'B': // Battery
+                    {
+                        Instantiate(battery, new Vector3(x, y, 0), Quaternion.identity);
+                        break;
+                    }
+                case 'L': // Lacus
+                    {
+                        Instantiate(lacus, new Vector3(x, y, 0), Quaternion.identity);
+                        break;
+                    }
+                case '?': // Button
+                    {
+                        Instantiate(button, new Vector3(x, y, 0), Quaternion.identity);
+                        break;
+                    }
+                case '!': // Deactivated Arrow
+                    {
+                        Instantiate(arrow, new Vector3(x, y, 0), Quaternion.identity);
+                        break;
+                    }
+                case 'E': // Exit
+                    {
+                        Instantiate(exit, new Vector3(x, y, 0), Quaternion.identity);
+                        break;
+                    }
+                case 'S': // Stop
+                    {
+                        Instantiate(stop, new Vector3(x, y, 0), Quaternion.identity);
+                        break;
+                    }
 
-                    case ' ': // Usat per legibilitat al txt
-                        {
-                            x--;
-                            break;
-                        }
-                    default:
-                        {
-                            Debug.LogError("tile is unknown or not implemented");
-                            x--;
-                            break;
-                        }
-                }
-                x++;
-            }  
+                // En el cas de fer més caselles, seguir la estructura
+
+                case ' ': // Usat per legibilitat al txt
+                    {
+                        x--;
+                        break;
+                    }
+                case '\n': // Salt de linea
+                    {
+                        x--;
+                        break;
+                    }
+                default:
+                    {
+                        //Debug.LogError("tile is unknown or not implemented");
+                        //Debug.Log(x);
+                        x--;
+                        break;
+                    }
+
+            }
+            x++;
+            if (x == width)
+            {
+                y--;
+                x = 0f;
+            }
         }
-        y++;
     }
 }
