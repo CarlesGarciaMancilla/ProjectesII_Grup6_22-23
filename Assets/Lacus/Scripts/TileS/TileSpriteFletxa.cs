@@ -42,11 +42,11 @@ public class TileSpriteFletxa : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            if (Time.time - timeRotation < cooldown) 
+            if (Time.time - this.timeRotation < cooldown) 
             {
                 return;
             }
-            timeRotation = Time.time;
+            this.timeRotation = Time.time;
             this.rotationRight.z += 90f;
             CheckIfObjectClickedRight();
             this.rotationRight.z = 0;
@@ -54,11 +54,11 @@ public class TileSpriteFletxa : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            if (Time.time - timeRotation < cooldown)
+            if (Time.time - this.timeRotation < cooldown)
             {
                 return;
             }
-            timeRotation = Time.time;
+            this.timeRotation = Time.time;
             this.rotationLeft.z -= 90f;
             CheckIfObjectClickedLeft();
             this.rotationRight.z = 0;
@@ -86,7 +86,7 @@ public class TileSpriteFletxa : MonoBehaviour
         {
             
             Debug.Log("rotacion");
-            col.gameObject.transform.DORotate(rotationRight, 1.5f, RotateMode.LocalAxisAdd);
+            col.gameObject.transform.DORotate(rotationRight, 0.5f, RotateMode.LocalAxisAdd);
         }
 
     }
@@ -102,7 +102,7 @@ public class TileSpriteFletxa : MonoBehaviour
         if (col == colliderArrow)
         {
             Debug.Log("rotacion");
-            col.gameObject.transform.DORotate(rotationLeft, 1.5f, RotateMode.Fast);
+            col.gameObject.transform.DORotate(rotationLeft, 0.5f, RotateMode.Fast);
         }
 
     }
