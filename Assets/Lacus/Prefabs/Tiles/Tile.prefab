@@ -113,7 +113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4808606409109695021}
   - component: {fileID: 6642655656981832825}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: ColisionLacus
   m_TagString: Tile
   m_Icon: {fileID: 0}
@@ -285,7 +285,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8514734583823012164}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0

@@ -8,6 +8,7 @@ public class TileHover : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        Debug.Log("ON TILE");
         highlight.SetActive(true);
     }
 

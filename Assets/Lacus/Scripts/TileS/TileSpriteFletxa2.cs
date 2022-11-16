@@ -7,10 +7,11 @@ using DG.Tweening;
 public class TileSpriteFletxa2 : MonoBehaviour
 {
     //public SpriteRenderer spriteRenderer;
-    public float cooldown;
-    public Collider2D colliderArrow;
 
+    public Collider2D colliderArrow;
     private float rotationAngle = 0f;
+
+    [SerializeField] private LayerMask layerArrow;
 
     void Start()
     {
@@ -32,7 +33,7 @@ public class TileSpriteFletxa2 : MonoBehaviour
         Vector2 mousePosScreenSpace = Input.mousePosition;
         Vector2 mousePosWorldSpace = Camera.main.ScreenToWorldPoint(mousePosScreenSpace);
 
-        Collider2D col = Physics2D.OverlapPoint(mousePosWorldSpace);
+        Collider2D col = Physics2D.OverlapPoint(mousePosWorldSpace, layerArrow);
 
         if (col == colliderArrow)
         {

@@ -84,7 +84,7 @@ GameObject:
   - component: {fileID: 5758262996604025845}
   - component: {fileID: 387756994557142212}
   - component: {fileID: 9208457546547781520}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: fletxa
   m_TagString: Arrow
   m_Icon: {fileID: 0}
@@ -198,8 +198,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9411d678fdf1ada4494e6792ba5a456c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 0
   colliderArrow: {fileID: 387756994557142212}
+  layerArrow:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &5160621258465148684
 GameObject:
   m_ObjectHideFlags: 0
