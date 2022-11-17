@@ -7,11 +7,11 @@ using System.Security.Cryptography;
 public class LacusMovement : MonoBehaviour
 {
     //public Transform lacusParent;
-    public LacusStats lacusStats;
-    public Transform destination;
-    public GameObject Lacus;
+    [SerializeField] private LacusStats lacusStats;
+    [SerializeField] private Transform destination;
+    [SerializeField] private GameObject Lacus;
 
-    public bool isMoving = false;
+    [HideInInspector] public bool isMoving = false;
 
 
     // Start is called before the first frame update
