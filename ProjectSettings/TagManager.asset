@@ -4,13 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  tags:
   - Arrow
-  - Tile
   - Battery
-  - End
   - Button
+  - End
   - Stop
+  - Tile
   layers:
   - Default
   - TransparentFX
@@ -18,9 +17,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Lines
+  - ArrowRotation
+  - StopRotation
   - 
   - 
   - 
