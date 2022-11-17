@@ -4,14 +4,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 
-public class TileSpriteFletxa2 : MonoBehaviour
+public class RotationArrow : MonoBehaviour
 {
-    //public SpriteRenderer spriteRenderer;
-
-    public Collider2D colliderArrow;
+    [SerializeField] private LayerMask layerArrow;
+    [SerializeField ]private Collider2D colliderArrow;
     private float rotationAngle = 0f;
 
-    [SerializeField] private LayerMask layerArrow;
+    
 
     void Start()
     {

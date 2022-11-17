@@ -14,7 +14,7 @@ public class ReadLevelFile : MonoBehaviour
     [SerializeField] private GameObject button;
     [SerializeField] private GameObject exit;
     [SerializeField] private GameObject stop;
-    [SerializeField] private String levelName;
+    [SerializeField] private string levelName;
 
 
     // Start is called before the first frame update
