@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System.Security.Cryptography;
+using System.Data;
 
 public class LacusMovement : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class LacusMovement : MonoBehaviour
     public LacusStats lacusStats;
     public Transform destination;
     public GameObject Lacus;
+    public float initialPositionX;
+    public float initialPositionY;
 
     public bool isMoving = false;
 
@@ -17,6 +20,9 @@ public class LacusMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        initialPositionX = this.transform.position.x;
+        initialPositionY = this.transform.position.y;
+
     }
 
     // Update is called once per frame
@@ -25,6 +31,11 @@ public class LacusMovement : MonoBehaviour
         InitiateMovementWithJumps();
         //Forward();
         //ForwardWithSpaceKey();
+         if(lacusStats.batteryLeft <= 1)
+        {
+            Death();
+
+        }
 
     }
 
@@ -66,6 +77,7 @@ public class LacusMovement : MonoBehaviour
             Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
             Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
         }
+       
     }
 
     // Funció que rota en Lacus donat una rotació amb un valor Z
@@ -82,5 +94,42 @@ public class LacusMovement : MonoBehaviour
             isMoving = true;
             ForwardWithJumps();
         }
+        else if (Input.GetKeyDown(KeyCode.Mouse0)) 
+        {
+
+            CheckIfMoveClick();
+        }
+    }
+
+
+    public void CheckIfMoveClick()
+    {
+        Vector2 mousePosScreenSpace = Input.mousePosition;
+        Vector2 mousePosWorldSpace = Camera.main.ScreenToWorldPoint(mousePosScreenSpace);
+
+
+
+        Collider2D col = Physics2D.OverlapPoint(mousePosWorldSpace);
+        if (col == Lacus) 
+        {
+            isMoving = true;
+            ForwardWithJumps();
+
+        }
+        
+
+
+    }
+    public void Death() 
+    {
+        
+        Debug.Log("muerto");
+        isMoving = false;
+        lacusStats.batteryLeft = 6;
+        transform.position = new Vector3(initialPositionX, initialPositionY, 0f);
+        transform.Rotate(0f, 0f, 270f);
+       
+
+
     }
 }

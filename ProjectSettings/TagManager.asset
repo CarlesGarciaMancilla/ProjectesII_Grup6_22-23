@@ -4,11 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  tags:
-  - Arrow
   - Tile
-  - Battery
+  - Arrow
   - End
+  - Battery
   - Button
   - Stop
   layers:

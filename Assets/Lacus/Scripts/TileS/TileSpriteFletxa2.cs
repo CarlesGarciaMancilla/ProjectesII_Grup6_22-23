@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
+using UnityEditor.DeviceSimulation;
 
 public class TileSpriteFletxa2 : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class TileSpriteFletxa2 : MonoBehaviour
     private Vector3 rotationRight = new Vector3(0, 0, 0f);
     private Vector3 rotationLeft = new Vector3(0, 0, 0f);
     private float timeRotation;
+    private Vector2 touch;
     public Collider2D colliderArrow;
 
     public void Init(bool isOffset)
@@ -40,6 +42,12 @@ public class TileSpriteFletxa2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.touchCount > 0)
+        {
+           touch = Input.GetTouch(0).position;
+        }
+
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             if (Time.time - this.timeRotation < cooldown)
@@ -63,11 +71,9 @@ public class TileSpriteFletxa2 : MonoBehaviour
             CheckIfObjectClickedLeft();
             this.rotationRight.z = 0;
         }
+        
 
-        if(Input.touchCount > 0)
-        {
-            Vector2 touch = Input.GetTouch(0).position;
-        }
+     
     }
 
     public class MouseClick : MonoBehaviour
