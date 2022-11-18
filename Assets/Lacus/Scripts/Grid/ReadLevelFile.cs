@@ -14,13 +14,14 @@ public class ReadLevelFile : MonoBehaviour
     [SerializeField] private GameObject button;
     [SerializeField] private GameObject exit;
     [SerializeField] private GameObject stop;
+    [SerializeField] private GameObject wall;
     [SerializeField] private string levelName;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        ReadTxt(5, levelName);
+        ReadTxt(levelName);
     }
 
     // Update is called once per frame
@@ -29,7 +30,7 @@ public class ReadLevelFile : MonoBehaviour
         
     }
 
-    void ReadTxt(int width, string fileName)
+    void ReadTxt(string fileName)
     {
         float x = 0f;
         float y = 0f;
@@ -94,6 +95,11 @@ public class ReadLevelFile : MonoBehaviour
                         Instantiate(stop, new Vector3(x, y, 0), Quaternion.identity);
                         break;
                     }
+                case '#': // Wall
+                    {
+                        Instantiate(wall, new Vector3(x, y, 0), Quaternion.identity);
+                        break;
+                    }
 
                 // En el cas de fer més caselles, seguir la estructura
 
@@ -104,7 +110,8 @@ public class ReadLevelFile : MonoBehaviour
                     }
                 case '\n': // Salt de linea
                     {
-                        x--;
+                        y--;
+                        x = -1f;
                         break;
                     }
                 default:
@@ -117,11 +124,6 @@ public class ReadLevelFile : MonoBehaviour
 
             }
             x++;
-            if (x == width)
-            {
-                y--;
-                x = 0f;
-            }
         }
     }
 }

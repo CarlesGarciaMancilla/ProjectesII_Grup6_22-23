@@ -286,5 +286,4 @@ MonoBehaviour:
   layerStop:
     serializedVersion: 2
     m_Bits: 256
-  Lacus: {fileID: 3388977648771342888, guid: 3236183fa7626e348b06f23630f1f786, type: 3}
-  LacusCollider: {fileID: 0}
+  Lacus: {fileID: 2110158594830730952, guid: 37cb86c1a5062b246a50ee90540e02dc, type: 3}
