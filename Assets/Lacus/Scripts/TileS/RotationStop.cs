@@ -11,13 +11,13 @@ public class RotationStop: MonoBehaviour
     private float rotationAngle = 0f;
 
     [SerializeField] private GameObject Lacus;
-    private Collider2D LacusCollider;
+    [SerializeField] private Collider2D LacusCollider;
     
 
     // Start is called before the first frame update
     void Start()
     {
-       LacusCollider = Lacus.GetComponent<Collider2D>();
+
     }
 
     // Update is called once per frame
@@ -32,23 +32,26 @@ public class RotationStop: MonoBehaviour
         Vector2 mousePosWorldSpace = Camera.main.ScreenToWorldPoint(mousePosScreenSpace);
 
         Collider2D col = Physics2D.OverlapPoint(mousePosWorldSpace, layerStop);
-
-        if (col == colliderStop && LacusCollider == colliderStop)
+        
+        if (col == colliderStop)
+        //if (col == colliderStop && LacusCollider == colliderStop)
         {
-            Debug.Log("ONSTOP");
             if (Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                Debug.Log("LEFT");
+            { 
+            
                 rotationAngle += 90f;
             }
 
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {
-                Debug.Log("RIGHT");
                 rotationAngle -= 90f;
             }
-            //Lacus.transform.Rotate(0f, 0f, rotationAngle, Space.World);
-            Lacus.transform.Rotate(0f, 0f, 90f, Space.World);
+
+            if (rotationAngle != 0)
+            {
+                Debug.Log("AAAA");
+                Lacus.gameObject.transform.Rotate(0f, 0f, rotationAngle, Space.Self);
+            }
             rotationAngle = 0f;
         }
     }
