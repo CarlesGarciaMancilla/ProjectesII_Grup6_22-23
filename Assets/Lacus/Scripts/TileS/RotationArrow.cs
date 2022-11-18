@@ -9,7 +9,7 @@ public class RotationArrow : MonoBehaviour
     [SerializeField] private LayerMask layerArrow;
     [SerializeField ]private Collider2D colliderArrow;
     private float rotationAngle = 0f;
-
+    [SerializeField] private AudioSource arrowTurn;
     
 
     void Start()
@@ -39,11 +39,13 @@ public class RotationArrow : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 rotationAngle += 90f;
+                arrowTurn.Play();
             }
 
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {
                 rotationAngle -= 90f;
+                arrowTurn.Play();
             }
             col.gameObject.transform.Rotate(0f, 0f, rotationAngle, Space.World);
             rotationAngle = 0f;
