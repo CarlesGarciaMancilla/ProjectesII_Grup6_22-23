@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OnOffArrow : MonoBehaviour
 {
-    [SerializeField] Button button;
+    [SerializeField] public Button button;
     [SerializeField] GameObject off;
     [SerializeField] GameObject fletxa_button;
     // Start is called before the first frame update
