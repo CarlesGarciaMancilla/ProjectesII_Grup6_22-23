@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1415476751359775736
+--- !u!1 &4476345934171423623
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1415476751359775738}
-  - component: {fileID: 1415476751359775737}
-  - component: {fileID: 1415476751359775739}
+  - component: {fileID: 4476345934171423621}
+  - component: {fileID: 4476345934171423622}
+  - component: {fileID: 4476345934171423620}
   m_Layer: 0
   m_Name: Generate Map
   m_TagString: Untagged
@@ -18,13 +18,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1415476751359775738
+--- !u!4 &4476345934171423621
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1415476751359775736}
+  m_GameObject: {fileID: 4476345934171423623}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.3069725, y: 4.0030804, z: 0.0005359232}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -33,33 +33,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1415476751359775737
+--- !u!114 &4476345934171423622
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1415476751359775736}
+  m_GameObject: {fileID: 4476345934171423623}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19c2541f774d3bc4185adac65ac4ad09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelName: Tuto_4
   arrow: {fileID: 3422180045459200256, guid: 7be8f8c35cf340848b45265a14d00b59, type: 3}
-  normalTile: {fileID: 343057456601112246, guid: da794e831c1da4f469018c9a0c53a2fa, type: 3}
   battery: {fileID: 3422180045459200256, guid: 853f1cd7ab1e647479ec063834063114, type: 3}
-  lacus: {fileID: 3388977648771342888, guid: 3236183fa7626e348b06f23630f1f786, type: 3}
-  button: {fileID: 3422180045459200256, guid: d0022ed3b2a22a447bf3f6ae84df9307, type: 3}
-  exit: {fileID: 3422180045459200256, guid: 2a00261fa9102a840ba53e9790a70af4, type: 3}
+  lacus: {fileID: 2110158594830730952, guid: 37cb86c1a5062b246a50ee90540e02dc, type: 3}
+  button: {fileID: 5302358215521241045, guid: d0022ed3b2a22a447bf3f6ae84df9307, type: 3}
+  final: {fileID: 3422180045459200256, guid: 2a00261fa9102a840ba53e9790a70af4, type: 3}
   stop: {fileID: 5001330152221261567, guid: aab0e41829b53fd409146bdab6fbc26f, type: 3}
-  levelName: LevelProto
---- !u!114 &1415476751359775739
+  TopLeftWall: {fileID: 115603370549585573, guid: 42e159a033f6d3c4795b83ced04b9c86, type: 3}
+  TopRightWall: {fileID: 1584175550994175667, guid: 5a87bd31fd099d44996ffc85e18fa9c2, type: 3}
+  BotLeftWall: {fileID: 6363641738827828562, guid: 949c95bcb3c46304380f3d9ceac962f9, type: 3}
+  BotRightWall: {fileID: 6621411703247680847, guid: 133549a5805d6f547ba636224a04bcf6, type: 3}
+  TopWall: {fileID: 4140800150419150313, guid: ec352aa937fb1154daf18c1231b88897, type: 3}
+  BotWall: {fileID: 3193550480499899915, guid: 5bac1f56ec74ffd4d87b7bf23aa2d4ee, type: 3}
+  LeftWall: {fileID: 8020364234534033028, guid: c0b5c0b7eae5e2e488bc28315d65843b, type: 3}
+  RightWall: {fileID: 4709756948427738348, guid: 4995ac08bebdf7540b91af6cd7867930, type: 3}
+--- !u!114 &4476345934171423620
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1415476751359775736}
+  m_GameObject: {fileID: 4476345934171423623}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81175eebcbf844042b37ef3501b32562, type: 3}
