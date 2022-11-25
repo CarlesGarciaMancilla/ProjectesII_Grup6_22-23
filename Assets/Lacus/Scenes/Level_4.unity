@@ -783,6 +783,10 @@ PrefabInstance:
       propertyPath: levelName
       value: Level_4
       objectReference: {fileID: 0}
+    - target: {fileID: 4476345934171423622, guid: 8db11ea860223ff40b5d6dac1ec1dbe8, type: 3}
+      propertyPath: onOffArrow
+      value: 
+      objectReference: {fileID: 3422180045459200256, guid: 5b7c280155793d84db3f0699ffb6842f, type: 3}
     - target: {fileID: 4476345934171423623, guid: 8db11ea860223ff40b5d6dac1ec1dbe8, type: 3}
       propertyPath: m_Name
       value: Generate Map
