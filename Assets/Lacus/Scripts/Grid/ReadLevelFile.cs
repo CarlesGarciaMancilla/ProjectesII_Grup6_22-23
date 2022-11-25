@@ -11,6 +11,7 @@ public class ReadLevelFile : MonoBehaviour
     [SerializeField] private string levelName;
 
     [SerializeField] private GameObject arrow;
+    [SerializeField] private GameObject onOffArrow;
     [SerializeField] private GameObject battery;
     [SerializeField] private GameObject lacus;
     [SerializeField] private GameObject button;
@@ -73,7 +74,12 @@ public class ReadLevelFile : MonoBehaviour
             {
                 case '<': // Arrow
                     {
-                        GameObject obj = Instantiate(arrow, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
+                        Instantiate(arrow, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
+                        break;
+                    }
+                case '>': // Arrow Button
+                    {
+                        GameObject obj = Instantiate(onOffArrow, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
                         onOffArrows.Add(obj.GetComponent<OnOffArrow>());
                         break;
                     }

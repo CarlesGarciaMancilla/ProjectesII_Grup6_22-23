@@ -405,7 +405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a5dcea69336b64498b23f430c1a0400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxBattery: 6
+  maxBattery: 7
   batteryLeft: 0
 --- !u!50 &2110158594830730954
 Rigidbody2D:
