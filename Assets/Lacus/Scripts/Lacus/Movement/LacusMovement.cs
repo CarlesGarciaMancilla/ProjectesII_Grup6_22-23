@@ -10,6 +10,7 @@ public class LacusMovement : MonoBehaviour
     [SerializeField] private LacusStats lacusStats;
     [SerializeField] private Transform destination;
     [SerializeField] private GameObject Lacus;
+    private float rotationAngle = 0f;
 
     [HideInInspector] public bool isMoving = false;
 
@@ -25,7 +26,12 @@ public class LacusMovement : MonoBehaviour
         InitiateMovementWithJumps();
         //Forward();
         //ForwardWithSpaceKey();
+        CheckIfObjectClicked();
 
+        if (Input.touchCount > 0)
+        {
+            Vector2 touch = Input.GetTouch(0).position;
+        }
     }
 
     // Funció que fa avançar en Lacus en direcció al empty una única casella 
@@ -82,5 +88,26 @@ public class LacusMovement : MonoBehaviour
             isMoving = true;
             ForwardWithJumps();
         }
+    }
+
+    private void CheckIfObjectClicked()
+    {
+        
+
+        
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                rotationAngle += 90f;
+               
+            }
+
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                rotationAngle -= 90f;
+                
+            }
+            this.gameObject.transform.Rotate(0f, 0f, rotationAngle, Space.World);
+            rotationAngle = 0f;
+        
     }
 }

@@ -7,7 +7,7 @@ public class LacusCheckTile : MonoBehaviour
 {
     public LacusMovement Lacus;
     public LacusStats LacusS;
-    public Button buttonUI;
+   
 
     void OnTriggerEnter2D(Collider2D collider)
     {
@@ -31,7 +31,7 @@ public class LacusCheckTile : MonoBehaviour
         if (collider.CompareTag("End"))
         {
             Debug.Log("End");
-            buttonUI.SetEnabled(true);
+    
         }
         if (collider.CompareTag("Tile"))
         {

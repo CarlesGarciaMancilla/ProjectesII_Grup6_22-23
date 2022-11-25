@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 2110158594830730954}
   m_Layer: 1
   m_Name: LacusAsset
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -392,6 +392,7 @@ MonoBehaviour:
   lacusStats: {fileID: 2110158594830730964}
   destination: {fileID: 2110158594699518160}
   Lacus: {fileID: 2110158594830730952}
+  LacusC: {fileID: 3112497322230418705}
   isMoving: 0
 --- !u!114 &2110158594830730964
 MonoBehaviour:
