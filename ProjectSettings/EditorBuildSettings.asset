@@ -11,4 +11,28 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Lacus/Scenes/GridTest.unity
     guid: cd4ec35c0fb3e6445b428978fdfef78d
+  - enabled: 1
+    path: Assets/Lacus/Scenes/Tutorial_1.unity
+    guid: 72e08ad57f82ad44da4d0ab3610b1a80
+  - enabled: 1
+    path: Assets/Lacus/Scenes/Tutorial_2.unity
+    guid: 8fc458f0945bed84fa76c4303ac899b8
+  - enabled: 1
+    path: Assets/Lacus/Scenes/Tutorial_3.unity
+    guid: 107d5d601bd19734bb78c0c135a21d05
+  - enabled: 1
+    path: Assets/Lacus/Scenes/Tutorial_4.unity
+    guid: b8b734072e35a3645a6a65aa594a1ebd
+  - enabled: 1
+    path: Assets/Lacus/Scenes/Level_1.unity
+    guid: ec119a7facf091e40b6efee12f5549fb
+  - enabled: 1
+    path: Assets/Lacus/Scenes/Level_2.unity
+    guid: 92c8ffdadd6061a4a98b2304cfaab0af
+  - enabled: 1
+    path: Assets/Lacus/Scenes/Level_3.unity
+    guid: c596d13c9d9bcc440a22e34946bf73bf
+  - enabled: 1
+    path: Assets/Lacus/Scenes/Level_4.unity
+    guid: 6cfe5195b6bd289488caaa7815caeee8
   m_configObjects: {}
