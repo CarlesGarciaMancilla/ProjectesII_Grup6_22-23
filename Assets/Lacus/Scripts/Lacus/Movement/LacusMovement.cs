@@ -8,8 +8,9 @@ public class LacusMovement : MonoBehaviour
 {
     //public Transform lacusParent;
     [SerializeField] private LacusStats lacusStats;
-    [SerializeField] private Transform destination;
     [SerializeField] private GameObject Lacus;
+    [SerializeField] private Transform destination;
+    [SerializeField] private Collider2D destinationCollider;
 
     [HideInInspector] public bool isMoving = false;
 
@@ -23,6 +24,7 @@ public class LacusMovement : MonoBehaviour
     void Update()
     {
         InitiateMovementWithJumps();
+        //InitiateMovementContinuous();
         //Forward();
         //ForwardWithSpaceKey();
 
@@ -83,4 +85,24 @@ public class LacusMovement : MonoBehaviour
             ForwardWithJumps();
         }
     }
+
+    private void ForwardContinuous()
+    {
+        if (isMoving)
+        {
+            Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
+            Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
+        }
+    }
+
+    private void InitiateMovementContinuous()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && isMoving == false)
+        {
+            isMoving = true;
+            ForwardContinuous();
+        }
+    }
+
+
 }
