@@ -16,47 +16,88 @@ public class LeverChange : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1)) 
         {
-            SceneManager.LoadScene("Tutorial_1", LoadSceneMode.Single);
-             
+
+            ChangeTutorial1();
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2)) 
         {
-            SceneManager.LoadScene("Tutorial_2", LoadSceneMode.Single);
-             
+            ChangeTutorial2();
+
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            SceneManager.LoadScene("Tutorial_3", LoadSceneMode.Single);
+            ChangeTutorial3();
 
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            SceneManager.LoadScene("Tutorial_4", LoadSceneMode.Single);
+            ChangeTutorial4();
 
         }
         else if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            SceneManager.LoadScene("Level_1", LoadSceneMode.Single);
+            ChangeLevel1();
 
         }
         else if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            SceneManager.LoadScene("Level_2", LoadSceneMode.Single);
+            ChangeLevel2();
 
         }
         else if (Input.GetKeyDown(KeyCode.Alpha7))
         {
-            SceneManager.LoadScene("Level_3", LoadSceneMode.Single);
+            ChangeLevel3();
 
         }
         else if (Input.GetKeyDown(KeyCode.Alpha8))
         {
-            SceneManager.LoadScene("Level_4", LoadSceneMode.Single);
+            ChangeLevel4();
 
         }
 
 
 
 
+    }
+
+
+   public void ChangeTutorial1()
+    {
+        SceneManager.LoadScene("Tutorial_1", LoadSceneMode.Single);
+    }
+
+   public void ChangeTutorial2()
+    {
+        SceneManager.LoadScene("Tutorial_2", LoadSceneMode.Single);
+    }
+
+   public void ChangeTutorial3()
+    {
+        SceneManager.LoadScene("Tutorial_3", LoadSceneMode.Single);
+    }
+
+   public void ChangeTutorial4()
+    {
+        SceneManager.LoadScene("Tutorial_4", LoadSceneMode.Single);
+    }
+
+   public void ChangeLevel1() 
+    {
+        SceneManager.LoadScene("Level_1", LoadSceneMode.Single);
+    }
+
+   public void ChangeLevel2()
+    {
+        SceneManager.LoadScene("Level_2", LoadSceneMode.Single);
+    }
+
+   public void ChangeLevel3()
+    {
+        SceneManager.LoadScene("Level_3", LoadSceneMode.Single);
+    }
+
+   public void ChangeLevel4()
+    {
+        SceneManager.LoadScene("Level_4", LoadSceneMode.Single);
     }
 }
