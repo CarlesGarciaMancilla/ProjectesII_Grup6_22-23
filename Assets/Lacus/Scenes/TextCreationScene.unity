@@ -244,6 +244,7 @@ MonoBehaviour:
   button: {fileID: 5302358215521241045, guid: d0022ed3b2a22a447bf3f6ae84df9307, type: 3}
   exit: {fileID: 3422180045459200256, guid: 2a00261fa9102a840ba53e9790a70af4, type: 3}
   stop: {fileID: 5001330152221261567, guid: aab0e41829b53fd409146bdab6fbc26f, type: 3}
+  wall: {fileID: 0}
   levelName: LevelProto
 --- !u!4 &1117652630
 Transform:
