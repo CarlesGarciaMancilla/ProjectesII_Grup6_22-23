@@ -104,5 +104,10 @@ public class LacusMovement : MonoBehaviour
         }
     }
 
+    private void FuckingMovementOfCrap()
+    {
+        Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
+        Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
+    }
 
 }

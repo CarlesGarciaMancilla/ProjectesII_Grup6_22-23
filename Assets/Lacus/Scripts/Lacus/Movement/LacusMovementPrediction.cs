@@ -11,68 +11,91 @@ public class LacusMovementPrediction : MonoBehaviour
     Vector3 currentPosition;
     private bool locked;
 
+
+    // GetCurrentIsFacing Inicial
+
+    // Bucle:
+    // Comprobar bateria no es 0
+    // Mirar Tile Seguent, fer comprobacions
+    // Avançar en IsFacing correcte
+
+    private void Start()
+    {
+
+        // GetCurrentFacing Inicial
+        ForwardDestination();
+    }
+
+
     void OnTriggerEnter2D(Collider2D collider)
     {
-        /*if (collider.CompareTag("Tile"))
-        {
+        // "Bucle"
 
-            if (stats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.RIGHT && stats.batteryLeft != 0 && !LockDestination())
-            {
-                this.transform.position = new Vector3( this.transform.localPosition.x + tile.transform.localScale.x, 0f, 0f);
-            }
-            else if (stats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.UP && stats.batteryLeft != 0 && !LockDestination())
-            {
-                this.transform.position = new Vector3( 0f, this.transform.position.x + tile.transform.localScale.y, 0f);
-            }
-            else if (stats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.LEFT && stats.batteryLeft != 0 && !LockDestination())
-            {
-                this.transform.position = new Vector3( this.transform.position.x - tile.transform.localScale.x, 0f, 0f);
-            }
-            else if (stats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.DOWN && stats.batteryLeft != 0 && !LockDestination())
-            {
-                this.transform.position = new Vector3( 0f, this.transform.position.y - tile.transform.localScale.y, 0f);
-            }
-            
-            Debug.Log("Tile");
-        }
-        if (collider.CompareTag("Stop"))
+        // Comprobar bateria
+        if (stats.batteryLeft != 0)
         {
-            locked = true;
-            // Parar moviment, no avança el destination
-            Debug.Log("Stop");
+            // Mirar Tile Seguent
+            if (collider.CompareTag("Tile"))
+            {
+                // Avançar en is Facing Correcte
+                ForwardDestination();
+
+                Debug.Log("Tile");
+            }
+            if (collider.CompareTag("Stop"))
+            {
+                // Parar moviment, no avança el destination
+                LockDestination();
+                Debug.Log("Stop");
+            }
+            if (collider.CompareTag("End"))
+            {
+                // Parar moviment, no avança el destination
+                LockDestination();
+                Debug.Log("End");
+            }
+            if (collider.CompareTag("Arrow"))
+            {
+                // Parar moviment, no avança el destination
+                LockDestination();
+                Debug.Log("Arrow");
+            }
         }
-        if (collider.CompareTag("End"))
-        {
-            locked = true;
-            // Parar moviment, no avança el destination
-            Debug.Log("End");
-        }
-        if (collider.CompareTag("Arrow"))
-        {
-            locked = true;
-            // Parar moviment, no avança el destination
-        }*/
-        
     }
 
     private void Update()
-    { 
+    {
         /*if (LockDestination())
         {
             this.transform.position = currentPosition;
         }*/
     }
 
-    bool LockDestination()
+    void ForwardDestination()
     {
-        currentPosition = this.transform.position;
-        if (!locked)
+        if (stats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.RIGHT)
         {
-            return false;
+            this.transform.localPosition = new Vector3(this.transform.localPosition.x + 1f, 0f, 0f);
         }
-        else 
+        else if (stats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.UP)
         {
-            return true;
-        }  
+            this.transform.localPosition = new Vector3(0f, this.transform.localPosition.x + 1f, 0f);
+        }
+        else if (stats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.LEFT)
+        {
+            this.transform.localPosition = new Vector3(this.transform.localPosition.x - 1f, 0f, 0f);
+        }
+        else if (stats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.DOWN)
+        {
+            this.transform.localPosition = new Vector3(0f, this.transform.localPosition.y - 1f, 0f);
+        }
     }
+
+    void LockDestination()
+    {
+        this.transform.TransformPoint(this.transform.localPosition);
+    }
+
+
+    
 }
