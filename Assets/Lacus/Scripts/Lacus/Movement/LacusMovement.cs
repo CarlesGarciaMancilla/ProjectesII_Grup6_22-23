@@ -10,7 +10,6 @@ public class LacusMovement : MonoBehaviour
     [SerializeField] private LacusStats lacusStats;
     [SerializeField] private GameObject Lacus;
     [SerializeField] private Transform destination;
-    [SerializeField] private GameObject Lacus;
     private float rotationAngle = 0f;
     private Vector3 initialPosition;
     [SerializeField] private Collider2D destinationCollider;
@@ -104,6 +103,25 @@ public class LacusMovement : MonoBehaviour
         }
     }
 
+    public void InitiateToDestinationMovement()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (!isMoving)
+            {
+                Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
+                Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
+            }
+
+        }
+    }
+    public void ToDestinationMovement()
+    {
+        Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1.5f, false);
+        Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1.5f, false);
+    }
+
+
     private void CheckIfObjectClicked()
     {
 
@@ -129,10 +147,8 @@ public class LacusMovement : MonoBehaviour
 
     public void ResetLacus()
     {
-   
         transform.position = initialPosition;
         isMoving = false;
         lacusStats.batteryLeft = lacusStats.maxBattery;
-
     }
 }

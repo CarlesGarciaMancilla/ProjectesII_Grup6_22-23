@@ -15,8 +15,6 @@ public class LacusCheckTileRotation : MonoBehaviour
             LacusM.Rotate(collider.transform.rotation);
 
             StartCoroutine(Wait());
-            
-
         }
     }
 
