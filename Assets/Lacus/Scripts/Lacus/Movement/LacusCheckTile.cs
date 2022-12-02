@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class LacusCheckTile : MonoBehaviour
 {
     public LacusMovement Lacus;
     public LacusStats LacusS;
+   
 
     void OnTriggerEnter2D(Collider2D collider)
     {
@@ -29,6 +31,7 @@ public class LacusCheckTile : MonoBehaviour
         if (collider.CompareTag("End"))
         {
             Debug.Log("End");
+    
         }
         if (collider.CompareTag("Tile"))
         {
