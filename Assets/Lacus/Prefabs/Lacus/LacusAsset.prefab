@@ -128,7 +128,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c92d4b2d6ca9cfe4bb97cc20bcde252a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 075b5408ece0f644598e5545931412d5, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -392,7 +392,6 @@ MonoBehaviour:
   lacusStats: {fileID: 2110158594830730964}
   destination: {fileID: 2110158594699518160}
   Lacus: {fileID: 2110158594830730952}
-  LacusC: {fileID: 3112497322230418705}
   isMoving: 0
 --- !u!114 &2110158594830730964
 MonoBehaviour:
@@ -407,7 +406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxBattery: 7
-  batteryLeft: 0
+  batteryLeft: 6
 --- !u!50 &2110158594830730954
 Rigidbody2D:
   serializedVersion: 4
@@ -476,6 +475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lacus: {fileID: 2110158594830730967}
   LacusS: {fileID: 2110158594830730964}
+  StopSound: {fileID: 3870696809754580574, guid: aab0e41829b53fd409146bdab6fbc26f, type: 3}
 --- !u!61 &3112497320903925959
 BoxCollider2D:
   m_ObjectHideFlags: 0

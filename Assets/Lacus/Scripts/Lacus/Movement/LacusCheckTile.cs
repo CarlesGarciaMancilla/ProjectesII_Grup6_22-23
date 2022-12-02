@@ -7,7 +7,8 @@ public class LacusCheckTile : MonoBehaviour
 {
     public LacusMovement Lacus;
     public LacusStats LacusS;
-   
+    [SerializeField] private AudioSource StopSound;
+
 
     void OnTriggerEnter2D(Collider2D collider)
     {
@@ -25,6 +26,7 @@ public class LacusCheckTile : MonoBehaviour
         if (collider.CompareTag("Stop"))
         {
             Lacus.isMoving = false;
+            StopSound.Play();
             Debug.Log("Stop");
         }
 
@@ -38,6 +40,12 @@ public class LacusCheckTile : MonoBehaviour
             Debug.Log("Tile");
             Lacus.ForwardWithJumps();
             LacusS.batteryLeft--;
+        }
+        if (collider.CompareTag("Wall"))
+        {
+            Debug.Log("Wall");
+            Lacus.ResetLacus();
+            
         }
     }
 }

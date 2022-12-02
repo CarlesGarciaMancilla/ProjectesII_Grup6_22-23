@@ -11,6 +11,7 @@ public class LacusMovement : MonoBehaviour
     [SerializeField] private Transform destination;
     [SerializeField] private GameObject Lacus;
     private float rotationAngle = 0f;
+    private Vector3 initialPosition;
 
     [HideInInspector] public bool isMoving = false;
 
@@ -18,6 +19,7 @@ public class LacusMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        initialPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -32,7 +34,15 @@ public class LacusMovement : MonoBehaviour
         {
             Vector2 touch = Input.GetTouch(0).position;
         }
+
+        if (lacusStats.batteryLeft <= 1 || Input.GetKeyDown(KeyCode.R)) 
+        {
+            ResetLacus();
+        }
+ 
     }
+
+
 
     // Funció que fa avançar en Lacus en direcció al empty una única casella 
     void ForwardWithSpaceKey()
@@ -92,22 +102,33 @@ public class LacusMovement : MonoBehaviour
 
     private void CheckIfObjectClicked()
     {
-        
 
-        
+
+        if (isMoving == false)
+        {
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 rotationAngle += 90f;
-               
+
             }
 
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 rotationAngle -= 90f;
-                
+
             }
             this.gameObject.transform.Rotate(0f, 0f, rotationAngle, Space.World);
             rotationAngle = 0f;
-        
+        }
+    }
+
+
+    public void ResetLacus()
+    {
+   
+        transform.position = initialPosition;
+        isMoving = false;
+        lacusStats.batteryLeft = lacusStats.maxBattery;
+
     }
 }
