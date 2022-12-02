@@ -13,7 +13,17 @@ public class LacusCheckTileRotation : MonoBehaviour
         if (collider.CompareTag("Arrow"))
         {
             LacusM.Rotate(collider.transform.rotation);
-            Debug.Log("Arrow");
+
+            StartCoroutine(Wait());
+            
+
         }
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(0.3f);
+        Debug.Log("Wait?");
+        LacusM.ToDestinationMovement();
     }
 }

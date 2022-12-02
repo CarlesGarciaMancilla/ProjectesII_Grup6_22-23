@@ -23,7 +23,8 @@ public class LacusMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        InitiateMovementWithJumps();
+        InitiateToDestinationMovement();
+        //InitiateMovementWithJumps();
         //InitiateMovementContinuous();
         //Forward();
         //ForwardWithSpaceKey();
@@ -104,10 +105,22 @@ public class LacusMovement : MonoBehaviour
         }
     }
 
-    private void FuckingMovementOfCrap()
+    public void InitiateToDestinationMovement()
     {
-        Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
-        Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (!isMoving)
+            {
+                Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
+                Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
+            }
+            
+        }
+    }
+    public void ToDestinationMovement()
+    {
+        Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1.5f, false);
+        Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1.5f, false);
     }
 
 }

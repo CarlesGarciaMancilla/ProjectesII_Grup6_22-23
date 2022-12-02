@@ -33,7 +33,7 @@ public class LacusCheckTile : MonoBehaviour
         if (collider.CompareTag("Tile"))
         {
             Debug.Log("Tile");
-            Lacus.ForwardWithJumps();
+            //Lacus.ForwardWithJumps();
             LacusS.batteryLeft--;
         }
     }

@@ -11,6 +11,8 @@ public class LacusMovementPrediction : MonoBehaviour
     Vector3 currentPosition;
     private bool locked;
 
+    int tempBattery;
+
 
     // GetCurrentIsFacing Inicial
 
@@ -21,9 +23,16 @@ public class LacusMovementPrediction : MonoBehaviour
 
     private void Start()
     {
-
+        tempBattery = stats.batteryLeft;
         // GetCurrentFacing Inicial
         ForwardDestination();
+
+        
+
+    }
+
+    private void Update()
+    {
     }
 
 
@@ -31,47 +40,39 @@ public class LacusMovementPrediction : MonoBehaviour
     {
         // "Bucle"
 
-        // Comprobar bateria
-        if (stats.batteryLeft != 0)
+        // Comprobar bateria, mirar quantes caselles pot avançar amb la bateria que li queda
+        if (tempBattery > 0)
         {
             // Mirar Tile Seguent
-            if (collider.CompareTag("Tile"))
+            if (collider.CompareTag("Tile") && !locked)
             {
                 // Avançar en is Facing Correcte
                 ForwardDestination();
-
-                Debug.Log("Tile");
             }
+
+            locked = false;
+
             if (collider.CompareTag("Stop"))
             {
                 // Parar moviment, no avança el destination
-                LockDestination();
-                Debug.Log("Stop");
+                locked = true;
             }
             if (collider.CompareTag("End"))
             {
                 // Parar moviment, no avança el destination
-                LockDestination();
-                Debug.Log("End");
+                locked = true;
             }
             if (collider.CompareTag("Arrow"))
             {
                 // Parar moviment, no avança el destination
-                LockDestination();
-                Debug.Log("Arrow");
+                locked = true;
             }
+            tempBattery--;
+            Debug.Log(tempBattery);
         }
     }
 
-    private void Update()
-    {
-        /*if (LockDestination())
-        {
-            this.transform.position = currentPosition;
-        }*/
-    }
-
-    void ForwardDestination()
+    public void ForwardDestination()
     {
         if (stats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.RIGHT)
         {
@@ -79,7 +80,7 @@ public class LacusMovementPrediction : MonoBehaviour
         }
         else if (stats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.UP)
         {
-            this.transform.localPosition = new Vector3(0f, this.transform.localPosition.x + 1f, 0f);
+            this.transform.localPosition = new Vector3(0f, this.transform.localPosition.y + 1f, 0f);
         }
         else if (stats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.LEFT)
         {
@@ -89,13 +90,5 @@ public class LacusMovementPrediction : MonoBehaviour
         {
             this.transform.localPosition = new Vector3(0f, this.transform.localPosition.y - 1f, 0f);
         }
-    }
-
-    void LockDestination()
-    {
-        this.transform.TransformPoint(this.transform.localPosition);
-    }
-
-
-    
+    } 
 }
