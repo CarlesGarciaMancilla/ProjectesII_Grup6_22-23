@@ -184,7 +184,7 @@ Transform:
   m_GameObject: {fileID: 5001330152221261567}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.88, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 902411120518479406}
@@ -286,5 +286,4 @@ MonoBehaviour:
   layerStop:
     serializedVersion: 2
     m_Bits: 256
-  Lacus: {fileID: 3388977648771342888, guid: 3236183fa7626e348b06f23630f1f786, type: 3}
-  LacusCollider: {fileID: 0}
+  Lacus: {fileID: 2110158594830730952, guid: 37cb86c1a5062b246a50ee90540e02dc, type: 3}
