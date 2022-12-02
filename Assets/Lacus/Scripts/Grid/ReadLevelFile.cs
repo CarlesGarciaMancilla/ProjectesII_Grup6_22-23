@@ -11,6 +11,7 @@ public class ReadLevelFile : MonoBehaviour
     [SerializeField] private string levelName;
 
     [SerializeField] private GameObject arrow;
+    [SerializeField] private GameObject onOffArrow;
     [SerializeField] private GameObject battery;
     [SerializeField] private GameObject lacus;
     [SerializeField] private GameObject button;
@@ -65,6 +66,8 @@ public class ReadLevelFile : MonoBehaviour
             Debug.LogError($"The process failed: {e.ToString()}");
         }
 
+        List<OnOffArrow> onOffArrows = new List<OnOffArrow>();
+        Button arrowsButton = null;
         foreach (char tile in line)
         {
             switch (tile)
@@ -72,6 +75,12 @@ public class ReadLevelFile : MonoBehaviour
                 case '<': // Arrow
                     {
                         Instantiate(arrow, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
+                        break;
+                    }
+                case '>': // Arrow Button
+                    {
+                        GameObject obj = Instantiate(onOffArrow, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
+                        onOffArrows.Add(obj.GetComponent<OnOffArrow>());
                         break;
                     }
                 case '_': // Normal tile
@@ -90,7 +99,8 @@ public class ReadLevelFile : MonoBehaviour
                     }
                 case '?': // Button
                     {
-                        Instantiate(button, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
+                        GameObject obj = Instantiate(button, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
+                        arrowsButton = obj.GetComponent<Button>();
                         break;
                     }
                 case '!': // Deactivated Arrow
@@ -187,6 +197,11 @@ public class ReadLevelFile : MonoBehaviour
 
             }
             x++;
+        }
+
+        foreach (var arr in onOffArrows)
+        {
+            arr.button = arrowsButton;
         }
     }
 }

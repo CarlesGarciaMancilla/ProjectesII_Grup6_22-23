@@ -10,6 +10,9 @@ public class LacusMovement : MonoBehaviour
     [SerializeField] private LacusStats lacusStats;
     [SerializeField] private GameObject Lacus;
     [SerializeField] private Transform destination;
+    [SerializeField] private GameObject Lacus;
+    private float rotationAngle = 0f;
+    private Vector3 initialPosition;
     [SerializeField] private Collider2D destinationCollider;
 
     [HideInInspector] public bool isMoving = false;
@@ -18,6 +21,7 @@ public class LacusMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        initialPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -28,10 +32,23 @@ public class LacusMovement : MonoBehaviour
         //InitiateMovementContinuous();
         //Forward();
         //ForwardWithSpaceKey();
+        CheckIfObjectClicked();
 
+        if (Input.touchCount > 0)
+        {
+            Vector2 touch = Input.GetTouch(0).position;
+        }
+
+        if (lacusStats.batteryLeft <= 1 || Input.GetKeyDown(KeyCode.R)) 
+        {
+            ResetLacus();
+        }
+ 
     }
 
-    // Funció que fa avançar en Lacus en direcció al empty una única casella 
+
+
+    // Funciï¿½ que fa avanï¿½ar en Lacus en direcciï¿½ al empty una ï¿½nica casella 
     void ForwardWithSpaceKey()
     {
         // Limitar el moviment del Lacus (Implementar vida/bateria)
@@ -43,7 +60,7 @@ public class LacusMovement : MonoBehaviour
         }
     }
 
-    // Funció que fa avançar en Lacus en direcció al empty seguit però no és precís 
+    // Funciï¿½ que fa avanï¿½ar en Lacus en direcciï¿½ al empty seguit perï¿½ no ï¿½s precï¿½s 
     public void Forward()
     {
         // Inici del moviment   
@@ -60,7 +77,7 @@ public class LacusMovement : MonoBehaviour
         }
     }
 
-    // Funció que fa avançar en Lacus en direcció al empty una única casella però no es crida al Update() sino en les colisions
+    // Funciï¿½ que fa avanï¿½ar en Lacus en direcciï¿½ al empty una ï¿½nica casella perï¿½ no es crida al Update() sino en les colisions
     public void ForwardWithJumps()
     {
         // Moure's amb DoTween
@@ -71,7 +88,7 @@ public class LacusMovement : MonoBehaviour
         }
     }
 
-    // Funció que rota en Lacus donat una rotació amb un valor Z
+    // Funciï¿½ que rota en Lacus donat una rotaciï¿½ amb un valor Z
     public void Rotate(Quaternion rotation)
     {
         // Rotar amb DoTween
@@ -87,40 +104,35 @@ public class LacusMovement : MonoBehaviour
         }
     }
 
-    private void ForwardContinuous()
+    private void CheckIfObjectClicked()
     {
-        if (isMoving)
-        {
-            Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
-            Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
-        }
-    }
 
-    private void InitiateMovementContinuous()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && isMoving == false)
-        {
-            isMoving = true;
-            ForwardContinuous();
-        }
-    }
 
-    public void InitiateToDestinationMovement()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (isMoving == false)
         {
-            if (!isMoving)
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
-                Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
+                rotationAngle += 90f;
+
             }
-            
+
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                rotationAngle -= 90f;
+
+            }
+            this.gameObject.transform.Rotate(0f, 0f, rotationAngle, Space.World);
+            rotationAngle = 0f;
         }
     }
-    public void ToDestinationMovement()
-    {
-        Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1.5f, false);
-        Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1.5f, false);
-    }
 
+
+    public void ResetLacus()
+    {
+   
+        transform.position = initialPosition;
+        isMoving = false;
+        lacusStats.batteryLeft = lacusStats.maxBattery;
+
+    }
 }
