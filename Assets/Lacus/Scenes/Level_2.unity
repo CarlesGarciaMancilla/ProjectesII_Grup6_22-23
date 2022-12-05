@@ -259,6 +259,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4476345934171423620, guid: 8db11ea860223ff40b5d6dac1ec1dbe8, type: 3}
+      propertyPath: tile
+      value: 
+      objectReference: {fileID: 343057456601112246, guid: da794e831c1da4f469018c9a0c53a2fa, type: 3}
+    - target: {fileID: 4476345934171423620, guid: 8db11ea860223ff40b5d6dac1ec1dbe8, type: 3}
       propertyPath: height
       value: 7
       objectReference: {fileID: 0}
