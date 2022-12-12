@@ -147,8 +147,9 @@ public class LacusMovement : MonoBehaviour
 
     public void ResetLacus()
     {
-        transform.position = initialPosition;
         isMoving = false;
+        transform.DOComplete(false);
+        transform.position = initialPosition;
         lacusStats.batteryLeft = lacusStats.maxBattery;
     }
 }
