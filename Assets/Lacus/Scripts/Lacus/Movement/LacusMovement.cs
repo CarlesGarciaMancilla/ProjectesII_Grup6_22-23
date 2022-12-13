@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System.Security.Cryptography;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
 public class LacusMovement : MonoBehaviour
 {
@@ -124,20 +125,20 @@ public class LacusMovement : MonoBehaviour
 
     private void CheckIfObjectClicked()
     {
-
-
         if (isMoving == false)
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 rotationAngle += 90f;
-
+                ResetDestinationPosition();
+                ForwardDestination();
             }
 
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 rotationAngle -= 90f;
-
+                ResetDestinationPosition();
+                ForwardDestination();
             }
             this.gameObject.transform.Rotate(0f, 0f, rotationAngle, Space.World);
             rotationAngle = 0f;
@@ -151,5 +152,30 @@ public class LacusMovement : MonoBehaviour
         transform.DOComplete(false);
         transform.position = initialPosition;
         lacusStats.batteryLeft = lacusStats.maxBattery;
+    }
+
+    public void ForwardDestination()
+    {
+        if (lacusStats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.RIGHT)
+        {
+            destination.transform.localPosition = new Vector3(transform.localPosition.x + 1.6f, 0f, 0f);
+        }
+        else if (lacusStats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.UP)
+        {
+            destination.transform.localPosition = new Vector3(0f, transform.localPosition.y + 1.6f, 0f);
+        }
+        else if (lacusStats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.LEFT)
+        {
+            destination.transform.localPosition = new Vector3(transform.localPosition.x - 1.6f, 0f, 0f);
+        }
+        else if (lacusStats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.DOWN)
+        {
+            destination.transform.localPosition = new Vector3(0f, transform.localPosition.y - 1.6f, 0f);
+        }
+    }
+
+    public void ResetDestinationPosition()
+    {
+        destination.transform.localPosition = new Vector3(2f, 0, 0);
     }
 }
