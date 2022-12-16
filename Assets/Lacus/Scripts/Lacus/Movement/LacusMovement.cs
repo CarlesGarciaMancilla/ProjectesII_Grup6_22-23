@@ -116,12 +116,8 @@ public class LacusMovement : MonoBehaviour
         transform.DOComplete(false);
         transform.position = initialPosition;
         ResetDestinationPosition();
-    }
-
-    public void ResetBattery()
-    {
         lacusStats.batteryLeft = lacusStats.maxBattery;
-        lacusStats.batteryLeft++;
+        lacusStats.batteryLeft = lacusStats.maxBattery;
     }
 
     public void ForwardDestination()

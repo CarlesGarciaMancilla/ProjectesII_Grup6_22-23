@@ -46,9 +46,9 @@ public class LacusCheckTile : MonoBehaviour
 
     IEnumerator WallRespawn()
     {
+        Lacus.ResetLacus();
         yield return new WaitForSeconds(0.1f);
         Lacus.ResetLacus();
-        Lacus.ResetBattery();
     }
 
 }
