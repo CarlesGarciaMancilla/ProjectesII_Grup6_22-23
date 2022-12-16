@@ -29,10 +29,7 @@ public class LacusMovement : MonoBehaviour
     void Update()
     {
         InitiateToDestinationMovement();
-        //InitiateMovementWithJumps();
-        //InitiateMovementContinuous();
-        //Forward();
-        //ForwardWithSpaceKey();
+
         CheckIfObjectClicked();
 
         if (Input.touchCount > 0)
@@ -54,61 +51,10 @@ public class LacusMovement : MonoBehaviour
     }
 
 
-
-    // Funci� que fa avan�ar en Lacus en direcci� al empty una �nica casella 
-    void ForwardWithSpaceKey()
-    {
-        // Limitar el moviment del Lacus (Implementar vida/bateria)
-        // Moure's amb DoTween
-        if (lacusStats.batteryLeft > 0 && Input.GetKeyDown(KeyCode.Space))
-        {
-            transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
-            transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
-        }
-    }
-
-    // Funci� que fa avan�ar en Lacus en direcci� al empty seguit per� no �s prec�s 
-    public void Forward()
-    {
-        // Inici del moviment   
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            isMoving = true;
-        }
-
-        // Moure's amb DoTween
-        if (lacusStats.batteryLeft > 1 && isMoving)
-        {
-            transform.DOLocalMoveX(destination.transform.position.x, 4f, false);
-            transform.DOLocalMoveY(destination.transform.position.y, 4f, false);
-        }
-    }
-
-    // Funci� que fa avan�ar en Lacus en direcci� al empty una �nica casella per� no es crida al Update() sino en les colisions
-    public void ForwardWithJumps()
-    {
-        // Moure's amb DoTween
-        if (lacusStats.batteryLeft > 1 && isMoving)
-        {
-            Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
-            Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
-        }
-    }
-
-    // Funci� que rota en Lacus donat una rotaci� amb un valor Z
+    // Funció que rota en Lacus donat una rotació amb un valor Z
     public void Rotate(Quaternion rotation)
     {
-        // Rotar amb DoTween
         Lacus.transform.DORotateQuaternion(rotation, 0.3f);
-    }
-    
-    private void InitiateMovementWithJumps()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && isMoving == false)
-        {
-            isMoving = true;
-            ForwardWithJumps();
-        }
     }
 
     public void InitiateToDestinationMovement()

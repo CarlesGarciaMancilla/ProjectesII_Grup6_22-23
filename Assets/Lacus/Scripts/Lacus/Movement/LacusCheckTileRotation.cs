@@ -5,7 +5,9 @@ using UnityEngine;
 public class LacusCheckTileRotation : MonoBehaviour
 {
 
-    public LacusMovement LacusM;
+    [SerializeField] private LacusMovement LacusM;
+    [SerializeField] private LacusStats LacusS;
+
 
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D collider)
@@ -13,7 +15,7 @@ public class LacusCheckTileRotation : MonoBehaviour
         if (collider.CompareTag("Arrow"))
         {
             LacusM.Rotate(collider.transform.rotation);
-
+            LacusS.batteryLeft--;
             StartCoroutine(Wait());
         }
     }

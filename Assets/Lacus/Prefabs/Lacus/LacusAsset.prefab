@@ -536,6 +536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LacusM: {fileID: 6033293880122079854}
+  LacusS: {fileID: 6033293880122079853}
 --- !u!1001 &662820299656823805
 PrefabInstance:
   m_ObjectHideFlags: 0

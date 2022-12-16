@@ -14,38 +14,32 @@ public class LacusCheckTile : MonoBehaviour
     {
         if (collider.CompareTag("Battery"))
         {
-            Debug.Log("Battery");
             LacusS.batteryLeft = LacusS.maxBattery;
         }
 
         if (collider.CompareTag("Button"))
         {
-            Debug.Log("Button");
+            // Activates / Deactivates the button
         }
 
         if (collider.CompareTag("Stop"))
         {
             Lacus.isMoving = false;
+            LacusS.batteryLeft--;
             StopSound.Play();
-            Debug.Log("Stop");
         }
 
         if (collider.CompareTag("End"))
         {
-            Debug.Log("End");
-    
+            // Change to next scene
         }
         if (collider.CompareTag("Tile"))
         {
-            Debug.Log("Tile");
-            //Lacus.ForwardWithJumps();
             LacusS.batteryLeft--;
         }
         if (collider.CompareTag("Wall"))
         {
-            Debug.Log("Wall");
             Lacus.ResetLacus();
-            
         }
     }
 }
