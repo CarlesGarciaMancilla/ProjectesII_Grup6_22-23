@@ -123,7 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lacus: {fileID: 6033293880122079857}
   isFacing: 0
-  maxBattery: 7
+  maxBattery: 6
   batteryLeft: 6
 --- !u!50 &6033293880122079859
 Rigidbody2D:
@@ -220,6 +220,7 @@ MonoBehaviour:
   stats: {fileID: 6033293880122079853}
   movement: {fileID: 6033293880122079854}
   tile: {fileID: 343057456601112246, guid: da794e831c1da4f469018c9a0c53a2fa, type: 3}
+  locked: 0
 --- !u!1 &6588085385973559862
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@ public class LacusMovement : MonoBehaviour
 
     [HideInInspector] public bool isMoving = false;
 
+    private bool resetDestination = false;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +40,13 @@ public class LacusMovement : MonoBehaviour
             Vector2 touch = Input.GetTouch(0).position;
         }
 
-        if (lacusStats.batteryLeft <= 1 || Input.GetKeyDown(KeyCode.R)) 
+        if (lacusStats.batteryLeft == 0)
+        {
+
+        }
+
+        //if (lacusStats.batteryLeft == 0 || Input.GetKeyDown(KeyCode.R)) 
+        if (Input.GetKeyDown(KeyCode.R)) 
         {
             ResetLacus();
         }
@@ -130,18 +137,26 @@ public class LacusMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 rotationAngle += 90f;
-                ResetDestinationPosition();
                 ForwardDestination();
+                resetDestination = true;
             }
 
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 rotationAngle -= 90f;
-                ResetDestinationPosition();
                 ForwardDestination();
+                resetDestination = true;
             }
+
             this.gameObject.transform.Rotate(0f, 0f, rotationAngle, Space.World);
+
+            if (resetDestination)
+            {
+                ResetDestinationPosition();
+            }
+            
             rotationAngle = 0f;
+            resetDestination = false;
         }
     }
 
@@ -152,30 +167,34 @@ public class LacusMovement : MonoBehaviour
         transform.DOComplete(false);
         transform.position = initialPosition;
         lacusStats.batteryLeft = lacusStats.maxBattery;
+        ResetDestinationPosition();
     }
 
     public void ForwardDestination()
     {
+        destination.transform.localPosition = new Vector3(destination.transform.localPosition.x + 1.6f, 0f, 0f);
+
+        /*
         if (lacusStats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.RIGHT)
         {
-            destination.transform.localPosition = new Vector3(transform.localPosition.x + 1.6f, 0f, 0f);
+            destination.transform.localPosition = new Vector3(destination.transform.localPosition.x + 1.6f, 0f, 0f);
         }
         else if (lacusStats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.UP)
         {
-            destination.transform.localPosition = new Vector3(0f, transform.localPosition.y + 1.6f, 0f);
+            destination.transform.localPosition = new Vector3(0f, destination.transform.localPosition.y + 1.6f, 0f);
         }
         else if (lacusStats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.LEFT)
         {
-            destination.transform.localPosition = new Vector3(transform.localPosition.x - 1.6f, 0f, 0f);
+            destination.transform.localPosition = new Vector3(destination.transform.localPosition.x - 1.6f, 0f, 0f);
         }
         else if (lacusStats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.DOWN)
         {
-            destination.transform.localPosition = new Vector3(0f, transform.localPosition.y - 1.6f, 0f);
-        }
+            destination.transform.localPosition = new Vector3(0f, destination.transform.localPosition.y - 1.6f, 0f);
+        }*/
     }
 
     public void ResetDestinationPosition()
     {
-        destination.transform.localPosition = new Vector3(2f, 0, 0);
+        destination.transform.localPosition = new Vector3(1.6f, 0, 0);
     }
 }

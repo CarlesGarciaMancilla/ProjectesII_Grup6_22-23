@@ -9,7 +9,7 @@ public class LacusMovementPrediction : MonoBehaviour
     [SerializeField] private LacusStats stats;
     [SerializeField] private LacusMovement movement;
     [SerializeField] GameObject tile;
-    private bool locked;
+    [SerializeField] private bool locked;
 
     private int tempBattery;
 
@@ -36,35 +36,29 @@ public class LacusMovementPrediction : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider)
     {
         // "Bucle"
-
         // Comprobar bateria, mirar quantes caselles pot avançar amb la bateria que li queda
-        if (tempBattery > 0 && !locked)
-        {
-            // Mirar Tile Seguent
-            if (collider.CompareTag("Tile"))
-            {
-                // Avançar en is Facing Correcte
-                movement.ForwardDestination();
-            }
 
-            if (collider.CompareTag("Stop"))
-            {
-                // Parar moviment, no avança el destination
-                locked = true;
-            }
-            if (collider.CompareTag("End"))
-            {
-                // Parar moviment, no avança el destination
-                locked = true;
-            }
-            if (collider.CompareTag("Arrow"))
-            {
-                // Parar moviment, no avança el destination
-                Debug.Log("A");
-                locked = true;
-            }
-            tempBattery--;
-            Debug.Log(tempBattery);
+        // Mirar Tile Seguent
+
+        if (collider.CompareTag("Stop"))
+        {
+            // Parar moviment, no avança el destination
+               
+        }
+        if (collider.CompareTag("End"))
+        {
+            // Parar moviment, no avança el destination
+               
+        }
+        if (collider.CompareTag("Arrow"))
+        {
+            // Parar moviment, no avança el destination
+        }
+
+        if (collider.CompareTag("Tile"))
+        {
+            // Avançar en is Facing Correcte
+            movement.ForwardDestination();
         }
     }
 
