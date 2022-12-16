@@ -8,8 +8,10 @@ using UnityEngine.Windows;
 
 public class ReadLevelFile : MonoBehaviour
 {
+    [SerializeField] private Transform worldCoords;
     [SerializeField] private string levelName;
 
+    [SerializeField] private GameObject normalTile;
     [SerializeField] private GameObject arrow;
     [SerializeField] private GameObject onOffArrow;
     [SerializeField] private GameObject battery;
@@ -30,14 +32,16 @@ public class ReadLevelFile : MonoBehaviour
     [SerializeField] private GameObject RightWall;
 
 
+    private void Awake()
+    {
+        worldCoords.transform.position = new Vector3(2, -3, -10);
+    }
 
-    // Start is called before the first frame update
     void Start()
     {
         ReadTxt(levelName);
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -85,6 +89,7 @@ public class ReadLevelFile : MonoBehaviour
                     }
                 case '_': // Normal tile
                     {
+                        Instantiate(normalTile, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
                         break;
                     }
                 case 'B': // Battery
@@ -95,6 +100,7 @@ public class ReadLevelFile : MonoBehaviour
                 case 'L': // Lacus
                     {
                         Instantiate(lacus, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
+                        Instantiate(normalTile, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
                         break;
                     }
                 case '?': // Button
