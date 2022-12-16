@@ -42,7 +42,7 @@ public class LacusMovement : MonoBehaviour
 
         if (lacusStats.batteryLeft == 0)
         {
-
+            destination.transform.localPosition = new Vector3(0f, 0f, 0f);
         }
 
         //if (lacusStats.batteryLeft == 0 || Input.GetKeyDown(KeyCode.R)) 

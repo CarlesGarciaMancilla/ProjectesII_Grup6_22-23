@@ -421,16 +421,29 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4476345934171423622, guid: 8db11ea860223ff40b5d6dac1ec1dbe8, type: 3}
+      propertyPath: lacus
+      value: 
+      objectReference: {fileID: 6033293880122079857, guid: 37cb86c1a5062b246a50ee90540e02dc, type: 3}
+    - target: {fileID: 4476345934171423622, guid: 8db11ea860223ff40b5d6dac1ec1dbe8, type: 3}
       propertyPath: levelName
       value: Tuto_3
       objectReference: {fileID: 0}
     - target: {fileID: 4476345934171423622, guid: 8db11ea860223ff40b5d6dac1ec1dbe8, type: 3}
+      propertyPath: normalTile
+      value: 
+      objectReference: {fileID: 343057456601112246, guid: da794e831c1da4f469018c9a0c53a2fa, type: 3}
+    - target: {fileID: 4476345934171423622, guid: 8db11ea860223ff40b5d6dac1ec1dbe8, type: 3}
       propertyPath: onOffArrow
       value: 
       objectReference: {fileID: 3422180045459200256, guid: 5b7c280155793d84db3f0699ffb6842f, type: 3}
+    - target: {fileID: 4476345934171423622, guid: 8db11ea860223ff40b5d6dac1ec1dbe8, type: 3}
+      propertyPath: worldCoords
+      value: 
+      objectReference: {fileID: 28796678}
     - target: {fileID: 4476345934171423623, guid: 8db11ea860223ff40b5d6dac1ec1dbe8, type: 3}
       propertyPath: m_Name
       value: Generate Map
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4476345934171423620, guid: 8db11ea860223ff40b5d6dac1ec1dbe8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8db11ea860223ff40b5d6dac1ec1dbe8, type: 3}
