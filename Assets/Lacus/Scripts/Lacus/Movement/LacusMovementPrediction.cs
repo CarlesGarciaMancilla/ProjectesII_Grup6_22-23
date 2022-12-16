@@ -39,7 +39,11 @@ public class LacusMovementPrediction : MonoBehaviour
         // Comprobar bateria, mirar quantes caselles pot avançar amb la bateria que li queda
 
         // Mirar Tile Seguent
-
+        if (collider.CompareTag("Battery"))
+        {
+            // Parar moviment, no avança el destination
+            movement.ForwardDestination();
+        }
         if (collider.CompareTag("Stop"))
         {
             // Parar moviment, no avança el destination

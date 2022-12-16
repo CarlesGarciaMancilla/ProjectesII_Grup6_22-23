@@ -14,16 +14,26 @@ public class LacusCheckTileRotation : MonoBehaviour
     {
         if (collider.CompareTag("Arrow"))
         {
-            LacusM.Rotate(collider.transform.rotation);
             LacusS.batteryLeft--;
-            StartCoroutine(Wait());
+            StartCoroutine(WaitToForward(collider));
+
         }
     }
 
-    IEnumerator Wait()
+    IEnumerator WaitToForward(Collider2D collider)
     {
+        // Ha d'estar aixi, si no no rota perfectament
+        yield return new WaitForSeconds(0.35f);
+        if (collider.transform.rotation != transform.rotation)
+        {
+            LacusM.Rotate(collider.transform.rotation);
+            yield return new WaitForSeconds(0.3f);
+        }
+        // Ficar Audio Aqui
+        // No treure, si no es torna voig
+        
+        LacusM.ResetDestinationPosition();
         yield return new WaitForSeconds(0.3f);
-        Debug.Log("Wait?");
         LacusM.ToDestinationMovement();
     }
 }

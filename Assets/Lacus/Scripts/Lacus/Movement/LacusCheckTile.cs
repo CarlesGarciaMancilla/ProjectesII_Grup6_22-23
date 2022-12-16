@@ -39,7 +39,16 @@ public class LacusCheckTile : MonoBehaviour
         }
         if (collider.CompareTag("Wall"))
         {
-            Lacus.ResetLacus();
+
+            StartCoroutine(WallRespawn());
         }
     }
+
+    IEnumerator WallRespawn()
+    {
+        yield return new WaitForSeconds(0.1f);
+        Lacus.ResetLacus();
+        Lacus.ResetBattery();
+    }
+
 }

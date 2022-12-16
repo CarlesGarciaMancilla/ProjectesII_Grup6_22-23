@@ -23,6 +23,9 @@ public class LacusMovement : MonoBehaviour
     void Start()
     {
         initialPosition = transform.position;
+        lacusStats.batteryLeft = lacusStats.maxBattery;
+        ResetLacus();
+        ResetLacus();
     }
 
     // Update is called once per frame
@@ -71,8 +74,8 @@ public class LacusMovement : MonoBehaviour
     }
     public void ToDestinationMovement()
     {
-        Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1.5f, false);
-        Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1.5f, false);
+        Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
+        Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
     }
 
 
@@ -112,8 +115,13 @@ public class LacusMovement : MonoBehaviour
         isMoving = false;
         transform.DOComplete(false);
         transform.position = initialPosition;
-        lacusStats.batteryLeft = lacusStats.maxBattery;
         ResetDestinationPosition();
+    }
+
+    public void ResetBattery()
+    {
+        lacusStats.batteryLeft = lacusStats.maxBattery;
+        lacusStats.batteryLeft++;
     }
 
     public void ForwardDestination()
