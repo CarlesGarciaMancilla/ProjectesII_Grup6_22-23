@@ -108,6 +108,7 @@ MonoBehaviour:
   Lacus: {fileID: 6033293880122079857}
   destination: {fileID: 6033293880259255401}
   destinationCollider: {fileID: 1040985383712223166}
+  destinationBattery: {fileID: 4244387518369126440}
   isMoving: 0
 --- !u!114 &6033293880122079853
 MonoBehaviour:
