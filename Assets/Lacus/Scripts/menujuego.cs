@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class menujuego : MonoBehaviour
 {
     public GameObject menuPanel;
+    public GameObject menuOptions;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,8 +22,11 @@ public class menujuego : MonoBehaviour
     {
         switch (menu)
         {
-            case "jugar":
-                SceneManager.LoadScene("Preguntas");
+            case "play":
+                SceneManager.LoadScene("Tutorial_1");
+                break;
+            case "options":
+                menuOptions.SetActive(true);
                 break;
             case "exit":
 #if UNITY_EDITOR
