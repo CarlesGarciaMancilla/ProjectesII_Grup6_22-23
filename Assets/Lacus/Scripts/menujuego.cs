@@ -7,6 +7,7 @@ public class menujuego : MonoBehaviour
 {
     public GameObject menuPanel;
     public GameObject menuOptions;
+    public AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +33,14 @@ public class menujuego : MonoBehaviour
             case "return":
                 menuOptions.SetActive(false);
                 menuPanel.SetActive(true);
+                break;
+            case "mute":
+                if (audio.isPlaying) 
+                {
+                audio.Pause();
+                }
+                else
+                    audio.Play();
                 break;
             case "exit":
 #if UNITY_EDITOR
