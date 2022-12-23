@@ -12,9 +12,12 @@ public class LacusCheckTile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
+        if (!Lacus.isMoving)
+            return;
+
         if (collider.CompareTag("Battery"))
         {
-            LacusS.batteryLeft = LacusS.maxBattery;
+            LacusS.ResetBattery();
         }
 
         if (collider.CompareTag("Button"))

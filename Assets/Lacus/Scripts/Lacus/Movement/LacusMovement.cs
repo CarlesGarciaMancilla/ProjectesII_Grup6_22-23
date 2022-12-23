@@ -24,7 +24,6 @@ public class LacusMovement : MonoBehaviour
     void Start()
     {
         initialPosition = transform.position;
-        lacusStats.batteryLeft = lacusStats.maxBattery;
         //ResetLacus();
         //ResetLacus();
     }
@@ -120,8 +119,7 @@ public class LacusMovement : MonoBehaviour
         ResetDestinationPosition();
 
         // Diria que s'ha de fer aixo per que es pugi fer reset a la bateria
-        lacusStats.batteryLeft = lacusStats.maxBattery;
-        lacusStats.batteryLeft = lacusStats.maxBattery;
+        lacusStats.ResetBattery();
 
         // No va la recarrega del destination
         destinationBattery.FillTempBattery();
