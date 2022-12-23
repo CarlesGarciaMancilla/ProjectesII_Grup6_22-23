@@ -27,6 +27,11 @@ public class menujuego : MonoBehaviour
                 break;
             case "options":
                 menuOptions.SetActive(true);
+                menuPanel.SetActive(false);
+                break;
+            case "return":
+                menuOptions.SetActive(false);
+                menuPanel.SetActive(true);
                 break;
             case "exit":
 #if UNITY_EDITOR
