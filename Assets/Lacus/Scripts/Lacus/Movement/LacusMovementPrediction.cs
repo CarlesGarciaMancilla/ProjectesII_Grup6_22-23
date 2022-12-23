@@ -32,7 +32,7 @@ public class LacusMovementPrediction : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(tempBattery);
+        //Debug.Log(tempBattery);
     }
 
 

@@ -31,6 +31,7 @@ public class LacusMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(lacusStats.batteryLeft);
         InitiateToDestinationMovement();
 
         CheckIfObjectClicked();
@@ -68,6 +69,7 @@ public class LacusMovement : MonoBehaviour
             {
                 Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
                 Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
+                isMoving = true;
             }
 
         }
