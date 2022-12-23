@@ -8,6 +8,8 @@ public class OnOffArrow : MonoBehaviour
     [SerializeField] GameObject off;
     [SerializeField] GameObject fletxa_button;
     [SerializeField] GameObject lights;
+    [SerializeField] ParticleSystem spark;
+    private int i = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,10 +23,14 @@ public class OnOffArrow : MonoBehaviour
         {
             off.SetActive(false);
             lights.SetActive(true);
+            if(i == 0)
+            spark.Play();
             fletxa_button.tag = "Arrow";
+            i++;
         }
         else// is Off
         {
+            i = 0;
             off.SetActive(true);
             lights.SetActive(false);
             fletxa_button.tag = "Tile";
