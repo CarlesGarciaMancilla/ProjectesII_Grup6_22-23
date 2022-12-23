@@ -14,6 +14,7 @@ public class LacusMovement : MonoBehaviour
     private float rotationAngle = 0f;
     private Vector3 initialPosition;
     [SerializeField] private Collider2D destinationCollider;
+    [SerializeField] private LacusMovementPrediction destinationBattery;
 
     [HideInInspector] public bool isMoving = false;
 
@@ -24,8 +25,8 @@ public class LacusMovement : MonoBehaviour
     {
         initialPosition = transform.position;
         lacusStats.batteryLeft = lacusStats.maxBattery;
-        ResetLacus();
-        ResetLacus();
+        //ResetLacus();
+        //ResetLacus();
     }
 
     // Update is called once per frame
@@ -102,6 +103,7 @@ public class LacusMovement : MonoBehaviour
             if (resetDestination)
             {
                 ResetDestinationPosition();
+                destinationBattery.FillTempBattery();
             }
             
             rotationAngle = 0f;
@@ -116,8 +118,13 @@ public class LacusMovement : MonoBehaviour
         transform.DOComplete(false);
         transform.position = initialPosition;
         ResetDestinationPosition();
+
+        // Diria que s'ha de fer aixo per que es pugi fer reset a la bateria
         lacusStats.batteryLeft = lacusStats.maxBattery;
         lacusStats.batteryLeft = lacusStats.maxBattery;
+
+        // No va la recarrega del destination
+        destinationBattery.FillTempBattery();
     }
 
     public void ForwardDestination()
@@ -146,5 +153,6 @@ public class LacusMovement : MonoBehaviour
     public void ResetDestinationPosition()
     {
         destination.transform.localPosition = new Vector3(1.6f, 0, 0);
+        destinationBattery.FillTempBattery(lacusStats.batteryLeft);
     }
 }
