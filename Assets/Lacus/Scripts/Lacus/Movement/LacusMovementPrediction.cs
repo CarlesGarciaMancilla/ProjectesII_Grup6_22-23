@@ -4,6 +4,7 @@ using UnityEngine;
 using static UnityEditor.PlayerSettings;
 using DG.Tweening;
 using System;
+using System.Runtime.CompilerServices;
 
 public class LacusMovementPrediction : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class LacusMovementPrediction : MonoBehaviour
     private void Start()
     {
         tempBattery = stats.batteryLeft;
-        // GetCurrentFacing Inicial
+        
         movement.ForwardDestination();
     }
 
@@ -45,30 +46,31 @@ public class LacusMovementPrediction : MonoBehaviour
         {
             if (collider.CompareTag("Battery"))
             {
-                // Parar moviment, no avança el destination
+                Debug.Log("Battery Filled");
+                FillTempBattery();
                 movement.ForwardDestination();
-                tempBattery--;
             }
             if (collider.CompareTag("Stop"))
             {
-                // Parar moviment, no avança el destination
                 tempBattery--;
 
             }
             if (collider.CompareTag("End"))
             {
-                // Parar moviment, no avança el destination
                 tempBattery--;
             }
             if (collider.CompareTag("Arrow"))
             {
-                // Parar moviment, no avança el destination
                 tempBattery--;
             }
 
             if (collider.CompareTag("Tile"))
             {
-                // Avançar en is Facing Correcte
+                movement.ForwardDestination();
+                tempBattery--;
+            }
+            if (collider.CompareTag("Button"))
+            {
                 movement.ForwardDestination();
                 tempBattery--;
             }
@@ -78,6 +80,11 @@ public class LacusMovementPrediction : MonoBehaviour
     public void FillTempBattery()
     {
         tempBattery = stats.maxBattery;
+    }
+
+    public void FillTempBattery(int battery)
+    {
+        tempBattery = battery -1;
     }
 
     /*public void ForwardDestination()

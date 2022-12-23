@@ -25,8 +25,8 @@ public class LacusMovement : MonoBehaviour
     {
         initialPosition = transform.position;
         lacusStats.batteryLeft = lacusStats.maxBattery;
-        ResetLacus();
-        ResetLacus();
+        //ResetLacus();
+        //ResetLacus();
     }
 
     // Update is called once per frame
@@ -153,5 +153,6 @@ public class LacusMovement : MonoBehaviour
     public void ResetDestinationPosition()
     {
         destination.transform.localPosition = new Vector3(1.6f, 0, 0);
+        destinationBattery.FillTempBattery(lacusStats.batteryLeft);
     }
 }

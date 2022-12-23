@@ -173,7 +173,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6033293880259255400}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.6, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.2500001, y: 1.2500001, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -538,6 +538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LacusM: {fileID: 6033293880122079854}
   LacusS: {fileID: 6033293880122079853}
+  destination: {fileID: 6033293880259255401}
 --- !u!1001 &662820299656823805
 PrefabInstance:
   m_ObjectHideFlags: 0
