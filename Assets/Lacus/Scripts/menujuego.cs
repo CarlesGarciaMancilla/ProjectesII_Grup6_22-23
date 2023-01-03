@@ -11,6 +11,8 @@ public class menujuego : MonoBehaviour
     public GameObject menuPanel;
     public GameObject menuOptions;
     public GameObject prefabTransition;
+    public GameObject LevelSelector;
+    public Button level1;
     public AudioSource audio;
     public Animator animator;
     // Start is called before the first frame update
@@ -29,15 +31,22 @@ public class menujuego : MonoBehaviour
         switch (menu)
         {
             case "play":
-                StartCoroutine(SceneLoad());
+                menuPanel.SetActive(false);
+                LevelSelector.SetActive(true);
+                level1.enabled = false;
                 break;
             case "options":
                 menuOptions.SetActive(true);
                 menuPanel.SetActive(false);
                 break;
-            case "return":
+            case "return":               
                 menuOptions.SetActive(false);
+                LevelSelector.SetActive(false);
                 menuPanel.SetActive(true);
+                break;
+            case "level1":
+                // LevelSelector.SetActive(false);
+                StartCoroutine(SceneLoad());
                 break;
             case "mute":
                 if (audio.isPlaying) 
