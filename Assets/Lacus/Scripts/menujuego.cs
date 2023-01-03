@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class menujuego : MonoBehaviour
 {
@@ -13,12 +14,20 @@ public class menujuego : MonoBehaviour
     public GameObject prefabTransition;
     public GameObject LevelSelector;
     public Button level1;
+    public Button level2;
+    public Button level3;
+    public Button level4;
+    public Button level5;
+    public Button level6;
+    public Button level7;
+    public Button level8;
     public AudioSource audio;
     public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(Transition());
+        
     }
 
     // Update is called once per frame
@@ -28,12 +37,19 @@ public class menujuego : MonoBehaviour
     }
     public void GestionClickMenu(string menu)
     {
+       
         switch (menu)
         {
             case "play":
                 menuPanel.SetActive(false);
                 LevelSelector.SetActive(true);
-                level1.enabled = false;
+                level2.interactable = false;
+                level3.interactable = false;
+                level4.interactable = false;
+                level5.interactable = false;
+                level6.interactable = false;
+                level7.interactable = false;
+                level8.interactable = false;
                 break;
             case "options":
                 menuOptions.SetActive(true);
