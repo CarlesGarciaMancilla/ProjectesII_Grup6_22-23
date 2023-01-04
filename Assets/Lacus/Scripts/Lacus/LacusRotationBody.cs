@@ -7,7 +7,7 @@ public class LacusRotationBody : MonoBehaviour
     [SerializeField] private LayerMask lacusBodyLayer;
     [SerializeField] private Collider2D colliderBody;
     private float rotationAngle = 0f;
-    //[SerializeField] private AudioSource lacusTurn;
+    [SerializeField] private AudioSource lacusTurn;
     [SerializeField] private Transform Lacus;
 
 
@@ -38,13 +38,13 @@ public class LacusRotationBody : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 rotationAngle += 90f;
-                //lacusTurn.Play();
+                lacusTurn.Play();
             }
 
             if (Input.GetMouseButtonDown(1))
             {
                 rotationAngle -= 90f;
-                //lacusTurn.Play();
+                lacusTurn.Play();
             }
             Lacus.Rotate(0f, 0f, rotationAngle, Space.World);
             rotationAngle = 0f;
