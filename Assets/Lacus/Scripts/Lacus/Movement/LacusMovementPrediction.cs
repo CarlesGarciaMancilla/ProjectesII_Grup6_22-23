@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 using DG.Tweening;
+using System;
+using System.Runtime.CompilerServices;
 
 public class LacusMovementPrediction : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class LacusMovementPrediction : MonoBehaviour
     [SerializeField] GameObject tile;
     [SerializeField] private bool locked;
 
-    private int tempBattery;
+    [HideInInspector] private int tempBattery;
 
 
     // GetCurrentIsFacing Inicial
@@ -24,12 +25,13 @@ public class LacusMovementPrediction : MonoBehaviour
     private void Start()
     {
         tempBattery = stats.batteryLeft;
-        // GetCurrentFacing Inicial
+        
         movement.ForwardDestination();
     }
 
     private void Update()
     {
+        //Debug.Log(tempBattery);
     }
 
 
@@ -39,31 +41,49 @@ public class LacusMovementPrediction : MonoBehaviour
         // Comprobar bateria, mirar quantes caselles pot avançar amb la bateria que li queda
 
         // Mirar Tile Seguent
-        if (collider.CompareTag("Battery"))
+        if (tempBattery > 0)
         {
-            // Parar moviment, no avança el destination
-            movement.ForwardDestination();
-        }
-        if (collider.CompareTag("Stop"))
-        {
-            // Parar moviment, no avança el destination
-               
-        }
-        if (collider.CompareTag("End"))
-        {
-            // Parar moviment, no avança el destination
-               
-        }
-        if (collider.CompareTag("Arrow"))
-        {
-            // Parar moviment, no avança el destination
-        }
+            if (collider.CompareTag("Battery"))
+            {
+                Debug.Log("Battery Filled");
+                FillTempBattery();
+                movement.ForwardDestination();
+            }
+            if (collider.CompareTag("Stop"))
+            {
+                tempBattery--;
 
-        if (collider.CompareTag("Tile"))
-        {
-            // Avançar en is Facing Correcte
-            movement.ForwardDestination();
+            }
+            if (collider.CompareTag("End"))
+            {
+                tempBattery--;
+            }
+            if (collider.CompareTag("Arrow"))
+            {
+                tempBattery--;
+            }
+
+            if (collider.CompareTag("Tile"))
+            {
+                movement.ForwardDestination();
+                tempBattery--;
+            }
+            if (collider.CompareTag("Button"))
+            {
+                movement.ForwardDestination();
+                tempBattery--;
+            }
         }
+    }
+
+    public void FillTempBattery()
+    {
+        tempBattery = stats.maxBattery;
+    }
+
+    public void FillTempBattery(int battery)
+    {
+        tempBattery = battery -1;
     }
 
     /*public void ForwardDestination()

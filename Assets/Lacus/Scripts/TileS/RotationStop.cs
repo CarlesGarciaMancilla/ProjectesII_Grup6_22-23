@@ -17,7 +17,7 @@ public class RotationStop: MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       LacusCollider = Lacus.GetComponent<Collider2D>();
+       //LacusCollider = Lacus.GetComponent<Collider2D>();
     }
 
     // Update is called once per frame

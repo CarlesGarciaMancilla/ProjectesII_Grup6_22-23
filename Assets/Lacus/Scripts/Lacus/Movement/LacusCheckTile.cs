@@ -8,13 +8,24 @@ public class LacusCheckTile : MonoBehaviour
     public LacusMovement Lacus;
     public LacusStats LacusS;
     [SerializeField] private AudioSource StopSound;
+    private GameObject tempG;
+    private GameObject menu;
 
+    void Start()
+    {
+        tempG = GameObject.Find("Canvasfinal");
+       menu = tempG.transform.Find("FinalMenu").gameObject;
+
+    }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
+        if (!Lacus.isMoving)
+            return;
+
         if (collider.CompareTag("Battery"))
         {
-            LacusS.batteryLeft = LacusS.maxBattery;
+            LacusS.ResetBattery();
         }
 
         if (collider.CompareTag("Button"))
@@ -32,6 +43,7 @@ public class LacusCheckTile : MonoBehaviour
         if (collider.CompareTag("End"))
         {
             // Change to next scene
+            menu.SetActive(true);
         }
         if (collider.CompareTag("Tile"))
         {
