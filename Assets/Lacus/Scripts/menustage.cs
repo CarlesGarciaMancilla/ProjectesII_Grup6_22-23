@@ -54,24 +54,52 @@ public class menustage : MonoBehaviour
         switch (scene)
         {
             case "Tutorial_1":
+                if (!PlayerPrefs.HasKey("tuto_2"))
+                {
+                    PlayerPrefs.SetInt("tuto_2", 1);
+                }           
                 SceneManager.LoadScene("Tutorial_2");
                 break;
             case "Tutorial_2":
+                if (!PlayerPrefs.HasKey("tuto_3"))
+                {
+                    PlayerPrefs.SetInt("tuto_3", 1);
+                }
                 SceneManager.LoadScene("Tutorial_3");
                 break;
             case "Tutorial_3":
+                if (!PlayerPrefs.HasKey("tuto_4"))
+                {
+                    PlayerPrefs.SetInt("tuto_4", 1);
+                }
                 SceneManager.LoadScene("Tutorial_4");
                 break;
             case "Tutorial_4":
+                if (!PlayerPrefs.HasKey("lev_1"))
+                {
+                    PlayerPrefs.SetInt("lev_1", 1);
+                }
                 SceneManager.LoadScene("Level_1");
                 break;
             case "Level_1":
+                if (!PlayerPrefs.HasKey("lev_2"))
+                {
+                    PlayerPrefs.SetInt("lev_2", 1);
+                }
                 SceneManager.LoadScene("Level_2");
                 break;
             case "Level_2":
+                if (!PlayerPrefs.HasKey("lev_3"))
+                {
+                    PlayerPrefs.SetInt("lev_3", 1);
+                }
                 SceneManager.LoadScene("Level_3");
                 break;
             case "Level_3":
+                if (!PlayerPrefs.HasKey("lev_4"))
+                {
+                    PlayerPrefs.SetInt("lev_4", 1);
+                }
                 SceneManager.LoadScene("Level_4");
                 break;
             case "Level_4":
