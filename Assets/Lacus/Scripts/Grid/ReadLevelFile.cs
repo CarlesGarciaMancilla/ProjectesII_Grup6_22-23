@@ -71,7 +71,7 @@ public class ReadLevelFile : MonoBehaviour
         }
 
         List<OnOffArrow> onOffArrows = new List<OnOffArrow>();
-        Button arrowsButton = null;
+        Buttons arrowsButton = null;
         foreach (char tile in line)
         {
             switch (tile)
@@ -106,7 +106,7 @@ public class ReadLevelFile : MonoBehaviour
                 case '?': // Button
                     {
                         GameObject obj = Instantiate(button, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
-                        arrowsButton = obj.GetComponent<Button>();
+                        arrowsButton = obj.GetComponent<Buttons>();
                         break;
                     }
                 case '!': // Deactivated Arrow

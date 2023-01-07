@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 
-public class Button : MonoBehaviour
+public class Buttons : MonoBehaviour
 {
     public bool isPressed;
     public Sprite buttonOn;

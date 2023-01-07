@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OnOffArrow : MonoBehaviour
 {
-    [SerializeField] public Button button;
+    [SerializeField] public Buttons button;
     [SerializeField] GameObject off;
     [SerializeField] GameObject fletxa_button;
     [SerializeField] GameObject lights;
