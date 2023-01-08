@@ -17,6 +17,7 @@ public class LacusMovement : MonoBehaviour
     [SerializeField] private Collider2D destinationCollider;
     [SerializeField] private LacusMovementPrediction destinationBattery;
     public GameObject keyspacep;
+    public GameObject keyr;
     private string sceneName;
 
 
@@ -28,6 +29,8 @@ public class LacusMovement : MonoBehaviour
     void Start()
     {
         sceneName = SceneManager.GetActiveScene().name;
+        keyr = GameObject.Find("reset");
+       
         keyspacep = GameObject.Find("space");
         initialPosition = transform.position;
         //ResetLacus();
@@ -53,12 +56,14 @@ public class LacusMovement : MonoBehaviour
         }
 
         //if (lacusStats.batteryLeft == 0 || Input.GetKeyDown(KeyCode.R)) 
-        if (Input.GetKeyDown(KeyCode.R)) 
+        if (Input.GetKeyDown(KeyCode.R) || keyr.activeSelf == false) 
         {
             SceneManager.LoadScene(sceneName);
+            
         }
  
     }
+
 
 
     // Funció que rota en Lacus donat una rotació amb un valor Z

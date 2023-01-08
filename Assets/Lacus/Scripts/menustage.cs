@@ -17,12 +17,14 @@ public class menustage : MonoBehaviour
     public GameObject prefabTransition;
     public Animator animator;
     public GameObject space;
+    public GameObject reset;
+    public GameObject options;
 
 
     // Start is called before the first frame update
     void Start()
     {
-
+        reset.SetActive(true);
         sceneName = SceneManager.GetActiveScene().name;
         StartCoroutine(Transition());
     }
@@ -42,13 +44,30 @@ public class menustage : MonoBehaviour
                 Panel.SetActive(false);
                 StartCoroutine(SceneLoad(sceneName));
                 break;
-            case "returnmenu":
+            case "return":
+                options.SetActive(false);
                 Debug.Log("return");
                 SceneManager.LoadScene("Menu");
+                Time.timeScale = 1;
                 break;
+            case "options":
+                options.SetActive(true);
+                Time.timeScale = 0f;
+                break;
+            case "resume":
+                options.SetActive(false);
+                Time.timeScale = 1;
+                break;
+            case "mute":
+                if (audioGame.isPlaying)
+                {
+                    audioGame.Pause();
+                }
+                else
+                    audioGame.Play();
+                break;
+                
         }
-
-
     }
 
     public IEnumerator SceneLoad(string scene)
@@ -121,8 +140,12 @@ public class menustage : MonoBehaviour
     public void SpaceActive() 
     {
         space.SetActive(false);
-    
-    
+       
+    }
+    public void ResetActive() 
+    {
+        reset.SetActive(false);
+       
     }
    
 

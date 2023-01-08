@@ -26,6 +26,7 @@ public class menujuego : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Screen.SetResolution(720, 1000, FullScreenMode.Windowed);
         StartCoroutine(Transition());
         level2.interactable = false;
         level3.interactable = false;
