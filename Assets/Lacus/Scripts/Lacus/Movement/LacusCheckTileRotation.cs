@@ -7,6 +7,7 @@ public class LacusCheckTileRotation : MonoBehaviour
 
     [SerializeField] private LacusMovement LacusM;
     [SerializeField] private LacusStats LacusS;
+    [SerializeField] private Transform destination;
 
 
     // Start is called before the first frame update
@@ -26,12 +27,14 @@ public class LacusCheckTileRotation : MonoBehaviour
         yield return new WaitForSeconds(0.35f);
         if (collider.transform.rotation != transform.rotation)
         {
+            destination.localPosition = new Vector3(0, 0, 0);
             LacusM.Rotate(collider.transform.rotation);
             yield return new WaitForSeconds(0.3f);
         }
+
         // Ficar Audio Aqui
+
         // No treure, si no es torna voig
-        
         LacusM.ResetDestinationPosition();
         yield return new WaitForSeconds(0.3f);
         LacusM.ToDestinationMovement();

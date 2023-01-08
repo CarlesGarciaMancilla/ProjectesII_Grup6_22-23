@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using System.Security.Cryptography;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using UnityEngine.SceneManagement;
 
 public class LacusMovement : MonoBehaviour
 {
@@ -14,6 +15,11 @@ public class LacusMovement : MonoBehaviour
     private float rotationAngle = 0f;
     private Vector3 initialPosition;
     [SerializeField] private Collider2D destinationCollider;
+    [SerializeField] private LacusMovementPrediction destinationBattery;
+    public GameObject keyspacep;
+    public GameObject keyr;
+    private string sceneName;
+
 
     [HideInInspector] public bool isMoving = false;
 
@@ -22,15 +28,19 @@ public class LacusMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        sceneName = SceneManager.GetActiveScene().name;
+        keyr = GameObject.Find("reset");
+       
+        keyspacep = GameObject.Find("space");
         initialPosition = transform.position;
-        lacusStats.batteryLeft = lacusStats.maxBattery;
-        ResetLacus();
-        ResetLacus();
+        //ResetLacus();
+        //ResetLacus();
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(lacusStats.batteryLeft);
         InitiateToDestinationMovement();
 
         CheckIfObjectClicked();
@@ -46,12 +56,14 @@ public class LacusMovement : MonoBehaviour
         }
 
         //if (lacusStats.batteryLeft == 0 || Input.GetKeyDown(KeyCode.R)) 
-        if (Input.GetKeyDown(KeyCode.R)) 
+        if (Input.GetKeyDown(KeyCode.R) || keyr.activeSelf == false) 
         {
-            ResetLacus();
+            SceneManager.LoadScene(sceneName);
+            
         }
  
     }
+
 
 
     // Funció que rota en Lacus donat una rotació amb un valor Z
@@ -62,12 +74,13 @@ public class LacusMovement : MonoBehaviour
 
     public void InitiateToDestinationMovement()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || keyspacep.activeSelf == false)
         {
             if (!isMoving)
             {
                 Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
                 Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
+                isMoving = true;
             }
 
         }
@@ -102,6 +115,7 @@ public class LacusMovement : MonoBehaviour
             if (resetDestination)
             {
                 ResetDestinationPosition();
+                destinationBattery.FillTempBattery();
             }
             
             rotationAngle = 0f;
@@ -113,11 +127,16 @@ public class LacusMovement : MonoBehaviour
     public void ResetLacus()
     {
         isMoving = false;
+        keyspacep.SetActive(true);
         transform.DOComplete(false);
         transform.position = initialPosition;
         ResetDestinationPosition();
-        lacusStats.batteryLeft = lacusStats.maxBattery;
-        lacusStats.batteryLeft = lacusStats.maxBattery;
+
+        // Diria que s'ha de fer aixo per que es pugi fer reset a la bateria
+        lacusStats.ResetBattery();
+
+        // No va la recarrega del destination
+        destinationBattery.FillTempBattery();
     }
 
     public void ForwardDestination()
@@ -146,5 +165,17 @@ public class LacusMovement : MonoBehaviour
     public void ResetDestinationPosition()
     {
         destination.transform.localPosition = new Vector3(1.6f, 0, 0);
+        destinationBattery.FillTempBattery(lacusStats.batteryLeft);
+    }
+
+
+    public void InitiateMovement()
+    {       
+            if (!isMoving)
+            {
+                Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
+                Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
+                isMoving = true;
+            }       
     }
 }
