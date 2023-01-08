@@ -52,3 +52,6 @@ TagManager:
   - name: Lacus
     uniqueID: 592181553
     locked: 0
+  - name: fondo
+    uniqueID: 2231887755
+    locked: 0

@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using System.Security.Cryptography;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using UnityEngine.SceneManagement;
 
 public class LacusMovement : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class LacusMovement : MonoBehaviour
     private Vector3 initialPosition;
     [SerializeField] private Collider2D destinationCollider;
     [SerializeField] private LacusMovementPrediction destinationBattery;
+    public GameObject keyspacep;
+    private string sceneName;
+
 
     [HideInInspector] public bool isMoving = false;
 
@@ -23,6 +27,8 @@ public class LacusMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        sceneName = SceneManager.GetActiveScene().name;
+        keyspacep = GameObject.Find("space");
         initialPosition = transform.position;
         //ResetLacus();
         //ResetLacus();
@@ -49,7 +55,7 @@ public class LacusMovement : MonoBehaviour
         //if (lacusStats.batteryLeft == 0 || Input.GetKeyDown(KeyCode.R)) 
         if (Input.GetKeyDown(KeyCode.R)) 
         {
-            ResetLacus();
+            SceneManager.LoadScene(sceneName);
         }
  
     }
@@ -63,7 +69,7 @@ public class LacusMovement : MonoBehaviour
 
     public void InitiateToDestinationMovement()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || keyspacep.activeSelf == false)
         {
             if (!isMoving)
             {
@@ -116,6 +122,7 @@ public class LacusMovement : MonoBehaviour
     public void ResetLacus()
     {
         isMoving = false;
+        keyspacep.SetActive(true);
         transform.DOComplete(false);
         transform.position = initialPosition;
         ResetDestinationPosition();
@@ -154,5 +161,16 @@ public class LacusMovement : MonoBehaviour
     {
         destination.transform.localPosition = new Vector3(1.6f, 0, 0);
         destinationBattery.FillTempBattery(lacusStats.batteryLeft);
+    }
+
+
+    public void InitiateMovement()
+    {       
+            if (!isMoving)
+            {
+                Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
+                Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
+                isMoving = true;
+            }       
     }
 }

@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class menustage : MonoBehaviour
 {
@@ -15,9 +16,13 @@ public class menustage : MonoBehaviour
     private string sceneName;
     public GameObject prefabTransition;
     public Animator animator;
+    public GameObject space;
+
+
     // Start is called before the first frame update
     void Start()
     {
+
         sceneName = SceneManager.GetActiveScene().name;
         StartCoroutine(Transition());
     }
@@ -25,7 +30,7 @@ public class menustage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     public void GestionClickMenuFinal(string menuf)
     {
@@ -57,7 +62,7 @@ public class menustage : MonoBehaviour
                 if (!PlayerPrefs.HasKey("tuto_2"))
                 {
                     PlayerPrefs.SetInt("tuto_2", 1);
-                }           
+                }
                 SceneManager.LoadScene("Tutorial_2");
                 break;
             case "Tutorial_2":
@@ -112,4 +117,16 @@ public class menustage : MonoBehaviour
         yield return new WaitForSeconds(transitionTime);
         prefabTransition.SetActive(false);
     }
+
+    public void SpaceActive() 
+    {
+        space.SetActive(false);
+    
+    
+    }
+   
+
+
+
+
 }
