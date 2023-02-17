@@ -15,13 +15,6 @@ public class LacusMovementPrediction : MonoBehaviour
     [HideInInspector] private int tempBattery;
 
 
-    // GetCurrentIsFacing Inicial
-
-    // Bucle:
-    // Comprobar bateria no es 0
-    // Mirar Tile Seguent, fer comprobacions
-    // Avançar en IsFacing correcte
-
     private void Start()
     {
         tempBattery = stats.batteryLeft;
@@ -31,7 +24,6 @@ public class LacusMovementPrediction : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log(tempBattery);
     }
 
 
@@ -47,7 +39,7 @@ public class LacusMovementPrediction : MonoBehaviour
             {
                 Debug.Log("Battery Filled");
                 FillTempBattery();
-                movement.ForwardDestination();
+                //movement.ForwardDestination();
             }
             if (collider.CompareTag("Stop"))
             {
@@ -65,12 +57,12 @@ public class LacusMovementPrediction : MonoBehaviour
 
             if (collider.CompareTag("Tile"))
             {
-                movement.ForwardDestination();
+                //movement.ForwardDestination();
                 tempBattery--;
             }
             if (collider.CompareTag("Button"))
             {
-                movement.ForwardDestination();
+                //movement.ForwardDestination();
                 tempBattery--;
             }
         }
@@ -85,29 +77,4 @@ public class LacusMovementPrediction : MonoBehaviour
     {
         tempBattery = battery -1;
     }
-
-    /*public void ForwardDestination()
-    {
-        if (stats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.RIGHT)
-        {
-            transform.localPosition = new Vector3(transform.localPosition.x + 1.6f, 0f, 0f);
-        }
-        else if (stats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.UP)
-        {
-            transform.localPosition = new Vector3(0f, transform.localPosition.y + 1.6f, 0f);
-        }
-        else if (stats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.LEFT)
-        {
-            transform.localPosition = new Vector3(transform.localPosition.x - 1.6f, 0f, 0f);
-        }
-        else if (stats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.DOWN)
-        {
-            transform.localPosition = new Vector3(0f, transform.localPosition.y - 1.6f, 0f);
-        }
-    } 
-
-    public void ResetDestinationPosition()
-    {
-        transform.localPosition = new Vector3(1.6f, 0, 0);
-    }*/
 }

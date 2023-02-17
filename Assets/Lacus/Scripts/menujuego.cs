@@ -21,7 +21,7 @@ public class menujuego : MonoBehaviour
     public Button level6;
     public Button level7;
     public Button level8;
-    public AudioSource audio;
+    public AudioSource audioS;
     public Animator animator;
     // Start is called before the first frame update
     void Start()
@@ -43,6 +43,8 @@ public class menujuego : MonoBehaviour
     {
         
     }
+
+    // No es crida en cap lloc, com funciona?
     public void GestionClickMenu(string menu)
     {
        
@@ -86,6 +88,8 @@ public class menujuego : MonoBehaviour
                     level8.interactable = true;
                 }
                 break;
+
+                // StartCoroutine(SceneLoad("NomdelNivell"));
             case "options":
                 menuOptions.SetActive(true);
                 menuPanel.SetActive(false);
@@ -128,12 +132,12 @@ public class menujuego : MonoBehaviour
                 StartCoroutine(SceneLoad8());
                 break;
             case "mute":
-                if (audio.isPlaying) 
+                if (audioS.isPlaying) 
                 {
-                audio.Pause();
+                audioS.Pause();
                 }
                 else
-                    audio.Play();
+                    audioS.Play();
                 break;
             case "exit":
 #if UNITY_EDITOR
@@ -212,7 +216,17 @@ public class menujuego : MonoBehaviour
         SceneManager.LoadScene("Level_4");
     }
 
+    // Fer les SceneLoad AIXI, NO facis 70 mil funcions que es practicament lo mateix y que nomes canvi 1 cosa, es fica un parametre a la funcio i et serveix per totes les coses
+    public IEnumerator SceneLoad(string sceneName)
+    {
+        // Potser modificar una mica aixo per canviar les variables del menu i levelSelector
+        // Aixo te elements de transition, mira si pots ficar Transition() aqui
 
+        prefabTransition.SetActive(true);
+        animator.SetTrigger("StartTransition");
+        yield return new WaitForSeconds(transitionTime);
+        SceneManager.LoadScene(sceneName);
+    }
 
 
     public IEnumerator Transition() 
