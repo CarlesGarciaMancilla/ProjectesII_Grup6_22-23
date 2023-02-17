@@ -10,18 +10,17 @@ public class LacusCheckTileRotation : MonoBehaviour
     [SerializeField] private Transform destination;
 
 
-    // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D collider)
     {
+        // Colisió Casella NOMES ARROW
         if (collider.CompareTag("Arrow"))
         {
             LacusS.batteryLeft--;
             StartCoroutine(WaitToForward(collider));
-
         }
     }
 
-    IEnumerator WaitToForward(Collider2D collider)
+    public IEnumerator WaitToForward(Collider2D collider)
     {
         // Ha d'estar aixi, si no no rota perfectament
         yield return new WaitForSeconds(0.35f);
@@ -37,6 +36,6 @@ public class LacusCheckTileRotation : MonoBehaviour
         // No treure, si no es torna voig
         LacusM.ResetDestinationPosition();
         yield return new WaitForSeconds(0.3f);
-        LacusM.ToDestinationMovement();
+
     }
 }

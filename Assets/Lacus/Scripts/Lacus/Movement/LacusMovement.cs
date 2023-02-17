@@ -16,6 +16,7 @@ public class LacusMovement : MonoBehaviour
     private Vector3 initialPosition;
     [SerializeField] private Collider2D destinationCollider;
     [SerializeField] private LacusMovementPrediction destinationBattery;
+
     public GameObject keyspacep;
     public GameObject keyr;
     private string sceneName;
@@ -40,10 +41,10 @@ public class LacusMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(lacusStats.batteryLeft);
+        //Debug.Log(lacusStats.batteryLeft);
         InitiateToDestinationMovement();
 
-        CheckIfObjectClicked();
+        RotationLacusKeyboard();
 
         if (Input.touchCount > 0)
         {
@@ -72,18 +73,23 @@ public class LacusMovement : MonoBehaviour
         Lacus.transform.DORotateQuaternion(rotation, 0.3f);
     }
 
-    public void InitiateToDestinationMovement()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) || keyspacep.activeSelf == false)
-        {
-            if (!isMoving)
-            {
-                Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
-                Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
-                isMoving = true;
-            }
+    // ------------------------------
+    // Funció principal de Moviment
+    // ------------------------------
 
-        }
+    IEnumerator ToDestinationMovementV2()
+    {
+        Debug.Log("AAA");
+        Tween tweenX = Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
+        Tween tweenY = Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
+
+        yield return tweenX.WaitForCompletion();
+        yield return tweenY.WaitForCompletion();
+
+        StartCoroutine(ToDestinationMovementV2());
+
+        // This log will happen after the tween has completed
+        Debug.Log("Tween completed!");
     }
     public void ToDestinationMovement()
     {
@@ -91,8 +97,42 @@ public class LacusMovement : MonoBehaviour
         Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
     }
 
+    // Iniciador del Moviment i on hi accedeix el bucle per avançar
+    public void InitiateToDestinationMovement()
+    {
 
-    private void CheckIfObjectClicked()
+            ;
+        if (Input.GetKeyDown(KeyCode.Space) || keyspacep.activeSelf == false)
+        {
+            if (!isMoving)
+            {
+                //ToDestinationMovement();
+                Debug.Log("BBBB");
+                StartCoroutine(ToDestinationMovementV2());
+                isMoving = true;
+
+            }
+
+        }
+    }
+    
+    // Funció avançar Destination
+    public void ForwardDestination()
+    {
+        destination.transform.localPosition = new Vector3(destination.transform.localPosition.x + 1.6f, 0f, 0f);
+    }
+
+    // Reset del Destination
+    public void ResetDestinationPosition()
+    {
+        destination.transform.localPosition = new Vector3(1.6f, 0, 0);
+        destinationBattery.FillTempBattery(lacusStats.batteryLeft);
+    }
+
+    
+
+    // S'ha de cambiar / eliminar per la versió de click a sobre del lacus
+    private void RotationLacusKeyboard()
     {
         if (isMoving == false)
         {
@@ -124,6 +164,11 @@ public class LacusMovement : MonoBehaviour
     }
 
 
+
+
+
+
+    // Mirar en un futur els problemes del reset
     public void ResetLacus()
     {
         isMoving = false;
@@ -137,45 +182,5 @@ public class LacusMovement : MonoBehaviour
 
         // No va la recarrega del destination
         destinationBattery.FillTempBattery();
-    }
-
-    public void ForwardDestination()
-    {
-        destination.transform.localPosition = new Vector3(destination.transform.localPosition.x + 1.6f, 0f, 0f);
-
-        /*
-        if (lacusStats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.RIGHT)
-        {
-            destination.transform.localPosition = new Vector3(destination.transform.localPosition.x + 1.6f, 0f, 0f);
-        }
-        else if (lacusStats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.UP)
-        {
-            destination.transform.localPosition = new Vector3(0f, destination.transform.localPosition.y + 1.6f, 0f);
-        }
-        else if (lacusStats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.LEFT)
-        {
-            destination.transform.localPosition = new Vector3(destination.transform.localPosition.x - 1.6f, 0f, 0f);
-        }
-        else if (lacusStats.GetCurrentIsFacing() == LacusStats.LacusIsFacing.DOWN)
-        {
-            destination.transform.localPosition = new Vector3(0f, destination.transform.localPosition.y - 1.6f, 0f);
-        }*/
-    }
-
-    public void ResetDestinationPosition()
-    {
-        destination.transform.localPosition = new Vector3(1.6f, 0, 0);
-        destinationBattery.FillTempBattery(lacusStats.batteryLeft);
-    }
-
-
-    public void InitiateMovement()
-    {       
-            if (!isMoving)
-            {
-                Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
-                Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
-                isMoving = true;
-            }       
     }
 }
