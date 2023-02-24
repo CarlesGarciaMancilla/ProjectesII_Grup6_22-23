@@ -13,8 +13,9 @@ public class LacusCheckTile : MonoBehaviour
 
     void Start()
     {
+        // Això NO va aqui
         tempG = GameObject.Find("Canvasfinal");
-       menu = tempG.transform.Find("FinalMenu").gameObject;
+        menu = tempG.transform.Find("FinalMenu").gameObject;
 
     }
 
@@ -45,6 +46,7 @@ public class LacusCheckTile : MonoBehaviour
         else if (collider.CompareTag("End"))
         {
             // Change to next scene
+            // Canivar la linea de sota
             menu.SetActive(true);
         }
         else if (collider.CompareTag("Tile"))
@@ -53,7 +55,6 @@ public class LacusCheckTile : MonoBehaviour
         }
         else if (collider.CompareTag("Wall"))
         {
-
             StartCoroutine(WallRespawn());
         }
     }

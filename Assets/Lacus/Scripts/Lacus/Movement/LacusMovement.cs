@@ -29,10 +29,12 @@ public class LacusMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Aixo NO va aqui
         sceneName = SceneManager.GetActiveScene().name;
         keyr = GameObject.Find("reset");
-       
         keyspacep = GameObject.Find("space");
+
+
         initialPosition = transform.position;
         //ResetLacus();
         //ResetLacus();
@@ -41,10 +43,7 @@ public class LacusMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(lacusStats.batteryLeft);
         InitiateToDestinationMovement();
-
-        RotationLacusKeyboard();
 
         if (Input.touchCount > 0)
         {
@@ -56,11 +55,9 @@ public class LacusMovement : MonoBehaviour
             destination.transform.localPosition = new Vector3(0f, 0f, 0f);
         }
 
-        //if (lacusStats.batteryLeft == 0 || Input.GetKeyDown(KeyCode.R)) 
-        if (Input.GetKeyDown(KeyCode.R) || keyr.activeSelf == false) 
+        if (keyr.activeSelf == false) 
         {
             SceneManager.LoadScene(sceneName);
-            
         }
  
     }
@@ -73,46 +70,35 @@ public class LacusMovement : MonoBehaviour
         Lacus.transform.DORotateQuaternion(rotation, 0.3f);
     }
 
+
     // ------------------------------
     // Funció principal de Moviment
     // ------------------------------
-
     IEnumerator ToDestinationMovementV2()
     {
-        Debug.Log("AAA");
         Tween tweenX = Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
         Tween tweenY = Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
 
         yield return tweenX.WaitForCompletion();
         yield return tweenY.WaitForCompletion();
 
-        StartCoroutine(ToDestinationMovementV2());
-
-        // This log will happen after the tween has completed
-        Debug.Log("Tween completed!");
-    }
-    public void ToDestinationMovement()
-    {
-        Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
-        Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
+        // Comprobar si en els stops s'atura
+        if (isMoving)
+        {
+            StartCoroutine(ToDestinationMovementV2());
+        }
     }
 
     // Iniciador del Moviment i on hi accedeix el bucle per avançar
     public void InitiateToDestinationMovement()
     {
-
-            ;
-        if (Input.GetKeyDown(KeyCode.Space) || keyspacep.activeSelf == false)
+        if (keyspacep.activeSelf == false)
         {
             if (!isMoving)
             {
-                //ToDestinationMovement();
-                Debug.Log("BBBB");
                 StartCoroutine(ToDestinationMovementV2());
                 isMoving = true;
-
             }
-
         }
     }
     
@@ -128,45 +114,6 @@ public class LacusMovement : MonoBehaviour
         destination.transform.localPosition = new Vector3(1.6f, 0, 0);
         destinationBattery.FillTempBattery(lacusStats.batteryLeft);
     }
-
-    
-
-    // S'ha de cambiar / eliminar per la versió de click a sobre del lacus
-    private void RotationLacusKeyboard()
-    {
-        if (isMoving == false)
-        {
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                rotationAngle += 90f;
-                ForwardDestination();
-                resetDestination = true;
-            }
-
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                rotationAngle -= 90f;
-                ForwardDestination();
-                resetDestination = true;
-            }
-
-            this.gameObject.transform.Rotate(0f, 0f, rotationAngle, Space.World);
-
-            if (resetDestination)
-            {
-                ResetDestinationPosition();
-                destinationBattery.FillTempBattery();
-            }
-            
-            rotationAngle = 0f;
-            resetDestination = false;
-        }
-    }
-
-
-
-
-
 
     // Mirar en un futur els problemes del reset
     public void ResetLacus()
