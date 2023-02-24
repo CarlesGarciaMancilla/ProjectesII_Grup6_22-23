@@ -8,9 +8,8 @@ using System.Runtime.CompilerServices;
 public class LacusMovementPrediction : MonoBehaviour
 {
     [SerializeField] private LacusStats stats;
-    [SerializeField] private LacusMovement movement;
-    [SerializeField] GameObject tile;
-    [SerializeField] private bool locked;
+    //[SerializeField] GameObject tile;
+    //[SerializeField] private bool locked;
 
     [HideInInspector] private int tempBattery;
 
@@ -18,8 +17,6 @@ public class LacusMovementPrediction : MonoBehaviour
     private void Start()
     {
         tempBattery = stats.batteryLeft;
-        
-        movement.ForwardDestination();
     }
 
     private void Update()
@@ -29,22 +26,15 @@ public class LacusMovementPrediction : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        // "Bucle"
-        // Comprobar bateria, mirar quantes caselles pot avançar amb la bateria que li queda
-
-        // Mirar Tile Seguent
         if (tempBattery > 0)
         {
             if (collider.CompareTag("Battery"))
             {
-                Debug.Log("Battery Filled");
                 FillTempBattery();
-                //movement.ForwardDestination();
             }
             if (collider.CompareTag("Stop"))
             {
                 tempBattery--;
-
             }
             if (collider.CompareTag("End"))
             {
@@ -54,15 +44,12 @@ public class LacusMovementPrediction : MonoBehaviour
             {
                 tempBattery--;
             }
-
             if (collider.CompareTag("Tile"))
             {
-                //movement.ForwardDestination();
                 tempBattery--;
             }
             if (collider.CompareTag("Button"))
             {
-                //movement.ForwardDestination();
                 tempBattery--;
             }
         }

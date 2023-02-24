@@ -16,7 +16,6 @@ public class LacusStats : MonoBehaviour
         batteryLeft = maxBattery;
     }
 
-    // Update is called once per frame
     void Update()
     {
         

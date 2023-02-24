@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,10 @@ using static UnityEditor.PlayerSettings;
 
 public class ProtoRotation : MonoBehaviour
 {
+    [SerializeField] private LacusMovement LacusM;
+    [SerializeField] private Transform destination;
+    [SerializeField] private Transform Lacus;
+
     private float rotationAngle = 0;
 
 
@@ -31,8 +36,32 @@ public class ProtoRotation : MonoBehaviour
             rotationAngle = 0f;
         }
     }
-    public void SpriteRotation()
-    {
 
+    public IEnumerator LacusOnTileRotation(Collider2D collider)
+    {
+        // Ha d'estar aixi, si no no rota perfectament
+        yield return new WaitForSeconds(0.35f);
+        if (collider.transform.rotation != Lacus.transform.rotation)
+        {
+            destination.localPosition = new Vector3(0, 0, 0);
+            RotateLacus(collider.transform.rotation);
+            yield return new WaitForSeconds(0.3f);
+        }
+
+        // No treure, si no es torna voig
+        LacusM.ResetDestinationPosition();
+        yield return new WaitForSeconds(0.3f);
+
+    }
+
+    // Funció que rota en Lacus donat una rotació amb un valor Z
+    public void RotateLacus(Quaternion rotation)
+    {
+        Lacus.transform.DORotateQuaternion(rotation, 0.3f);
+    }
+
+    public void RotateSprite(Transform objectTarget, Quaternion rotation)
+    {
+        objectTarget.transform.DORotateQuaternion(rotation, 0.3f);
     }
 }
