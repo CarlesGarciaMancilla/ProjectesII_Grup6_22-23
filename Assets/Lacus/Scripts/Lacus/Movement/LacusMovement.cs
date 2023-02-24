@@ -36,6 +36,7 @@ public class LacusMovement : MonoBehaviour
 
 
         initialPosition = transform.position;
+        ForwardDestination();
         //ResetLacus();
         //ResetLacus();
     }
@@ -61,15 +62,6 @@ public class LacusMovement : MonoBehaviour
         }
  
     }
-
-
-
-    // Funció que rota en Lacus donat una rotació amb un valor Z
-    public void Rotate(Quaternion rotation)
-    {
-        Lacus.transform.DORotateQuaternion(rotation, 0.3f);
-    }
-
 
     // ------------------------------
     // Funció principal de Moviment

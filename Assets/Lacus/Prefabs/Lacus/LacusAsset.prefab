@@ -267,7 +267,6 @@ GameObject:
   - component: {fileID: 5194293788146513886}
   - component: {fileID: 1098841958497104870}
   - component: {fileID: 3895877411093669557}
-  - component: {fileID: 3153190121032569678}
   m_Layer: 9
   m_Name: LacusBodyRotation
   m_TagString: Untagged
@@ -329,25 +328,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20cb7d74b2a763c49a541c4d44b677ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationScript: {fileID: 3153190121032569678}
+  rotationScript: {fileID: 6973291953459519157}
   lacusBodyLayer:
     serializedVersion: 2
     m_Bits: 512
   colliderBody: {fileID: 1098841958497104870}
   lacusTurn: {fileID: 2440791443419169726}
   Lacus: {fileID: 6033293880122079848}
---- !u!114 &3153190121032569678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3668389000102513906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ec3549f782e22c4ba0deb2a0a2ba4a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4595120034762114171
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,6 +475,7 @@ GameObject:
   - component: {fileID: 6033293880122079855}
   - component: {fileID: 6033293880122079854}
   - component: {fileID: 6033293880122079853}
+  - component: {fileID: 6973291953459519157}
   - component: {fileID: 6033293880122079859}
   m_Layer: 9
   m_Name: LacusAsset
@@ -603,6 +591,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxBattery: 6
   batteryLeft: 6
+--- !u!114 &6973291953459519157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6033293880122079857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ec3549f782e22c4ba0deb2a0a2ba4a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LacusM: {fileID: 6033293880122079854}
+  destination: {fileID: 6033293880259255401}
+  Lacus: {fileID: 6033293880122079848}
 --- !u!50 &6033293880122079859
 Rigidbody2D:
   serializedVersion: 4
@@ -696,9 +699,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 6033293880122079853}
-  movement: {fileID: 6033293880122079854}
-  tile: {fileID: 343057456601112246, guid: da794e831c1da4f469018c9a0c53a2fa, type: 3}
-  locked: 0
 --- !u!1 &6588085385973559862
 GameObject:
   m_ObjectHideFlags: 0
@@ -1147,9 +1147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e39967495e129d4abf756578aaefa05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LacusM: {fileID: 6033293880122079854}
+  rotationScript: {fileID: 6973291953459519157}
   LacusS: {fileID: 6033293880122079853}
-  destination: {fileID: 6033293880259255401}
 --- !u!1001 &662820299656823805
 PrefabInstance:
   m_ObjectHideFlags: 0

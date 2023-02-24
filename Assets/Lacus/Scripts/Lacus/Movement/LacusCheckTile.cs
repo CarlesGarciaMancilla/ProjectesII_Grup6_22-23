@@ -13,7 +13,7 @@ public class LacusCheckTile : MonoBehaviour
 
     void Start()
     {
-        // Això NO va aqui
+        // Això SEGURAMENT no va aqui
         tempG = GameObject.Find("Canvasfinal");
         menu = tempG.transform.Find("FinalMenu").gameObject;
 
