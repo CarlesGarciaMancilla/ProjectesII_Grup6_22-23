@@ -12,7 +12,6 @@ public class LacusMovement : MonoBehaviour
     [SerializeField] private LacusStats lacusStats;
     [SerializeField] private GameObject Lacus;
     [SerializeField] private Transform destination;
-    private float rotationAngle = 0f;
     private Vector3 initialPosition;
     [SerializeField] private Collider2D destinationCollider;
     [SerializeField] private LacusMovementPrediction destinationBattery;
@@ -24,7 +23,6 @@ public class LacusMovement : MonoBehaviour
 
     [HideInInspector] public bool isMoving = false;
 
-    private bool resetDestination = false;
 
     // Start is called before the first frame update
     void Start()
