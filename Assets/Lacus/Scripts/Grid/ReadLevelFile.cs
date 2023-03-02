@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using System.IO;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Windows;
 
 public class ReadLevelFile : MonoBehaviour
 {
     [SerializeField] private Transform worldCoords;
-    [SerializeField] private string levelName;
+    [SerializeField] public string levelName;
 
     [SerializeField] private GameObject normalTile;
     [SerializeField] private GameObject arrow;
@@ -39,7 +38,8 @@ public class ReadLevelFile : MonoBehaviour
 
     void Start()
     {
-        ReadTxt(levelName);
+        ReadFile();
+        GenerateMap();
     }
 
     void Update()
@@ -47,7 +47,49 @@ public class ReadLevelFile : MonoBehaviour
         
     }
 
-    void ReadTxt(string fileName)
+    public string ReadFile()
+    {
+        string line = "";
+
+        try
+        {
+            var textFile = Resources.Load<TextAsset>("Text/" + levelName);
+            line = textFile.text;
+            return line;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"The process failed: {e.ToString()}");
+        }
+        return null;
+    }
+
+    public int ReadNumOfRows()
+    {
+        try
+        {
+            StreamReader sr = File.OpenText("Text/" + levelName);
+            string line;
+            int charCount = 0;
+            int lineCount = 0;
+
+            while ((line = sr.ReadLine()) != null)
+            {
+                if (line[charCount] == '\n')
+                {
+                    lineCount++;
+                }
+                charCount++;
+            }
+            return lineCount;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"The process failed: {e.ToString()}");
+        }
+        return 0;
+    }
+    void GenerateMap()
     {
         float x = 0f;
         float y = 0f;
@@ -56,19 +98,9 @@ public class ReadLevelFile : MonoBehaviour
 
         GameObject sprite = TopLeftWall;
 
-    
+        string line = ReadFile();
 
-        string line = "";
-
-        try
-        {
-            var textFile = Resources.Load<TextAsset>("Text/"+fileName);
-            line = textFile.text;
-        }
-        catch (Exception e)
-        {
-            Debug.LogError($"The process failed: {e.ToString()}");
-        }
+       
 
         List<OnOffArrow> onOffArrows = new List<OnOffArrow>();
         Buttons arrowsButton = null;
@@ -179,6 +211,12 @@ public class ReadLevelFile : MonoBehaviour
                         break;
                     }
 
+                case '.': // Espai Blanc
+                    {
+                        x++;
+                        break;
+                    }
+
 
                 // En el cas de fer més caselles, seguir la estructura
 
@@ -193,6 +231,7 @@ public class ReadLevelFile : MonoBehaviour
                         x = -1f;
                         break;
                     }
+
                 default:
                     {
                         //Debug.LogError("tile is unknown or not implemented");
