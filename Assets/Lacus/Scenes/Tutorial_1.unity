@@ -1114,6 +1114,7 @@ MonoBehaviour:
   animator: {fileID: 212780016}
   space: {fileID: 62366498}
   reset: {fileID: 630101269}
+  R: {fileID: 1077389863}
   options: {fileID: 1316258181}
 --- !u!82 &493380712
 AudioSource:

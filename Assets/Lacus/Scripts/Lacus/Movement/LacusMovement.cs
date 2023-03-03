@@ -57,6 +57,9 @@ public class LacusMovement : MonoBehaviour
         }
 
         //if (lacusStats.batteryLeft == 0 || Input.GetKeyDown(KeyCode.R)) 
+
+       
+
         if (Input.GetKeyDown(KeyCode.R) || keyr.activeSelf == false) 
         {
             SceneManager.LoadScene(sceneName);
