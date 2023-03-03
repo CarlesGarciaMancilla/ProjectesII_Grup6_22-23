@@ -42,6 +42,7 @@ public class ReadLevelFile : MonoBehaviour
 
     void Start()
     {
+        LookForTiles('#');
         GenerateWalls();
         GenerateMap();
     }
@@ -71,23 +72,34 @@ public class ReadLevelFile : MonoBehaviour
     {
         int numRows = ReadNumOfRows();
         string mapFile = ReadFile();
-
         List<Vector2> tiles = new List<Vector2>();
 
         int j = 0;
         for (int i = 0; i < numRows; i++)
         {
+            int columnCounter = 0;
+
+
             // Bucle Linia a Linia
             while (mapFile[j] != '\n')
             {
                 if (mapFile[j] == c)
                 {
-                    tiles.Add(new Vector2(i, j));
+                    tiles.Add(new Vector2(columnCounter / 2, i));
                 }
+
+                columnCounter++;
                 j++;
             }
-            j++;
+
+            // Saltar el "\n"
+            if (mapFile[j] == '\n')
+            {
+                j++;
+            }
+
         }
+
         return tiles;
     }
 
@@ -102,14 +114,19 @@ public class ReadLevelFile : MonoBehaviour
         bool isTopWall = true;
         bool isLeftWall = true;
 
-        GameObject sprite = TopLeftWall;
+        GameObject sprite = stop;
 
+        
         // Casella
-        for (int i = 0; i < wallPositions.Capacity; i++)
+        for (int i = 0; i < wallPositions.Count; i++)
         {
             // Mirar Totes les caselles
-            for (int j = 0; j < wallPositions.Capacity; j++)
+            for (int j = 0; j < wallPositions.Count; j++)
             {
+                Vector2 sum = wallPositions[0] + Vector2.right;
+                //Debug.Log(wallPositions[i] + " / " + sum + " / " + wallPositions[j]);
+                //Debug.Log(j + " / " + wallPositions.Count + " // " + wallPositions[i] + " / " + wallPositions[j]);
+
                 // Skipejar si es mira la mateixa casella
                 if (i == j)
                 {
@@ -135,82 +152,88 @@ public class ReadLevelFile : MonoBehaviour
                 }
 
                 // Comprobacions de walls
+                //if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.right) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.down))
                 if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.right) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.down))
                 {
                     // Top Left Corner
+                    Debug.Log("TopLeft");
                     sprite = TopLeftWall;
                 }
                 else if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.left) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.right) && isTopWall)
                 {
                     // Top Mid
+                    Debug.Log("TopMid");
                     sprite = TopWall;
                     isTopWall = !isTopWall;
                 }
                 else if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.left) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.down))
                 {
                     // Top Right
-                    sprite = TopLeftWall;
+                    Debug.Log("TopRight");
+                    sprite = TopRightWall;
                 }
                 else if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.up) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.down) && isLeftWall)
                 {
                     // Mid Left
+                    Debug.Log("MidLeft");
                     sprite = LeftWall;
                     isLeftWall = !isLeftWall;
                 }
                 else if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.up) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.down) && !isLeftWall)
                 {
                     // Mid Right
+                    Debug.Log("MidRight");
                     sprite = RightWall;
                     isLeftWall = !isLeftWall;
                 }
                 else if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.up) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.right))
                 {
                     // Bot Left
+                    Debug.Log("BotLeft");
                     sprite = BotLeftWall;
                 }
                 else if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.left) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.right) && !isTopWall)
                 {
                     // Bot Mid
+                    Debug.Log("BotMid");
                     sprite = BotWall;
                     isTopWall = !isTopWall;
                 }
                 else if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.left) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.up))
                 {
                     // Bot Right
+                    Debug.Log("BotRight");
                     sprite = BotRightWall;
                 }
             }
 
             // Instantiate
-            Instantiate(sprite, new Vector3(wallPositions[i].x - leftMargin - wallPositions[i].x * (1 - sprite.transform.localScale.x), wallPositions[i].y - topMargin - wallPositions[i].y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
+            Instantiate(sprite, new Vector3(wallPositions[i].x - leftMargin - wallPositions[i].x * (1 - sprite.transform.localScale.x), -wallPositions[i].y - topMargin + wallPositions[i].y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
+            sprite = stop;
         }
     }
 
     bool CompareWallPositions(Vector2 currentVector, Vector2 checkingVector, Vector2 direction)
     {
-        return currentVector.x+direction.x == checkingVector.x && currentVector.y+direction.y == checkingVector.y;
+        //return checkingVector.x == currentVector.x + direction.x && checkingVector.y == currentVector.y + direction.y;
+        return checkingVector == currentVector + direction;
     }
 
     public int ReadNumOfRows()
     {
         string line;
-        var textFile = Resources.Load<TextAsset>("Text/" + levelName);
-        line = textFile.text;
+        int lineCount = 0;
 
         try
         {
-            StreamReader sr = File.OpenText("Text/" + levelName);
-
-            int charCount = 0;
-            int lineCount = 0;
-
-            while ((line = sr.ReadLine()) != null)
+            var textFile = Resources.Load<TextAsset>("Text/" + levelName);
+            line = textFile.text;
+            for (int i = 0; i < line.Length; i++)
             {
-                if (line[charCount] == '\n')
+                if(line[i] == '\n')
                 {
                     lineCount++;
                 }
-                charCount++;
             }
             return lineCount;
         }
