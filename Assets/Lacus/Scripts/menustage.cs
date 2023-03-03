@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
+
 
 public class menustage : MonoBehaviour
 {
@@ -18,6 +18,7 @@ public class menustage : MonoBehaviour
     public Animator animator;
     public GameObject space;
     public GameObject reset;
+    public Button R;
     public GameObject options;
 
 
@@ -32,6 +33,18 @@ public class menustage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (Time.timeScale == 0f)
+        {
+            R.enabled = false;
+
+        }
+        else if(Time.timeScale != 0f)
+        {
+         R.enabled=true;
+        }
+
+
 
     }
     public void GestionClickMenuFinal(string menuf)
