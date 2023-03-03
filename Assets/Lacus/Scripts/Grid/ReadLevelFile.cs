@@ -30,6 +30,10 @@ public class ReadLevelFile : MonoBehaviour
     [SerializeField] private GameObject LeftWall;
     [SerializeField] private GameObject RightWall;
 
+    float x = 0f; // Posició Tiles X
+    float y = 0f; // Posició Tiles Y
+    float leftMargin = 0.4f; // Alineació horitzontal
+    float topMargin = -0.55f; // Alineació vertical
 
     private void Awake()
     {
@@ -38,7 +42,7 @@ public class ReadLevelFile : MonoBehaviour
 
     void Start()
     {
-        ReadFile();
+        GenerateWalls();
         GenerateMap();
     }
 
@@ -50,7 +54,6 @@ public class ReadLevelFile : MonoBehaviour
     public string ReadFile()
     {
         string line = "";
-
         try
         {
             var textFile = Resources.Load<TextAsset>("Text/" + levelName);
@@ -64,12 +67,140 @@ public class ReadLevelFile : MonoBehaviour
         return null;
     }
 
+    List<Vector2> LookForTiles(char c)
+    {
+        int numRows = ReadNumOfRows();
+        string mapFile = ReadFile();
+
+        List<Vector2> tiles = new List<Vector2>();
+
+        int j = 0;
+        for (int i = 0; i < numRows; i++)
+        {
+            // Bucle Linia a Linia
+            while (mapFile[j] != '\n')
+            {
+                if (mapFile[j] == c)
+                {
+                    tiles.Add(new Vector2(i, j));
+                }
+                j++;
+            }
+            j++;
+        }
+        return tiles;
+    }
+
+
+    void GenerateWalls()
+    {
+        // Lista de les posicions de les parets
+        List<Vector2> wallPositions = LookForTiles('#');
+        List<Vector2> goalPositions = LookForTiles('F');
+
+        // Variables per detectar quina casella dels costats és
+        bool isTopWall = true;
+        bool isLeftWall = true;
+
+        GameObject sprite = TopLeftWall;
+
+        // Casella
+        for (int i = 0; i < wallPositions.Capacity; i++)
+        {
+            // Mirar Totes les caselles
+            for (int j = 0; j < wallPositions.Capacity; j++)
+            {
+                // Skipejar si es mira la mateixa casella
+                if (i == j)
+                {
+                    continue;
+                }
+
+                // Si hi ha una casella Final, canviar la WallFacing, ja que el final es considera com una paret tot i que no ho és
+                if (CompareWallPositions(goalPositions[0], wallPositions[j], Vector2.left) && CompareWallPositions(goalPositions[0], wallPositions[j], Vector2.right) && isTopWall)
+                {
+                    isTopWall = !isTopWall;
+                }
+                else if (CompareWallPositions(goalPositions[0], wallPositions[j], Vector2.left) && CompareWallPositions(goalPositions[0], wallPositions[j], Vector2.right) && !isTopWall)
+                {
+                    isTopWall = !isTopWall;
+                }
+                else if (CompareWallPositions(goalPositions[0], wallPositions[j], Vector2.left) && CompareWallPositions(goalPositions[0], wallPositions[j], Vector2.right) && isLeftWall)
+                {
+                    isLeftWall = !isLeftWall;
+                }
+                else if (CompareWallPositions(goalPositions[0], wallPositions[j], Vector2.left) && CompareWallPositions(goalPositions[0], wallPositions[j], Vector2.right) && !isLeftWall)
+                {
+                    isLeftWall = !isLeftWall;
+                }
+
+                // Comprobacions de walls
+                if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.right) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.down))
+                {
+                    // Top Left Corner
+                    sprite = TopLeftWall;
+                }
+                else if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.left) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.right) && isTopWall)
+                {
+                    // Top Mid
+                    sprite = TopWall;
+                    isTopWall = !isTopWall;
+                }
+                else if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.left) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.down))
+                {
+                    // Top Right
+                    sprite = TopLeftWall;
+                }
+                else if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.up) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.down) && isLeftWall)
+                {
+                    // Mid Left
+                    sprite = LeftWall;
+                    isLeftWall = !isLeftWall;
+                }
+                else if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.up) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.down) && !isLeftWall)
+                {
+                    // Mid Right
+                    sprite = RightWall;
+                    isLeftWall = !isLeftWall;
+                }
+                else if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.up) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.right))
+                {
+                    // Bot Left
+                    sprite = BotLeftWall;
+                }
+                else if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.left) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.right) && !isTopWall)
+                {
+                    // Bot Mid
+                    sprite = BotWall;
+                    isTopWall = !isTopWall;
+                }
+                else if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.left) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.up))
+                {
+                    // Bot Right
+                    sprite = BotRightWall;
+                }
+            }
+
+            // Instantiate
+            Instantiate(sprite, new Vector3(wallPositions[i].x - leftMargin - wallPositions[i].x * (1 - sprite.transform.localScale.x), wallPositions[i].y - topMargin - wallPositions[i].y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
+        }
+    }
+
+    bool CompareWallPositions(Vector2 currentVector, Vector2 checkingVector, Vector2 direction)
+    {
+        return currentVector.x+direction.x == checkingVector.x && currentVector.y+direction.y == checkingVector.y;
+    }
+
     public int ReadNumOfRows()
     {
+        string line;
+        var textFile = Resources.Load<TextAsset>("Text/" + levelName);
+        line = textFile.text;
+
         try
         {
             StreamReader sr = File.OpenText("Text/" + levelName);
-            string line;
+
             int charCount = 0;
             int lineCount = 0;
 
@@ -91,16 +222,9 @@ public class ReadLevelFile : MonoBehaviour
     }
     void GenerateMap()
     {
-        float x = 0f;
-        float y = 0f;
-        float leftMargin = 0.4f; // Alineació horitzontal
-        float topMargin = -0.55f; // Alineació vertical
-
         GameObject sprite = TopLeftWall;
 
         string line = ReadFile();
-
-       
 
         List<OnOffArrow> onOffArrows = new List<OnOffArrow>();
         Buttons arrowsButton = null;
@@ -158,11 +282,12 @@ public class ReadLevelFile : MonoBehaviour
                     }
                 case '#': // Wall
                     {
+
                         // Problemes,
                         // buscar una solució al hardcode de la ultima casella de la fila i la ultima fila,
                         // es a dir buscar una alternativa a x == 4 i y == 6
 
-                        if (x == 0 && y == 0)
+                        /*if (x == 0 && y == 0)
                         {
                             // Corner Top Left
                             sprite = TopLeftWall;
@@ -207,7 +332,7 @@ public class ReadLevelFile : MonoBehaviour
                             Debug.LogError("Walls exteriors no correctes");
                         }
                         Instantiate(sprite, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
-
+                        */
                         break;
                     }
 
