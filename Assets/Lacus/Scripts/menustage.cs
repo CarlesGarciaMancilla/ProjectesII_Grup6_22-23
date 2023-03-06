@@ -28,6 +28,7 @@ public class menustage : MonoBehaviour
         reset.SetActive(true);
         sceneName = SceneManager.GetActiveScene().name;
         StartCoroutine(Transition());
+        Screen.SetResolution(720, 1000, FullScreenMode.Windowed);
     }
 
     // Update is called once per frame
