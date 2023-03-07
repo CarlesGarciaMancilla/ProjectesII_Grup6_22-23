@@ -17,11 +17,11 @@ public class ParticlesClick : MonoBehaviour
     {
         Vector2 mousePosScreenSpace = Input.mousePosition;
         Vector2 mousePosWorldSpace = Camera.main.ScreenToWorldPoint(mousePosScreenSpace);
-        transform.position = mousePosWorldSpace;
+        
         if (Input.GetMouseButtonDown(0))
         {
+            transform.position = mousePosWorldSpace;
             clickParticles.Play();
-            Debug.Log("Click");
         }
 
     }
