@@ -9,6 +9,16 @@ public class ParticlesClick : MonoBehaviour
     public ParticleSystem clickParticles;
     void Start()
     {
+        for (int i = 0; i < Object.FindObjectsOfType<ParticlesClick>().Length; i++)
+        {
+            if (Object.FindObjectsOfType<ParticlesClick>()[i] != this)
+            {
+                if (Object.FindObjectsOfType<ParticlesClick>()[i].name == gameObject.name)
+                {
+                    Destroy(gameObject);
+                }
+            }
+        }
         DontDestroyOnLoad(gameObject);
     }
 
