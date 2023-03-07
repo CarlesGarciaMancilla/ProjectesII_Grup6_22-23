@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 public class menujuego : MonoBehaviour
 {
     [SerializeField] private float transitionTime = 1f;
@@ -23,6 +24,7 @@ public class menujuego : MonoBehaviour
     public Button level8;
     public AudioSource audioS;
     public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -234,6 +236,10 @@ public class menujuego : MonoBehaviour
         yield return new WaitForSeconds(transitionTime);
         prefabTransition.SetActive(false);
     }
+
+
+   
+
 }
 
 
