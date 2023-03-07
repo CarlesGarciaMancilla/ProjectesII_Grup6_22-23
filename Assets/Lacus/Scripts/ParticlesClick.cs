@@ -9,7 +9,7 @@ public class ParticlesClick : MonoBehaviour
     public ParticleSystem clickParticles;
     void Start()
     {
-
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
