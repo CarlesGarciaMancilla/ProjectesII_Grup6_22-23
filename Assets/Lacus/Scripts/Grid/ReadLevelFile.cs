@@ -110,21 +110,34 @@ public class ReadLevelFile : MonoBehaviour
         List<Vector2> wallPositions = LookForTiles('#');
         List<Vector2> goalPositions = LookForTiles('F');
 
+        bool connectionUp = false;
+        bool connectionDown = false;
+        bool connectionLeft = false;
+        bool connectionRight = false;
+
         // Variables per detectar quina casella dels costats és
-        bool isTopWall = true;
-        bool isLeftWall = true;
+        bool isTopWall = false;
+        bool isLeftWall = false;
 
         GameObject sprite = stop;
+
 
         
         // Casella
         for (int i = 0; i < wallPositions.Count; i++)
         {
+            if (CompareWallPositions(goalPositions[0], wallPositions[i], Vector2.left) && CompareWallPositions(goalPositions[0], wallPositions[i], Vector2.right) && isTopWall)
+            {
+                isTopWall = !isTopWall;
+            }
+            else if (CompareWallPositions(goalPositions[0], wallPositions[i], Vector2.left) && CompareWallPositions(goalPositions[0], wallPositions[i], Vector2.right) && !isTopWall)
+            {
+                isTopWall = !isTopWall;
+            }
+
             // Mirar Totes les caselles
             for (int j = 0; j < wallPositions.Count; j++)
             {
-                Vector2 sum = wallPositions[0] + Vector2.right;
-                //Debug.Log(wallPositions[i] + " / " + sum + " / " + wallPositions[j]);
                 //Debug.Log(j + " / " + wallPositions.Count + " // " + wallPositions[i] + " / " + wallPositions[j]);
 
                 // Skipejar si es mira la mateixa casella
@@ -133,90 +146,95 @@ public class ReadLevelFile : MonoBehaviour
                     continue;
                 }
 
-                // Si hi ha una casella Final, canviar la WallFacing, ja que el final es considera com una paret tot i que no ho és
-                if (CompareWallPositions(goalPositions[0], wallPositions[j], Vector2.left) && CompareWallPositions(goalPositions[0], wallPositions[j], Vector2.right) && isTopWall)
+                // Comprobació de conexions Parets
+                if(CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.right) || CompareWallPositions(wallPositions[i], goalPositions[0], Vector2.right))
                 {
-                    isTopWall = !isTopWall;
+                    connectionRight = true;
                 }
-                else if (CompareWallPositions(goalPositions[0], wallPositions[j], Vector2.left) && CompareWallPositions(goalPositions[0], wallPositions[j], Vector2.right) && !isTopWall)
+                if (CompareWallPositions(wallPositions[i], wallPositions[j], -Vector2.down) || CompareWallPositions(wallPositions[i], goalPositions[0], -Vector2.down))
                 {
-                    isTopWall = !isTopWall;
+                    connectionDown = true;
                 }
-                else if (CompareWallPositions(goalPositions[0], wallPositions[j], Vector2.left) && CompareWallPositions(goalPositions[0], wallPositions[j], Vector2.right) && isLeftWall)
+                if (CompareWallPositions(wallPositions[i], wallPositions[j], -Vector2.up) || CompareWallPositions(wallPositions[i], goalPositions[0], -Vector2.up))
                 {
-                    isLeftWall = !isLeftWall;
+                    connectionUp = true;
                 }
-                else if (CompareWallPositions(goalPositions[0], wallPositions[j], Vector2.left) && CompareWallPositions(goalPositions[0], wallPositions[j], Vector2.right) && !isLeftWall)
+                if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.left) || CompareWallPositions(wallPositions[i], goalPositions[0], Vector2.left))
                 {
-                    isLeftWall = !isLeftWall;
+                    connectionLeft = true;
                 }
+            }
 
-                // Comprobacions de walls
-                //if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.right) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.down))
-                if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.right) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.down))
-                {
-                    // Top Left Corner
-                    Debug.Log("TopLeft");
-                    sprite = TopLeftWall;
-                }
-                else if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.left) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.right) && isTopWall)
-                {
-                    // Top Mid
-                    Debug.Log("TopMid");
-                    sprite = TopWall;
-                    isTopWall = !isTopWall;
-                }
-                else if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.left) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.down))
-                {
-                    // Top Right
-                    Debug.Log("TopRight");
-                    sprite = TopRightWall;
-                }
-                else if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.up) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.down) && isLeftWall)
-                {
-                    // Mid Left
-                    Debug.Log("MidLeft");
-                    sprite = LeftWall;
-                    isLeftWall = !isLeftWall;
-                }
-                else if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.up) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.down) && !isLeftWall)
-                {
-                    // Mid Right
-                    Debug.Log("MidRight");
-                    sprite = RightWall;
-                    isLeftWall = !isLeftWall;
-                }
-                else if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.up) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.right))
-                {
-                    // Bot Left
-                    Debug.Log("BotLeft");
-                    sprite = BotLeftWall;
-                }
-                else if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.left) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.right) && !isTopWall)
-                {
-                    // Bot Mid
-                    Debug.Log("BotMid");
-                    sprite = BotWall;
-                    isTopWall = !isTopWall;
-                }
-                else if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.left) && CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.up))
-                {
-                    // Bot Right
-                    Debug.Log("BotRight");
-                    sprite = BotRightWall;
-                }
+            if (connectionDown && connectionRight)
+            {
+                // Top Left Corner
+                Debug.Log("TopLeft");
+                sprite = TopLeftWall;
+                isTopWall = !isTopWall;
+            }
+            else if (connectionLeft && connectionRight && isTopWall)
+            {
+                // Top Mid
+                Debug.Log("TopMid");
+                sprite = TopWall;
+            }
+            else if (connectionLeft && connectionDown)
+            {
+                // Top Right
+                Debug.Log("TopRight");
+                sprite = TopRightWall;
+            }
+            else if (connectionUp && connectionDown && isLeftWall)
+            {
+                // Mid Left
+                Debug.Log("MidLeft");
+                sprite = LeftWall;
+                isLeftWall = !isLeftWall;
+            }
+            else if (connectionUp && connectionDown && !isLeftWall)
+            {
+                // Mid Right
+                Debug.Log("MidRight");
+                sprite = RightWall;
+                isLeftWall = !isLeftWall;
+            }
+            else if (connectionUp && connectionRight)
+            {
+                // Bot Left
+                Debug.Log("BotLeft");
+                sprite = BotLeftWall;
+                isTopWall = !isTopWall;
+            }
+            else if (connectionLeft && connectionRight && !isTopWall)
+            {
+                // Bot Mid
+                Debug.Log("BotMid");
+                sprite = BotWall;
+            }
+            else if (connectionLeft && connectionUp)
+            {
+                // Bot Right
+                Debug.Log("BotRight");
+                sprite = BotRightWall;
             }
 
             // Instantiate
             Instantiate(sprite, new Vector3(wallPositions[i].x - leftMargin - wallPositions[i].x * (1 - sprite.transform.localScale.x), -wallPositions[i].y - topMargin + wallPositions[i].y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
+            
+            // Sprite default per comprobar si hi ha algun error en les parets
             sprite = stop;
+
+            // Resetejar els Connection Bools
+            connectionUp = false;
+            connectionDown = false;
+            connectionLeft = false;
+            connectionRight = false;
         }
     }
 
     bool CompareWallPositions(Vector2 currentVector, Vector2 checkingVector, Vector2 direction)
     {
-        //return checkingVector.x == currentVector.x + direction.x && checkingVector.y == currentVector.y + direction.y;
-        return checkingVector == currentVector + direction;
+        return checkingVector == (currentVector + direction);
     }
 
     public int ReadNumOfRows()
@@ -243,6 +261,7 @@ public class ReadLevelFile : MonoBehaviour
         }
         return 0;
     }
+
     void GenerateMap()
     {
         GameObject sprite = TopLeftWall;
