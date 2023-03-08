@@ -328,6 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20cb7d74b2a763c49a541c4d44b677ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationScript: {fileID: 6973291953459519157}
   lacusBodyLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -344,7 +345,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2780889536507816680}
   - component: {fileID: 2440791443419169726}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LacusRotationSFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -474,8 +475,9 @@ GameObject:
   - component: {fileID: 6033293880122079855}
   - component: {fileID: 6033293880122079854}
   - component: {fileID: 6033293880122079853}
+  - component: {fileID: 6973291953459519157}
   - component: {fileID: 6033293880122079859}
-  m_Layer: 1
+  m_Layer: 9
   m_Name: LacusAsset
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -572,6 +574,8 @@ MonoBehaviour:
   destination: {fileID: 6033293880259255401}
   destinationCollider: {fileID: 1040985383712223166}
   destinationBattery: {fileID: 4244387518369126440}
+  keyspacep: {fileID: 0}
+  keyr: {fileID: 0}
   isMoving: 0
 --- !u!114 &6033293880122079853
 MonoBehaviour:
@@ -585,10 +589,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a5dcea69336b64498b23f430c1a0400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Lacus: {fileID: 6033293880122079857}
-  isFacing: 0
   maxBattery: 6
   batteryLeft: 6
+--- !u!114 &6973291953459519157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6033293880122079857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ec3549f782e22c4ba0deb2a0a2ba4a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LacusM: {fileID: 6033293880122079854}
+  destination: {fileID: 6033293880259255401}
+  Lacus: {fileID: 6033293880122079848}
 --- !u!50 &6033293880122079859
 Rigidbody2D:
   serializedVersion: 4
@@ -621,7 +638,7 @@ GameObject:
   - component: {fileID: 6033293880259255401}
   - component: {fileID: 1040985383712223166}
   - component: {fileID: 4244387518369126440}
-  m_Layer: 1
+  m_Layer: 9
   m_Name: LacusDestination
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -682,9 +699,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 6033293880122079853}
-  movement: {fileID: 6033293880122079854}
-  tile: {fileID: 343057456601112246, guid: da794e831c1da4f469018c9a0c53a2fa, type: 3}
-  locked: 0
 --- !u!1 &6588085385973559862
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,7 +884,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3889211786280986402}
   - component: {fileID: 2089418855382840001}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LacusDetectArrowSFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -999,7 +1013,7 @@ GameObject:
   - component: {fileID: 7332868497975549052}
   - component: {fileID: 7332868497975549053}
   - component: {fileID: 7332868497975549054}
-  m_Layer: 1
+  m_Layer: 9
   m_Name: LacusMovementDetection
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1036,7 +1050,6 @@ MonoBehaviour:
   Lacus: {fileID: 6033293880122079854}
   LacusS: {fileID: 6033293880122079853}
   StopSound: {fileID: 3870696809754580574, guid: aab0e41829b53fd409146bdab6fbc26f, type: 3}
-  panel: {fileID: 5758011468562538277, guid: d110a9682a29c1a4da7e9deb24248646, type: 3}
 --- !u!61 &7332868497975549054
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1074,7 +1087,7 @@ GameObject:
   - component: {fileID: 7332868498291388838}
   - component: {fileID: 7332868498291388840}
   - component: {fileID: 7332868498291388839}
-  m_Layer: 1
+  m_Layer: 9
   m_Name: LacusRotationDetection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1134,9 +1147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e39967495e129d4abf756578aaefa05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LacusM: {fileID: 6033293880122079854}
+  rotationScript: {fileID: 6973291953459519157}
   LacusS: {fileID: 6033293880122079853}
-  destination: {fileID: 6033293880259255401}
 --- !u!1001 &662820299656823805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1230,7 +1242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4295776001046501245, guid: 7a17c739754ca4a4cae7d9c685f6c75f, type: 3}
       propertyPath: m_Layer
-      value: 1
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4295776001046501246, guid: 7a17c739754ca4a4cae7d9c685f6c75f, type: 3}
       propertyPath: m_Pivot.x

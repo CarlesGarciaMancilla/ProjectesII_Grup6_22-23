@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using System.IO;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Windows;
 
 public class ReadLevelFile : MonoBehaviour
 {
     [SerializeField] private Transform worldCoords;
-    [SerializeField] private string levelName;
+    [SerializeField] public string levelName;
 
     [SerializeField] private GameObject normalTile;
     [SerializeField] private GameObject arrow;
     [SerializeField] private GameObject onOffArrow;
+    [SerializeField] private GameObject autoArrow;
     [SerializeField] private GameObject battery;
     [SerializeField] private GameObject lacus;
     [SerializeField] private GameObject button;
@@ -26,20 +26,25 @@ public class ReadLevelFile : MonoBehaviour
     [SerializeField] private GameObject BotLeftWall;
     [SerializeField] private GameObject BotRightWall;
 
-    [SerializeField] private GameObject TopWall;
-    [SerializeField] private GameObject BotWall;
-    [SerializeField] private GameObject LeftWall;
-    [SerializeField] private GameObject RightWall;
+    [SerializeField] private GameObject HorizontalWall;
+    [SerializeField] private GameObject VerticalWall;
 
+
+    float x = 0f; // Posició Tiles X
+    float y = 0f; // Posició Tiles Y
+    float leftMargin = 0.4f; // Alineació horitzontal
+    float topMargin = -0.55f; // Alineació vertical
 
     private void Awake()
     {
-        worldCoords.transform.position = new Vector3(2, -3, -10);
+        
     }
 
     void Start()
     {
-        ReadTxt(levelName);
+        worldCoords.transform.position = new Vector3(2, -3, -10);
+        GenerateWalls();
+        GenerateMap();
     }
 
     void Update()
@@ -47,28 +52,191 @@ public class ReadLevelFile : MonoBehaviour
         
     }
 
-    void ReadTxt(string fileName)
+    public string ReadFile()
     {
-        float x = 0f;
-        float y = 0f;
-        float leftMargin = 0.4f; // Alineació horitzontal
-        float topMargin = -0.55f; // Alineació vertical
-
-        GameObject sprite = TopLeftWall;
-
-    
-
         string line = "";
-
         try
         {
-            var textFile = Resources.Load<TextAsset>("Text/"+fileName);
+            var textFile = Resources.Load<TextAsset>("Text/" + levelName);
             line = textFile.text;
+            return line;
         }
         catch (Exception e)
         {
             Debug.LogError($"The process failed: {e.ToString()}");
         }
+        return null;
+    }
+
+    List<Vector2> LookForTiles(char c)
+    {
+        int numRows = ReadNumOfRows();
+        string mapFile = ReadFile();
+        List<Vector2> tiles = new List<Vector2>();
+
+        int j = 0;
+        for (int i = 0; i < numRows; i++)
+        {
+            int columnCounter = 0;
+
+
+            // Bucle Linia a Linia
+            while (mapFile[j] != '\n')
+            {
+                if (mapFile[j] == c)
+                {
+                    tiles.Add(new Vector2(columnCounter / 2, i));
+                }
+
+                columnCounter++;
+                j++;
+            }
+
+            // Saltar el "\n"
+            if (mapFile[j] == '\n')
+            {
+                j++;
+            }
+
+        }
+
+        return tiles;
+    }
+
+
+    void GenerateWalls()
+    {
+        // Lista de les posicions de les parets
+        List<Vector2> wallPositions = LookForTiles('#');
+        List<Vector2> goalPositions = LookForTiles('F');
+
+        bool connectionUp = false;
+        bool connectionDown = false;
+        bool connectionLeft = false;
+        bool connectionRight = false;
+
+        GameObject sprite = stop;
+
+        // Casella
+        for (int i = 0; i < wallPositions.Count; i++)
+        {
+
+            // Mirar Totes les caselles
+            for (int j = 0; j < wallPositions.Count; j++)
+            {
+                //Debug.Log(j + " / " + wallPositions.Count + " // " + wallPositions[i] + " / " + wallPositions[j]);
+
+                // Skipejar si es mira la mateixa casella
+                if (i == j)
+                {
+                    continue;
+                }
+
+                // Comprobació de conexions Parets
+                if(CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.right) || CompareWallPositions(wallPositions[i], goalPositions[0], Vector2.right))
+                {
+                    connectionRight = true;
+                }
+                if (CompareWallPositions(wallPositions[i], wallPositions[j], -Vector2.down) || CompareWallPositions(wallPositions[i], goalPositions[0], -Vector2.down))
+                {
+                    connectionDown = true;
+                }
+                if (CompareWallPositions(wallPositions[i], wallPositions[j], -Vector2.up) || CompareWallPositions(wallPositions[i], goalPositions[0], -Vector2.up))
+                {
+                    connectionUp = true;
+                }
+                if (CompareWallPositions(wallPositions[i], wallPositions[j], Vector2.left) || CompareWallPositions(wallPositions[i], goalPositions[0], Vector2.left))
+                {
+                    connectionLeft = true;
+                }
+            }
+
+            if (connectionDown && connectionRight)
+            {
+                // Top Left Corner
+                Debug.Log("TopLeft");
+                sprite = TopLeftWall;
+            }
+            else if (connectionLeft && connectionRight)
+            {
+                // Horizontal
+                Debug.Log("Horizontal");
+                sprite = HorizontalWall;
+            }
+            else if (connectionLeft && connectionDown)
+            {
+                // Top Right
+                Debug.Log("TopRight");
+                sprite = TopRightWall;
+            }
+            else if (connectionUp && connectionDown)
+            {
+                // Vertical
+                Debug.Log("Vertical");
+                sprite = VerticalWall;
+            }
+            else if (connectionUp && connectionRight)
+            {
+                // Bot Left
+                Debug.Log("BotLeft");
+                sprite = BotLeftWall;
+            }
+            else if (connectionLeft && connectionUp)
+            {
+                // Bot Right
+                Debug.Log("BotRight");
+                sprite = BotRightWall;
+            }
+
+            // Instantiate
+            Instantiate(sprite, new Vector3(wallPositions[i].x - leftMargin - wallPositions[i].x * (1 - sprite.transform.localScale.x), -wallPositions[i].y - topMargin + wallPositions[i].y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
+            
+            // Sprite default per comprobar si hi ha algun error en les parets
+            sprite = stop;
+
+            // Resetejar els Connection Bools
+            connectionUp = false;
+            connectionDown = false;
+            connectionLeft = false;
+            connectionRight = false;
+        }
+    }
+
+    bool CompareWallPositions(Vector2 currentVector, Vector2 checkingVector, Vector2 direction)
+    {
+        return checkingVector == (currentVector + direction);
+    }
+
+    public int ReadNumOfRows()
+    {
+        string line;
+        int lineCount = 0;
+
+        try
+        {
+            var textFile = Resources.Load<TextAsset>("Text/" + levelName);
+            line = textFile.text;
+            for (int i = 0; i < line.Length; i++)
+            {
+                if(line[i] == '\n')
+                {
+                    lineCount++;
+                }
+            }
+            return lineCount;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"The process failed: {e.ToString()}");
+        }
+        return 0;
+    }
+
+    void GenerateMap()
+    {
+        GameObject sprite = TopLeftWall;
+
+        string line = ReadFile();
 
         List<OnOffArrow> onOffArrows = new List<OnOffArrow>();
         Buttons arrowsButton = null;
@@ -85,6 +253,11 @@ public class ReadLevelFile : MonoBehaviour
                     {
                         GameObject obj = Instantiate(onOffArrow, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
                         onOffArrows.Add(obj.GetComponent<OnOffArrow>());
+                        break;
+                    }
+                case '^': // Arrow That Changes Clockwise
+                    {
+                        Instantiate(autoArrow, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
                         break;
                     }
                 case '_': // Normal tile
@@ -126,56 +299,13 @@ public class ReadLevelFile : MonoBehaviour
                     }
                 case '#': // Wall
                     {
-                        // Problemes,
-                        // buscar una solució al hardcode de la ultima casella de la fila i la ultima fila,
-                        // es a dir buscar una alternativa a x == 4 i y == 6
 
-                        if (x == 0 && y == 0)
-                        {
-                            // Corner Top Left
-                            sprite = TopLeftWall;
-                        }
-                        else if (x == 6 && y == 0)
-                        {
-                            // Corner Top Right
-                            sprite = TopRightWall;
-                        }
-                        else if (x == 0 && -y == 8) 
-                        {
-                            // Corner Bot Left
-                            sprite = BotLeftWall;
-                        }
-                        else if (x == 6 && -y == 8)
-                        {
-                            // Corner Bot Right
-                            sprite = BotRightWall;
-                        }
-                        else if (y == 0)
-                        {
-                            // Walls top
-                            sprite = TopWall;
-                        }
-                        else if (y == -8)
-                        {
-                            // Walls Bot
-                            sprite = BotWall;
-                        }
-                        else if (x == 0)
-                        {
-                            // Walls Left
-                            sprite = LeftWall;
-                        }
-                        else if (x == 6)
-                        {
-                            // Walls Right
-                            sprite = RightWall;
-                        }
-                        else
-                        {
-                            Debug.LogError("Walls exteriors no correctes");
-                        }
-                        Instantiate(sprite, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
+                        break;
+                    }
 
+                case '.': // Espai Blanc
+                    {
+                        x++;
                         break;
                     }
 
@@ -193,6 +323,7 @@ public class ReadLevelFile : MonoBehaviour
                         x = -1f;
                         break;
                     }
+
                 default:
                     {
                         //Debug.LogError("tile is unknown or not implemented");
