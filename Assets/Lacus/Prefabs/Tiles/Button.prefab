@@ -199,13 +199,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPressed: 0
-<<<<<<< HEAD
   buttonOn: {fileID: -64555107, guid: 5ba8ad6b35310ad49809ea053e7777ac, type: 3}
   buttonOff: {fileID: 678669282, guid: 5ba8ad6b35310ad49809ea053e7777ac, type: 3}
-=======
   buttonOn: {fileID: 678669282, guid: 5ba8ad6b35310ad49809ea053e7777ac, type: 3}
   buttonOff: {fileID: -64555107, guid: 5ba8ad6b35310ad49809ea053e7777ac, type: 3}
->>>>>>> Sprites
   buttonOnOffSound: {fileID: 8970625647847039118}
 --- !u!82 &8970625647847039118
 AudioSource:

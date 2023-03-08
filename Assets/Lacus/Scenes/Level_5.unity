@@ -3932,33 +3932,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1919615391208795162, guid: 8db11ea860223ff40b5d6dac1ec1dbe8, type: 3}
-      propertyPath: BotLeftWall
-      value: 
-      objectReference: {fileID: 681560209096653411, guid: 514fd22a8853a5d438313b827304742c, type: 3}
-    - target: {fileID: 1919615391208795162, guid: 8db11ea860223ff40b5d6dac1ec1dbe8, type: 3}
-      propertyPath: TopLeftWall
-      value: 
-      objectReference: {fileID: 6610815329477875352, guid: 73cbce965ac51c14f9ee3c81bc9f3093, type: 3}
-    - target: {fileID: 1919615391208795162, guid: 8db11ea860223ff40b5d6dac1ec1dbe8, type: 3}
       propertyPath: worldCoords
       value: 
       objectReference: {fileID: 28796678}
-    - target: {fileID: 1919615391208795162, guid: 8db11ea860223ff40b5d6dac1ec1dbe8, type: 3}
-      propertyPath: BotRightWall
-      value: 
-      objectReference: {fileID: 1370319948361830906, guid: 8c935b2943a8d62459289953ddcb7f1d, type: 3}
-    - target: {fileID: 1919615391208795162, guid: 8db11ea860223ff40b5d6dac1ec1dbe8, type: 3}
-      propertyPath: TopRightWall
-      value: 
-      objectReference: {fileID: 802400203840223413, guid: 9fdea179ed70528479a194833f321266, type: 3}
-    - target: {fileID: 1919615391208795162, guid: 8db11ea860223ff40b5d6dac1ec1dbe8, type: 3}
-      propertyPath: VerticalWall
-      value: 
-      objectReference: {fileID: 6300135716287447352, guid: b073a50c013217d4aa75a2410f3e0984, type: 3}
-    - target: {fileID: 1919615391208795162, guid: 8db11ea860223ff40b5d6dac1ec1dbe8, type: 3}
-      propertyPath: HorizontalWall
-      value: 
-      objectReference: {fileID: 7464713360918504180, guid: 01a0e41f453fa2849bfacc32d5ee4482, type: 3}
     - target: {fileID: 1919615391208795163, guid: 8db11ea860223ff40b5d6dac1ec1dbe8, type: 3}
       propertyPath: m_Name
       value: Generate Map

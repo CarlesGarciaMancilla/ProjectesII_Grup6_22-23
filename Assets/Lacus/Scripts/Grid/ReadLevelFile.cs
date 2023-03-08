@@ -13,6 +13,7 @@ public class ReadLevelFile : MonoBehaviour
     [SerializeField] private GameObject normalTile;
     [SerializeField] private GameObject arrow;
     [SerializeField] private GameObject onOffArrow;
+    [SerializeField] private GameObject autoArrow;
     [SerializeField] private GameObject battery;
     [SerializeField] private GameObject lacus;
     [SerializeField] private GameObject button;
@@ -25,10 +26,9 @@ public class ReadLevelFile : MonoBehaviour
     [SerializeField] private GameObject BotLeftWall;
     [SerializeField] private GameObject BotRightWall;
 
-    [SerializeField] private GameObject TopWall;
-    [SerializeField] private GameObject BotWall;
-    [SerializeField] private GameObject LeftWall;
-    [SerializeField] private GameObject RightWall;
+    [SerializeField] private GameObject HorizontalWall;
+    [SerializeField] private GameObject VerticalWall;
+
 
     float x = 0f; // Posició Tiles X
     float y = 0f; // Posició Tiles Y
@@ -37,12 +37,12 @@ public class ReadLevelFile : MonoBehaviour
 
     private void Awake()
     {
-        worldCoords.transform.position = new Vector3(2, -3, -10);
+        
     }
 
     void Start()
     {
-        LookForTiles('#');
+        worldCoords.transform.position = new Vector3(2, -3, -10);
         GenerateWalls();
         GenerateMap();
     }
@@ -115,25 +115,11 @@ public class ReadLevelFile : MonoBehaviour
         bool connectionLeft = false;
         bool connectionRight = false;
 
-        // Variables per detectar quina casella dels costats és
-        bool isTopWall = false;
-        bool isLeftWall = false;
-
         GameObject sprite = stop;
 
-
-        
         // Casella
         for (int i = 0; i < wallPositions.Count; i++)
         {
-            if (CompareWallPositions(goalPositions[0], wallPositions[i], Vector2.left) && CompareWallPositions(goalPositions[0], wallPositions[i], Vector2.right) && isTopWall)
-            {
-                isTopWall = !isTopWall;
-            }
-            else if (CompareWallPositions(goalPositions[0], wallPositions[i], Vector2.left) && CompareWallPositions(goalPositions[0], wallPositions[i], Vector2.right) && !isTopWall)
-            {
-                isTopWall = !isTopWall;
-            }
 
             // Mirar Totes les caselles
             for (int j = 0; j < wallPositions.Count; j++)
@@ -170,13 +156,12 @@ public class ReadLevelFile : MonoBehaviour
                 // Top Left Corner
                 Debug.Log("TopLeft");
                 sprite = TopLeftWall;
-                isTopWall = !isTopWall;
             }
-            else if (connectionLeft && connectionRight && isTopWall)
+            else if (connectionLeft && connectionRight)
             {
-                // Top Mid
-                Debug.Log("TopMid");
-                sprite = TopWall;
+                // Horizontal
+                Debug.Log("Horizontal");
+                sprite = HorizontalWall;
             }
             else if (connectionLeft && connectionDown)
             {
@@ -184,32 +169,17 @@ public class ReadLevelFile : MonoBehaviour
                 Debug.Log("TopRight");
                 sprite = TopRightWall;
             }
-            else if (connectionUp && connectionDown && isLeftWall)
+            else if (connectionUp && connectionDown)
             {
-                // Mid Left
-                Debug.Log("MidLeft");
-                sprite = LeftWall;
-                isLeftWall = !isLeftWall;
-            }
-            else if (connectionUp && connectionDown && !isLeftWall)
-            {
-                // Mid Right
-                Debug.Log("MidRight");
-                sprite = RightWall;
-                isLeftWall = !isLeftWall;
+                // Vertical
+                Debug.Log("Vertical");
+                sprite = VerticalWall;
             }
             else if (connectionUp && connectionRight)
             {
                 // Bot Left
                 Debug.Log("BotLeft");
                 sprite = BotLeftWall;
-                isTopWall = !isTopWall;
-            }
-            else if (connectionLeft && connectionRight && !isTopWall)
-            {
-                // Bot Mid
-                Debug.Log("BotMid");
-                sprite = BotWall;
             }
             else if (connectionLeft && connectionUp)
             {
@@ -285,6 +255,11 @@ public class ReadLevelFile : MonoBehaviour
                         onOffArrows.Add(obj.GetComponent<OnOffArrow>());
                         break;
                     }
+                case '^': // Arrow That Changes Clockwise
+                    {
+                        Instantiate(autoArrow, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
+                        break;
+                    }
                 case '_': // Normal tile
                     {
                         Instantiate(normalTile, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
@@ -325,56 +300,6 @@ public class ReadLevelFile : MonoBehaviour
                 case '#': // Wall
                     {
 
-                        // Problemes,
-                        // buscar una solució al hardcode de la ultima casella de la fila i la ultima fila,
-                        // es a dir buscar una alternativa a x == 4 i y == 6
-
-                        /*if (x == 0 && y == 0)
-                        {
-                            // Corner Top Left
-                            sprite = TopLeftWall;
-                        }
-                        else if (x == 6 && y == 0)
-                        {
-                            // Corner Top Right
-                            sprite = TopRightWall;
-                        }
-                        else if (x == 0 && -y == 8) 
-                        {
-                            // Corner Bot Left
-                            sprite = BotLeftWall;
-                        }
-                        else if (x == 6 && -y == 8)
-                        {
-                            // Corner Bot Right
-                            sprite = BotRightWall;
-                        }
-                        else if (y == 0)
-                        {
-                            // Walls top
-                            sprite = TopWall;
-                        }
-                        else if (y == -8)
-                        {
-                            // Walls Bot
-                            sprite = BotWall;
-                        }
-                        else if (x == 0)
-                        {
-                            // Walls Left
-                            sprite = LeftWall;
-                        }
-                        else if (x == 6)
-                        {
-                            // Walls Right
-                            sprite = RightWall;
-                        }
-                        else
-                        {
-                            Debug.LogError("Walls exteriors no correctes");
-                        }
-                        Instantiate(sprite, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
-                        */
                         break;
                     }
 
