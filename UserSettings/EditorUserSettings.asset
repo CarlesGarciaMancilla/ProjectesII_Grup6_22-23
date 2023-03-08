@@ -39,6 +39,7 @@ EditorUserSettings:
       flags: 0
     RecentlyUsedSceneGuid-8:
       value: 065205575c545e5d0c0d0a7249725a4446154e2f2a2d23617f2f4866b6b9323a
+<<<<<<< HEAD
       flags: 0
     RecentlyUsedSceneGuid-4:
       value: 5b575752500d0f0b545a59201527074410164f7c2f7c75607e281e6bbbb93660
@@ -55,6 +56,8 @@ EditorUserSettings:
     RecentlyUsedSceneGuid-8:
       value: 50540d005c515f0e0e570e704921084417164a2c7c2d703579281b32e7b16161
 >>>>>>> Sprites
+=======
+>>>>>>> Refactor
       flags: 0
     RecentlyUsedSceneGuid-9:
       value: 00530653070d58085d5f5a2711735e44404e1d782a797060782a1b31bbe2673b
