@@ -6,6 +6,7 @@ using UnityEngine;
 public class ProtoRotation : MonoBehaviour
 {
     [SerializeField] private LacusMovement LacusM;
+    [SerializeField] private LacusStats LacusS;
     [SerializeField] private Transform destination;
     [SerializeField] private Transform Lacus;
 
@@ -19,7 +20,7 @@ public class ProtoRotation : MonoBehaviour
 
         Collider2D col = Physics2D.OverlapPoint(mousePosWorldSpace, objectLayer);
 
-        if (col == objectCollider)
+        if (col == objectCollider && !LacusS.isMoving)
         {
             if (Input.GetMouseButtonDown(0))
             {

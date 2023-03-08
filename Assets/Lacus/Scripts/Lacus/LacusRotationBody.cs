@@ -12,6 +12,8 @@ public class LacusRotationBody : MonoBehaviour
     [SerializeField] private AudioSource lacusTurn;
     [SerializeField] private Transform Lacus;
 
+    //private readonly LacusStats LacusS;
+
 
     void Start()
     {

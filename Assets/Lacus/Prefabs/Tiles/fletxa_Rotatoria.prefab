@@ -243,7 +243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ec3549f782e22c4ba0deb2a0a2ba4a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LacusM: {fileID: 0}
+  LacusM: {fileID: 6033293880122079854, guid: 37cb86c1a5062b246a50ee90540e02dc, type: 3}
+  LacusS: {fileID: 6033293880122079853, guid: 37cb86c1a5062b246a50ee90540e02dc, type: 3}
   destination: {fileID: 0}
   Lacus: {fileID: 0}
 --- !u!114 &1639990769740994925

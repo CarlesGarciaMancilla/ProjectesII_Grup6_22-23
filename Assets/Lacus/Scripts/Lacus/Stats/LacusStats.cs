@@ -6,6 +6,9 @@ public class LacusStats : MonoBehaviour
 {
     public int maxBattery = 6;
     public int batteryLeft;
+
+    [HideInInspector] public bool isMoving = false;
+
     void Start()
     {
         ResetBattery();
@@ -19,5 +22,15 @@ public class LacusStats : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void DisableMovement()
+    {
+        isMoving = false;
+    }
+
+    public void ActivateMovement()
+    {
+        isMoving = true;
     }
 }

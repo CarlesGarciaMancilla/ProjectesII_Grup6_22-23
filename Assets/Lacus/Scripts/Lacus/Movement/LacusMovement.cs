@@ -21,9 +21,6 @@ public class LacusMovement : MonoBehaviour
     private string sceneName;
 
 
-    [HideInInspector] public bool isMoving = false;
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -35,13 +32,16 @@ public class LacusMovement : MonoBehaviour
 
         initialPosition = transform.position;
         ForwardDestination();
-        //ResetLacus();
-        //ResetLacus();
+
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(lacusStats.isMoving);
+
         InitiateToDestinationMovement();
 
         if (Input.touchCount > 0)
@@ -73,7 +73,7 @@ public class LacusMovement : MonoBehaviour
         yield return tweenY.WaitForCompletion();
 
         // Comprobar si en els stops s'atura
-        if (isMoving)
+        if (lacusStats.isMoving)
         {
             StartCoroutine(ToDestinationMovementV2());
         }
@@ -84,10 +84,12 @@ public class LacusMovement : MonoBehaviour
     {
         if (keyspacep.activeSelf == false)
         {
-            if (!isMoving)
+            if (!lacusStats.isMoving)
             {
                 StartCoroutine(ToDestinationMovementV2());
-                isMoving = true;
+
+                Debug.Log("Activated Movement");
+                lacusStats.ActivateMovement();
             }
         }
     }
@@ -108,7 +110,7 @@ public class LacusMovement : MonoBehaviour
     // Mirar en un futur els problemes del reset
     public void ResetLacus()
     {
-        isMoving = false;
+        lacusStats.DisableMovement();
         keyspacep.SetActive(true);
         transform.DOComplete(false);
         transform.position = initialPosition;

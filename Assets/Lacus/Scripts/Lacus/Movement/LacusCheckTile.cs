@@ -23,7 +23,7 @@ public class LacusCheckTile : MonoBehaviour
     {
         // Colisions Amb Tiles
 
-        if (!Lacus.isMoving)
+        if (!LacusS.isMoving)
             return;
 
         if (collider.CompareTag("Battery"))
@@ -38,7 +38,7 @@ public class LacusCheckTile : MonoBehaviour
 
         else if (collider.CompareTag("Stop"))
         {
-            Lacus.isMoving = false;
+            LacusS.DisableMovement();
             LacusS.batteryLeft--;
             StopSound.Play();
         }

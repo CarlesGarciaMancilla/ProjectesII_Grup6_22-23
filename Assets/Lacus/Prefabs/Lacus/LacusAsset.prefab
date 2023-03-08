@@ -576,7 +576,6 @@ MonoBehaviour:
   destinationBattery: {fileID: 4244387518369126440}
   keyspacep: {fileID: 0}
   keyr: {fileID: 0}
-  isMoving: 0
 --- !u!114 &6033293880122079853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -591,6 +590,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxBattery: 6
   batteryLeft: 6
+  isMoving: 0
 --- !u!114 &6973291953459519157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -604,6 +604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LacusM: {fileID: 6033293880122079854}
+  LacusS: {fileID: 6033293880122079853}
   destination: {fileID: 6033293880259255401}
   Lacus: {fileID: 6033293880122079848}
 --- !u!50 &6033293880122079859
