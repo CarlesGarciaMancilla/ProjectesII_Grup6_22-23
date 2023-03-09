@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 387756994557142212}
   - component: {fileID: 9208457546547781520}
   - component: {fileID: 7574215741424078007}
+  - component: {fileID: -3983390439422225563}
   - component: {fileID: 6682610610126977845}
   m_Layer: 7
   m_Name: fletxa_button
@@ -129,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9411d678fdf1ada4494e6792ba5a456c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationScript: {fileID: 0}
+  rotationScript: {fileID: -3983390439422225563}
   layerArrow:
     serializedVersion: 2
     m_Bits: 128
@@ -231,6 +232,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-3983390439422225563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3422180045459200256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ec3549f782e22c4ba0deb2a0a2ba4a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LacusM: {fileID: 0}
+  destination: {fileID: 0}
+  Lacus: {fileID: 0}
 --- !u!114 &6682610610126977845
 MonoBehaviour:
   m_ObjectHideFlags: 0

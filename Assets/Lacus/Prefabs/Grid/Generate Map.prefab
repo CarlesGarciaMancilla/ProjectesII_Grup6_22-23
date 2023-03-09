@@ -55,9 +55,9 @@ MonoBehaviour:
   button: {fileID: 5302358215521241045, guid: d0022ed3b2a22a447bf3f6ae84df9307, type: 3}
   final: {fileID: 3422180045459200256, guid: 2a00261fa9102a840ba53e9790a70af4, type: 3}
   stop: {fileID: 5001330152221261567, guid: aab0e41829b53fd409146bdab6fbc26f, type: 3}
-  TopLeftWall: {fileID: 6610815329477875352, guid: 73cbce965ac51c14f9ee3c81bc9f3093, type: 3}
-  TopRightWall: {fileID: 802400203840223413, guid: 9fdea179ed70528479a194833f321266, type: 3}
-  BotLeftWall: {fileID: 681560209096653411, guid: 514fd22a8853a5d438313b827304742c, type: 3}
-  BotRightWall: {fileID: 1370319948361830906, guid: 8c935b2943a8d62459289953ddcb7f1d, type: 3}
-  HorizontalWall: {fileID: 7464713360918504180, guid: 01a0e41f453fa2849bfacc32d5ee4482, type: 3}
-  VerticalWall: {fileID: 6300135716287447352, guid: b073a50c013217d4aa75a2410f3e0984, type: 3}
+  TopLeftWall: {fileID: 4406811488812073751, guid: 84350549cc7795343ab3446a9511daa1, type: 3}
+  TopRightWall: {fileID: 9214358611579330276, guid: 18c46c2efab1d9c44a1e338651f5e838, type: 3}
+  BotLeftWall: {fileID: 8149037008253751779, guid: 1efcea2ccab03e3409b68ef8a4122994, type: 3}
+  BotRightWall: {fileID: 3839649157458614915, guid: cc1daa3e450b01746ae839e69ed9e12e, type: 3}
+  HorizontalWall: {fileID: 7540536976370952461, guid: 5d8945d76a3eab441a622d1422d753ea, type: 3}
+  VerticalWall: {fileID: 8898316894452641634, guid: 4947dc51c77e1bd4fa8844dd31d71657, type: 3}
