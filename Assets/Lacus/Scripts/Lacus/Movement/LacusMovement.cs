@@ -40,8 +40,6 @@ public class LacusMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(lacusStats.isMoving);
-
         InitiateToDestinationMovement();
 
         if (Input.touchCount > 0)
@@ -89,7 +87,7 @@ public class LacusMovement : MonoBehaviour
                 StartCoroutine(ToDestinationMovementV2());
 
                 Debug.Log("Activated Movement");
-                lacusStats.ActivateMovement();
+                lacusStats.isMoving = true;
             }
         }
     }
@@ -110,7 +108,7 @@ public class LacusMovement : MonoBehaviour
     // Mirar en un futur els problemes del reset
     public void ResetLacus()
     {
-        lacusStats.DisableMovement();
+        lacusStats.isMoving = false;
         keyspacep.SetActive(true);
         transform.DOComplete(false);
         transform.position = initialPosition;

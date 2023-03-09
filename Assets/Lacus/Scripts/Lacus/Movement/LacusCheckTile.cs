@@ -38,7 +38,7 @@ public class LacusCheckTile : MonoBehaviour
 
         else if (collider.CompareTag("Stop"))
         {
-            LacusS.DisableMovement();
+            LacusS.isMoving = false;
             LacusS.batteryLeft--;
             StopSound.Play();
         }
