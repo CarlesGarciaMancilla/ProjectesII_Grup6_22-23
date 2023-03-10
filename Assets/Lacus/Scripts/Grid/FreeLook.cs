@@ -107,13 +107,13 @@ public class FreeLook : MonoBehaviour
 
     void UnStuckCameraOnCollision()
     {
-        if (Camera.main.transform.position.x < maximumLeft)
-        {
-            Camera.main.transform.position = new Vector3(maximumLeft, Camera.main.transform.position.y, Camera.main.transform.position.z);
-        }
         if (Camera.main.transform.position.x > maximumDownRight.x)
         {
             Camera.main.transform.position = new Vector3(maximumDownRight.x, Camera.main.transform.position.y, Camera.main.transform.position.z);
+        }
+        if (Camera.main.transform.position.x < maximumLeft)
+        {
+            Camera.main.transform.position = new Vector3(maximumLeft, Camera.main.transform.position.y, Camera.main.transform.position.z);
         }
         if (Camera.main.transform.position.y < maximumDownRight.y)
         {
