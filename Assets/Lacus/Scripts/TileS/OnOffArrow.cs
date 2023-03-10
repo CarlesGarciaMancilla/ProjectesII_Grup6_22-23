@@ -5,7 +5,8 @@ using UnityEngine;
 public class OnOffArrow : MonoBehaviour
 {
     [SerializeField] public Buttons button;
-    [SerializeField] GameObject off;
+    [SerializeField] Sprite arrowOn;
+    [SerializeField] Sprite arrowOff;
     [SerializeField] GameObject fletxa_button;
     [SerializeField] GameObject lights;
     [SerializeField] ParticleSystem spark;
@@ -21,7 +22,7 @@ public class OnOffArrow : MonoBehaviour
     {
         if (button.isPressed)//is On
         {
-            off.SetActive(false);
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = arrowOn;
             lights.SetActive(true);
             if(i == 0)
             spark.Play();
@@ -31,7 +32,7 @@ public class OnOffArrow : MonoBehaviour
         else// is Off
         {
             i = 0;
-            off.SetActive(true);
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = arrowOff;
             lights.SetActive(false);
             fletxa_button.tag = "Tile";
         }

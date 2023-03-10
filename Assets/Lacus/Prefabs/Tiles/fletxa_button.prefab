@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 214222012, guid: 5ba8ad6b35310ad49809ea053e7777ac, type: 3}
+  m_Sprite: {fileID: -1242462062, guid: dc338c8ab19cb8941923362e7f4c4ee4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -260,7 +260,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: -5677086930112798524, guid: d0022ed3b2a22a447bf3f6ae84df9307, type: 3}
-  off: {fileID: 5779507315643921816}
+  arrowOn: {fileID: -1452986196, guid: dc338c8ab19cb8941923362e7f4c4ee4, type: 3}
+  arrowOff: {fileID: -1242462062, guid: dc338c8ab19cb8941923362e7f4c4ee4, type: 3}
   fletxa_button: {fileID: 3422180045459200256}
   lights: {fileID: 5194117885306628197}
   spark: {fileID: 7674620074996727965}
@@ -313,7 +314,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 0.53113204, g: 1, b: 0.504717, a: 1}
-  m_Intensity: 0.5
+  m_Intensity: 0.25
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -448,7 +449,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.6117647}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
