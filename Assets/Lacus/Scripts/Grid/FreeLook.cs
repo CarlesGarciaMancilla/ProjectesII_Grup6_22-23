@@ -10,6 +10,8 @@ public class FreeLook : MonoBehaviour
     private Vector3 displacement;
     private Vector3 cameraPosition;
 
+    private float maximumLeft = -0.4f;
+
     private bool isDragging = false;
 
     void Start()
@@ -45,4 +47,6 @@ public class FreeLook : MonoBehaviour
             Camera.main.transform.position = initialPosition
         }*/
     }
+
+
 }

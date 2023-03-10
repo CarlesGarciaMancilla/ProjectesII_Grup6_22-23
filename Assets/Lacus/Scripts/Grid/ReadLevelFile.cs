@@ -232,6 +232,27 @@ public class ReadLevelFile : MonoBehaviour
         return 0;
     }
 
+    public Vector2 FarthestWallPosition()
+    {
+        Vector2 farPositions = new Vector2(0, 0);
+
+        List<Vector2> tiles = LookForTiles('#');
+
+        for (int i = 0; i < tiles.Count; i++)
+        {
+            if (tiles[i].x > farPositions.x) // Right
+            {
+                farPositions.x = tiles[i].x;
+            }
+            if (tiles[i].y > farPositions.y)
+            {
+                farPositions.y = tiles[i].y;
+            }
+        }
+
+        return farPositions;
+    }
+
     void GenerateMap()
     {
         GameObject sprite = TopLeftWall;
