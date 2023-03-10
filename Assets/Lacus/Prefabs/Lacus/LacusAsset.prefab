@@ -476,7 +476,6 @@ GameObject:
   - component: {fileID: 6033293880122079854}
   - component: {fileID: 6033293880122079853}
   - component: {fileID: 6973291953459519157}
-  - component: {fileID: 3151365110561203450}
   - component: {fileID: 6033293880122079859}
   m_Layer: 9
   m_Name: LacusAsset
@@ -606,19 +605,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LacusM: {fileID: 6033293880122079854}
   destination: {fileID: 6033293880259255401}
-  Lacus: {fileID: 6033293880122079848}
---- !u!114 &3151365110561203450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6033293880122079857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36b352c475ac7e74797e129cdcfffd9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   Lacus: {fileID: 6033293880122079848}
 --- !u!50 &6033293880122079859
 Rigidbody2D:
