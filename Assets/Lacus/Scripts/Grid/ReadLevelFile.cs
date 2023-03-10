@@ -154,37 +154,31 @@ public class ReadLevelFile : MonoBehaviour
             if (connectionDown && connectionRight)
             {
                 // Top Left Corner
-                Debug.Log("TopLeft");
                 sprite = TopLeftWall;
             }
             else if (connectionLeft && connectionRight)
             {
                 // Horizontal
-                Debug.Log("Horizontal");
                 sprite = HorizontalWall;
             }
             else if (connectionLeft && connectionDown)
             {
                 // Top Right
-                Debug.Log("TopRight");
                 sprite = TopRightWall;
             }
             else if (connectionUp && connectionDown)
             {
                 // Vertical
-                Debug.Log("Vertical");
                 sprite = VerticalWall;
             }
             else if (connectionUp && connectionRight)
             {
                 // Bot Left
-                Debug.Log("BotLeft");
                 sprite = BotLeftWall;
             }
             else if (connectionLeft && connectionUp)
             {
                 // Bot Right
-                Debug.Log("BotRight");
                 sprite = BotRightWall;
             }
 
