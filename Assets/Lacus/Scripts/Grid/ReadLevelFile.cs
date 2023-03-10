@@ -320,7 +320,6 @@ public class ReadLevelFile : MonoBehaviour
 
                 case '.': // Espai Blanc
                     {
-                        x++;
                         break;
                     }
 
