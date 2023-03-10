@@ -69,14 +69,18 @@ public class LacusMovement : MonoBehaviour
     {
         while (isMoving)
         {
-            Tween tweenX = Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
-            Tween tweenY = Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
-
-            yield return tweenX.WaitForCompletion();
-            yield return tweenY.WaitForCompletion();
-
-            Camera.main.transform.DOMoveX(destination.transform.position.x, 0.35f, false);
-            Camera.main.transform.DOMoveY(destination.transform.position.y, 0.35f, false);
+            float duration = 1f;
+            float currentDuration = 0f;
+            Vector3 start = Lacus.transform.position;
+            Vector3 dest = destination.transform.position;
+            while (currentDuration < duration)
+            {
+                currentDuration = Mathf.Min(currentDuration + Time.deltaTime, duration);
+                float ratio = currentDuration / duration;
+                Lacus.transform.position = Vector3.Lerp(start, dest, ratio);
+                Camera.main.transform.position = Lacus.transform.position + Vector3.back * 10f;
+                yield return null;
+            }
         }
 
     }
