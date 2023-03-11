@@ -477,6 +477,7 @@ GameObject:
   - component: {fileID: 6033293880122079853}
   - component: {fileID: 6973291953459519157}
   - component: {fileID: 6033293880122079859}
+  - component: {fileID: 5409752217998744232}
   m_Layer: 9
   m_Name: LacusAsset
   m_TagString: Player
@@ -627,6 +628,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &5409752217998744232
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6033293880122079857}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 49146be9ba0b6644bb3d299789d267de, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6033293880259255400
 GameObject:
   m_ObjectHideFlags: 0
