@@ -11,6 +11,7 @@ public class menujuego : MonoBehaviour
 
     public GameObject menuPanel;
     public GameObject menuOptions;
+    public GameObject menuCredits;
     public GameObject prefabTransition;
     public GameObject LevelSelector;
     public Button level1;
@@ -120,8 +121,13 @@ public class menujuego : MonoBehaviour
                 menuOptions.SetActive(true);
                 menuPanel.SetActive(false);
                 break;
+            case "credits":
+                menuCredits.SetActive(true);
+                menuPanel.SetActive(false);
+                break;
             case "return":               
                 menuOptions.SetActive(false);
+                menuCredits.SetActive(false);
                 LevelSelector.SetActive(false);
                 menuPanel.SetActive(true);
                 break;
