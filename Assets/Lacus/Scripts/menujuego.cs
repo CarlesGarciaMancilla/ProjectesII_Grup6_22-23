@@ -14,6 +14,7 @@ public class menujuego : MonoBehaviour
     public GameObject menuCredits;
     public GameObject prefabTransition;
     public GameObject LevelSelector;
+    bool resPC;
     public Button level1;
     public Button level2;
     public Button level3;
@@ -32,6 +33,7 @@ public class menujuego : MonoBehaviour
     void Start()
     {
         Screen.SetResolution(720, 1000, FullScreenMode.Windowed);
+        resPC = true;
         StartCoroutine(Transition());
         level2.interactable = false;
         level3.interactable = false;
@@ -120,6 +122,18 @@ public class menujuego : MonoBehaviour
             case "options":
                 menuOptions.SetActive(true);
                 menuPanel.SetActive(false);
+                break;
+            case "resolution":
+                if (resPC == true)
+                {
+                    Screen.SetResolution(1080, 1920, FullScreenMode.Windowed);
+                    resPC = false;
+                }
+                else if (resPC == false) 
+                {
+                    Screen.SetResolution(720, 1000, FullScreenMode.Windowed);
+                    resPC= true;    
+                }
                 break;
             case "credits":
                 menuCredits.SetActive(true);
