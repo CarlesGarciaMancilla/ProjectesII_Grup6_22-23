@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class FreeLook : MonoBehaviour
 {
     [SerializeField] private ReadLevelFile file;
+    private GameObject Lacus;
+    private LacusStats LacusS;
 
     private Vector3 initialPosition = new Vector3(-1.0f, -1.0f, -1.0f);
     private Vector3 displacement;
@@ -17,15 +20,13 @@ public class FreeLook : MonoBehaviour
 
     private bool isDragging = false;
 
-    private Camera mainCamera;
-
     void Start()
     {
-        mainCamera = Camera.main;
+
 
         maximumDownRight = file.FarthestWallPosition();
 
-        // Correcciï¿½ de la generaciï¿½ de tiles
+        // Correcció de la generació de tiles
         maximumDownRight.y = -maximumDownRight.y;
         maximumDownRight.x -= 4.35f;
         maximumDownRight.y += 6.4f;
@@ -33,7 +34,16 @@ public class FreeLook : MonoBehaviour
 
     private void Update()
     {
-        CameraMovement();
+        if (Lacus == null)
+        {
+            Lacus = GameObject.FindGameObjectWithTag("Player");
+            LacusS = Lacus.GetComponent<LacusStats>();
+        }
+
+        if (LacusS.isMoving == false)
+        {
+            CameraMovement();
+        }
     }
 
 
@@ -48,13 +58,13 @@ public class FreeLook : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             
-            displacement = mainCamera.ScreenToWorldPoint(Input.mousePosition) - mainCamera.transform.position;
+            displacement = Camera.main.ScreenToWorldPoint(Input.mousePosition) - Camera.main.transform.position;
 
 
             if(!isDragging)
             {
                 isDragging = true;
-                cameraPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+                cameraPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             }
 
         }
@@ -68,11 +78,11 @@ public class FreeLook : MonoBehaviour
 
             if (CheckBoundariesX())
             {
-                mainCamera.transform.position = new Vector3(cameraPosition.x - displacement.x, mainCamera.transform.position.y, mainCamera.transform.position.z);
+                Camera.main.transform.position = new Vector3(cameraPosition.x - displacement.x, Camera.main.transform.position.y, Camera.main.transform.position.z);
             }
             if (CheckBoundariesY())
             {
-                mainCamera.transform.position = new Vector3(mainCamera.transform.position.x, cameraPosition.y - displacement.y, mainCamera.transform.position.z);
+                Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, cameraPosition.y - displacement.y, Camera.main.transform.position.z);
             }
             UnStuckCameraOnCollision();
 
@@ -84,8 +94,8 @@ public class FreeLook : MonoBehaviour
     bool CheckBoundariesX()
     {
         // AABB
-        if (mainCamera.transform.position.x >= maximumLeft &&
-            mainCamera.transform.position.x <= maximumDownRight.x)
+        if (Camera.main.transform.position.x >= maximumLeft &&
+            Camera.main.transform.position.x <= maximumDownRight.x)
         {
             return true;
         }
@@ -98,8 +108,8 @@ public class FreeLook : MonoBehaviour
     bool CheckBoundariesY()
     {
         // AABB
-        if (mainCamera.transform.position.y <= maximumUp &&
-            mainCamera.transform.position.y >= maximumDownRight.y)
+        if (Camera.main.transform.position.y <= maximumUp &&
+            Camera.main.transform.position.y >= maximumDownRight.y)
         {
             return true;
         }
@@ -111,21 +121,21 @@ public class FreeLook : MonoBehaviour
 
     void UnStuckCameraOnCollision()
     {
-        if (mainCamera.transform.position.x > maximumDownRight.x)
+        if (Camera.main.transform.position.x > maximumDownRight.x)
         {
-            mainCamera.transform.position = new Vector3(maximumDownRight.x, mainCamera.transform.position.y, mainCamera.transform.position.z);
+            Camera.main.transform.position = new Vector3(maximumDownRight.x, Camera.main.transform.position.y, Camera.main.transform.position.z);
         }
-        if (mainCamera.transform.position.x < maximumLeft)
+        if (Camera.main.transform.position.x < maximumLeft)
         {
-            mainCamera.transform.position = new Vector3(maximumLeft, mainCamera.transform.position.y, mainCamera.transform.position.z);
+            Camera.main.transform.position = new Vector3(maximumLeft, Camera.main.transform.position.y, Camera.main.transform.position.z);
         }
-        if (mainCamera.transform.position.y < maximumDownRight.y)
+        if (Camera.main.transform.position.y < maximumDownRight.y)
         {
-            mainCamera.transform.position = new Vector3(mainCamera.transform.position.x, maximumDownRight.y, mainCamera.transform.position.z);
+            Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, maximumDownRight.y, Camera.main.transform.position.z);
         }
-        if (mainCamera.transform.position.y > maximumUp)
+        if (Camera.main.transform.position.y > maximumUp)
         {
-            mainCamera.transform.position = new Vector3(mainCamera.transform.position.x, maximumUp, mainCamera.transform.position.z);
+            Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, maximumUp, Camera.main.transform.position.z);
         }
     }
 }
