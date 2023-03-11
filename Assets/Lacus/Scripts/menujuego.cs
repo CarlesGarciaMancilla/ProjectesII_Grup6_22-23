@@ -21,6 +21,10 @@ public class menujuego : MonoBehaviour
     public Button level6;
     public Button level7;
     public Button level8;
+    public Button level9;
+    public Button level10;
+    public Button level11;
+    public Button level12;
     public AudioSource audioS;
     public Animator animator;
     // Start is called before the first frame update
@@ -35,6 +39,10 @@ public class menujuego : MonoBehaviour
         level6.interactable = false;
         level7.interactable = false;
         level8.interactable = false;
+        level9.interactable = false;
+        level10.interactable = false;
+        level11.interactable = false;
+        level12.interactable = false;
 
     }
 
@@ -89,7 +97,25 @@ public class menujuego : MonoBehaviour
                 }
                 break;
 
-                // StartCoroutine(SceneLoad("NomdelNivell"));
+                if (PlayerPrefs.GetInt("lev_5") == 1)
+                {
+                    level9.interactable = true;
+                }
+                break;
+
+                if (PlayerPrefs.GetInt("lev_6") == 1)
+                {
+                    level10.interactable = true;
+                }
+                break;
+
+                if (PlayerPrefs.GetInt("lev_7") == 1)
+                {
+                    level11.interactable = true;
+                }
+                break;
+
+            // StartCoroutine(SceneLoad("NomdelNivell"));
             case "options":
                 menuOptions.SetActive(true);
                 menuPanel.SetActive(false);
@@ -130,6 +156,18 @@ public class menujuego : MonoBehaviour
             case "level8":
                 // LevelSelector.SetActive(false);
                 StartCoroutine(SceneLoad8());
+                break;
+            case "level9":
+                // LevelSelector.SetActive(false);
+                StartCoroutine(SceneLoad9());
+                break;
+            case "level10":
+                // LevelSelector.SetActive(false);
+                StartCoroutine(SceneLoad10());
+                break;
+            case "level11":
+                // LevelSelector.SetActive(false);
+                StartCoroutine(SceneLoad11());
                 break;
             case "mute":
                 if (audioS.isPlaying) 
@@ -214,6 +252,30 @@ public class menujuego : MonoBehaviour
         animator.SetTrigger("StartTransition");
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene("Level_4");
+    }
+
+    public IEnumerator SceneLoad9()
+    {
+        prefabTransition.SetActive(true);
+        animator.SetTrigger("StartTransition");
+        yield return new WaitForSeconds(transitionTime);
+        SceneManager.LoadScene("Level_5");
+    }
+
+    public IEnumerator SceneLoad10()
+    {
+        prefabTransition.SetActive(true);
+        animator.SetTrigger("StartTransition");
+        yield return new WaitForSeconds(transitionTime);
+        SceneManager.LoadScene("Level_6");
+    }
+
+    public IEnumerator SceneLoad11()
+    {
+        prefabTransition.SetActive(true);
+        animator.SetTrigger("StartTransition");
+        yield return new WaitForSeconds(transitionTime);
+        SceneManager.LoadScene("Level_7");
     }
 
     // Fer les SceneLoad AIXI, NO facis 70 mil funcions que es practicament lo mateix y que nomes canvi 1 cosa, es fica un parametre a la funcio i et serveix per totes les coses
