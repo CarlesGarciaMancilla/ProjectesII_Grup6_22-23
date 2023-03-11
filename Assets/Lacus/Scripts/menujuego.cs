@@ -32,7 +32,7 @@ public class menujuego : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Screen.SetResolution(720, 1000, FullScreenMode.Windowed);
+        Screen.SetResolution(720, 1080, FullScreenMode.FullScreenWindow);
         resPC = true;
         StartCoroutine(Transition());
         level2.interactable = false;
@@ -126,13 +126,13 @@ public class menujuego : MonoBehaviour
             case "resolution":
                 if (resPC == true)
                 {
-                    Screen.SetResolution(1080, 1920, FullScreenMode.Windowed);
+                    Screen.SetResolution(1080, 1920, FullScreenMode.FullScreenWindow);
                     resPC = false;
                 }
                 else if (resPC == false) 
                 {
-                    Screen.SetResolution(720, 1000, FullScreenMode.Windowed);
-                    resPC= true;    
+                    Screen.SetResolution(720, 1080, FullScreenMode.FullScreenWindow);
+                    resPC = true;    
                 }
                 break;
             case "credits":
