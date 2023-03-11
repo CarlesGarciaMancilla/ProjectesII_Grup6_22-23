@@ -9,6 +9,7 @@ public class Buttons : MonoBehaviour
     public bool isPressed;
     public Sprite buttonOn;
     public Sprite buttonOff;
+    [SerializeField] GameObject lights;
     [SerializeField] private AudioSource buttonOnOffSound;
     void OnTriggerEnter2D(Collider2D collider)
     {
@@ -19,6 +20,7 @@ public class Buttons : MonoBehaviour
                 Debug.Log("Button off");
                 isPressed = false;
                 this.gameObject.GetComponent<SpriteRenderer>().sprite=buttonOff;
+                lights.SetActive(false);
                 buttonOnOffSound.Play();
             }
             if (!isPressed)
@@ -26,6 +28,7 @@ public class Buttons : MonoBehaviour
                 Debug.Log("Button on");
                 isPressed = true;
                 this.gameObject.GetComponent<SpriteRenderer>().sprite = buttonOn;
+                lights.SetActive(true);
                 buttonOnOffSound.Play();
             }
         }

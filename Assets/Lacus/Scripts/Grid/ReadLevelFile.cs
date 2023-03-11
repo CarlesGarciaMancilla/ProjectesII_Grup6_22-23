@@ -154,37 +154,31 @@ public class ReadLevelFile : MonoBehaviour
             if (connectionDown && connectionRight)
             {
                 // Top Left Corner
-                Debug.Log("TopLeft");
                 sprite = TopLeftWall;
             }
             else if (connectionLeft && connectionRight)
             {
                 // Horizontal
-                Debug.Log("Horizontal");
                 sprite = HorizontalWall;
             }
             else if (connectionLeft && connectionDown)
             {
                 // Top Right
-                Debug.Log("TopRight");
                 sprite = TopRightWall;
             }
             else if (connectionUp && connectionDown)
             {
                 // Vertical
-                Debug.Log("Vertical");
                 sprite = VerticalWall;
             }
             else if (connectionUp && connectionRight)
             {
                 // Bot Left
-                Debug.Log("BotLeft");
                 sprite = BotLeftWall;
             }
             else if (connectionLeft && connectionUp)
             {
                 // Bot Right
-                Debug.Log("BotRight");
                 sprite = BotRightWall;
             }
 
@@ -230,6 +224,27 @@ public class ReadLevelFile : MonoBehaviour
             Debug.LogError($"The process failed: {e.ToString()}");
         }
         return 0;
+    }
+
+    public Vector2 FarthestWallPosition()
+    {
+        Vector2 farPositions = new Vector2(0, 0);
+
+        List<Vector2> tiles = LookForTiles('#');
+
+        for (int i = 0; i < tiles.Count; i++)
+        {
+            if (tiles[i].x > farPositions.x) // Right
+            {
+                farPositions.x = tiles[i].x;
+            }
+            if (tiles[i].y > farPositions.y)
+            {
+                farPositions.y = tiles[i].y;
+            }
+        }
+
+        return farPositions;
     }
 
     void GenerateMap()
@@ -305,7 +320,6 @@ public class ReadLevelFile : MonoBehaviour
 
                 case '.': // Espai Blanc
                     {
-                        x++;
                         break;
                     }
 

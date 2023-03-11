@@ -46,7 +46,8 @@ public class LacusCheckTile : MonoBehaviour
         else if (collider.CompareTag("End"))
         {
             // Change to next scene
-            // Canivar la linea de sota
+            // Canviar la linea de sota
+            Lacus.isMoving = false;
             menu.SetActive(true);
         }
         else if (collider.CompareTag("Tile"))

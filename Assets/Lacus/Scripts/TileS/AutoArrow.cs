@@ -12,8 +12,6 @@ public class AutoArrow : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("EI");
-
             rotationAngle -= 90f;
             this.transform.Rotate(0f, 0f, rotationAngle, Space.World);
             rotationAngle = 0f;

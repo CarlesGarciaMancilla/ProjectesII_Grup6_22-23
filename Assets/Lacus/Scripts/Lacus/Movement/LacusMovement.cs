@@ -20,6 +20,7 @@ public class LacusMovement : MonoBehaviour
     public GameObject keyr;
     private string sceneName;
 
+    private Vector3 camInitialPos;
 
     [HideInInspector] public bool isMoving = false;
 
@@ -31,7 +32,7 @@ public class LacusMovement : MonoBehaviour
         sceneName = SceneManager.GetActiveScene().name;
         keyr = GameObject.Find("reset");
         keyspacep = GameObject.Find("space");
-
+        camInitialPos = Camera.main.transform.position;
 
         initialPosition = transform.position;
         ForwardDestination();
@@ -64,30 +65,57 @@ public class LacusMovement : MonoBehaviour
     // ------------------------------
     // Funció principal de Moviment
     // ------------------------------
+    IEnumerator ToDestinationMovementV3()
+    {
+        while (isMoving)
+        {
+            float duration = 1f;
+            float currentDuration = 0f;
+            Vector3 start = Lacus.transform.position;
+            Vector3 dest = destination.transform.position;
+            while (currentDuration < duration)
+            {
+                currentDuration = Mathf.Min(currentDuration + Time.deltaTime, duration);
+                float ratio = currentDuration / duration;
+                Lacus.transform.position = Vector3.Lerp(start, dest, ratio);
+                Camera.main.transform.position = Lacus.transform.position + Vector3.back * 10f;
+                yield return null;
+            }
+        }
+
+    }
     IEnumerator ToDestinationMovementV2()
     {
+        
         Tween tweenX = Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
         Tween tweenY = Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
 
         yield return tweenX.WaitForCompletion();
         yield return tweenY.WaitForCompletion();
 
+        Camera.main.transform.DOMoveX(destination.transform.position.x, 0.35f, false);
+        Camera.main.transform.DOMoveY(destination.transform.position.y, 0.35f, false);
+
         // Comprobar si en els stops s'atura
         if (isMoving)
         {
+
             StartCoroutine(ToDestinationMovementV2());
         }
+
     }
 
     // Iniciador del Moviment i on hi accedeix el bucle per avançar
     public void InitiateToDestinationMovement()
     {
         if (keyspacep.activeSelf == false)
-        {
+        { 
             if (!isMoving)
             {
-                StartCoroutine(ToDestinationMovementV2());
+                keyspacep.SetActive(true);
                 isMoving = true;
+                StartCoroutine(ToDestinationMovementV3());
+
             }
         }
     }
@@ -113,6 +141,7 @@ public class LacusMovement : MonoBehaviour
         transform.DOComplete(false);
         transform.position = initialPosition;
         ResetDestinationPosition();
+        Camera.main.transform.position = camInitialPos;
 
         // Diria que s'ha de fer aixo per que es pugi fer reset a la bateria
         lacusStats.ResetBattery();
