@@ -22,7 +22,7 @@ public class LacusRotationBody : MonoBehaviour
     {
         rotationScript.ClickRotation(Lacus, colliderBody, lacusBodyLayer, lacusTurn);
 
-        if (Input.touchCount > 0 )
+        if (Input.touchCount > 0)
         {
             Vector2 touch = Input.GetTouch(0).position;
         }

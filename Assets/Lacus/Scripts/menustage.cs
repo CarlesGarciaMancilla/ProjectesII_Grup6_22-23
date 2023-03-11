@@ -58,16 +58,6 @@ public class menustage : MonoBehaviour
                 options.SetActive(false);
                 Time.timeScale = 1;
                 break;
-            case "speed":
-                if(Time.timeScale == 1) 
-                { 
-                Time.timeScale = 2;
-                }
-                else if (Time.timeScale == 2)
-                {
-                    Time.timeScale = 1;
-                }
-                break;
             case "mute":
                 if (audioGame.isPlaying)
                 {
@@ -137,27 +127,6 @@ public class menustage : MonoBehaviour
                 SceneManager.LoadScene("Level_4");
                 break;
             case "Level_4":
-                if (!PlayerPrefs.HasKey("lev_5"))
-                {
-                    PlayerPrefs.SetInt("lev_5", 1);
-                }
-                SceneManager.LoadScene("Level_5");
-                break;
-            case "Level_5":
-                if (!PlayerPrefs.HasKey("lev_6"))
-                {
-                    PlayerPrefs.SetInt("lev_6", 1);
-                }
-                SceneManager.LoadScene("Level_6");
-                break;
-            case "Level_6":
-                if (!PlayerPrefs.HasKey("lev_7"))
-                {
-                    PlayerPrefs.SetInt("lev_7", 1);
-                }
-                SceneManager.LoadScene("Level_7");
-                break;
-            case "Level_7":              
                 break;
         }
     }
