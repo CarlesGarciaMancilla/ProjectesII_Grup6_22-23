@@ -32,12 +32,12 @@ public class ProtoRotation : MonoBehaviour
 
         if (col == objectCollider && LacusS.isMoving == false)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && Time.timeScale != 0)
             {
                 rotationAngle += 90f;
                 objectAudio.Play();
             }
-            else if (Input.GetMouseButtonDown(1))
+            else if (Input.GetMouseButtonDown(1) && Time.timeScale != 0)
             {
                 rotationAngle -= 90f;
                 objectAudio.Play();
