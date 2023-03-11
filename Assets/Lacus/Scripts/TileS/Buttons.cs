@@ -19,7 +19,7 @@ public class Buttons : MonoBehaviour
             {
                 Debug.Log("Button off");
                 isPressed = false;
-                gameObject.GetComponent<SpriteRenderer>().sprite=buttonOff;
+                this.gameObject.GetComponent<SpriteRenderer>().sprite=buttonOff;
                 lights.SetActive(false);
                 buttonOnOffSound.Play();
             }
@@ -27,7 +27,7 @@ public class Buttons : MonoBehaviour
             {
                 Debug.Log("Button on");
                 isPressed = true;
-                gameObject.GetComponent<SpriteRenderer>().sprite = buttonOn;
+                this.gameObject.GetComponent<SpriteRenderer>().sprite = buttonOn;
                 lights.SetActive(true);
                 buttonOnOffSound.Play();
             }

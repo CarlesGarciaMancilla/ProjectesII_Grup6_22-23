@@ -124,7 +124,6 @@ GameObject:
   - component: {fileID: 9208457546547781520}
   - component: {fileID: 7574215741424078007}
   - component: {fileID: -1473576365694860863}
-  - component: {fileID: -4250244585712551584}
   m_Layer: 7
   m_Name: fletxa
   m_TagString: Arrow
@@ -353,25 +352,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ec3549f782e22c4ba0deb2a0a2ba4a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LacusS: {fileID: -4250244585712551584}
   LacusM: {fileID: 0}
   destination: {fileID: 0}
   Lacus: {fileID: 0}
---- !u!114 &-4250244585712551584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3422180045459200256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a5dcea69336b64498b23f430c1a0400, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxBattery: 6
-  batteryLeft: 0
-  _isMoving: 0
 --- !u!1 &5160621258465148684
 GameObject:
   m_ObjectHideFlags: 0
