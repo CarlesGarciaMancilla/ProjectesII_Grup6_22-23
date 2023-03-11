@@ -15,9 +15,6 @@ public class LacusMovement : MonoBehaviour
     private Vector3 initialPosition;
     [SerializeField] private Collider2D destinationCollider;
     [SerializeField] private LacusMovementPrediction destinationBattery;
-    private ProtoRotation rotationScript;
-
-    public bool ableToForward;
 
     public GameObject keyspacep;
     public GameObject keyr;
@@ -37,6 +34,7 @@ public class LacusMovement : MonoBehaviour
         keyspacep = GameObject.Find("space");
         camInitialPos = Camera.main.transform.position;
 
+        mainCamera = Camera.main;
 
         camInitialPos = mainCamera.transform.position;
 

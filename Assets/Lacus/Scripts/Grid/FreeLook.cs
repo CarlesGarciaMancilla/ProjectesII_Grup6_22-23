@@ -17,9 +17,11 @@ public class FreeLook : MonoBehaviour
 
     private bool isDragging = false;
 
+    private Camera mainCamera;
+
     void Start()
     {
-
+        mainCamera = Camera.main;
 
         maximumDownRight = file.FarthestWallPosition();
 
@@ -46,13 +48,13 @@ public class FreeLook : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             
-            displacement = Camera.main.ScreenToWorldPoint(Input.mousePosition) - Camera.main.transform.position;
+            displacement = mainCamera.ScreenToWorldPoint(Input.mousePosition) - mainCamera.transform.position;
 
 
             if(!isDragging)
             {
                 isDragging = true;
-                cameraPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                cameraPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             }
 
         }
@@ -66,11 +68,11 @@ public class FreeLook : MonoBehaviour
 
             if (CheckBoundariesX())
             {
-                Camera.main.transform.position = new Vector3(cameraPosition.x - displacement.x, Camera.main.transform.position.y, Camera.main.transform.position.z);
+                mainCamera.transform.position = new Vector3(cameraPosition.x - displacement.x, mainCamera.transform.position.y, mainCamera.transform.position.z);
             }
             if (CheckBoundariesY())
             {
-                Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, cameraPosition.y - displacement.y, Camera.main.transform.position.z);
+                mainCamera.transform.position = new Vector3(mainCamera.transform.position.x, cameraPosition.y - displacement.y, mainCamera.transform.position.z);
             }
             UnStuckCameraOnCollision();
 
@@ -82,8 +84,8 @@ public class FreeLook : MonoBehaviour
     bool CheckBoundariesX()
     {
         // AABB
-        if (Camera.main.transform.position.x >= maximumLeft &&
-            Camera.main.transform.position.x <= maximumDownRight.x)
+        if (mainCamera.transform.position.x >= maximumLeft &&
+            mainCamera.transform.position.x <= maximumDownRight.x)
         {
             return true;
         }
@@ -96,8 +98,8 @@ public class FreeLook : MonoBehaviour
     bool CheckBoundariesY()
     {
         // AABB
-        if (Camera.main.transform.position.y <= maximumUp &&
-            Camera.main.transform.position.y >= maximumDownRight.y)
+        if (mainCamera.transform.position.y <= maximumUp &&
+            mainCamera.transform.position.y >= maximumDownRight.y)
         {
             return true;
         }
@@ -109,21 +111,21 @@ public class FreeLook : MonoBehaviour
 
     void UnStuckCameraOnCollision()
     {
-        if (Camera.main.transform.position.x > maximumDownRight.x)
+        if (mainCamera.transform.position.x > maximumDownRight.x)
         {
-            Camera.main.transform.position = new Vector3(maximumDownRight.x, Camera.main.transform.position.y, Camera.main.transform.position.z);
+            mainCamera.transform.position = new Vector3(maximumDownRight.x, mainCamera.transform.position.y, mainCamera.transform.position.z);
         }
-        if (Camera.main.transform.position.x < maximumLeft)
+        if (mainCamera.transform.position.x < maximumLeft)
         {
-            Camera.main.transform.position = new Vector3(maximumLeft, Camera.main.transform.position.y, Camera.main.transform.position.z);
+            mainCamera.transform.position = new Vector3(maximumLeft, mainCamera.transform.position.y, mainCamera.transform.position.z);
         }
-        if (Camera.main.transform.position.y < maximumDownRight.y)
+        if (mainCamera.transform.position.y < maximumDownRight.y)
         {
-            Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, maximumDownRight.y, Camera.main.transform.position.z);
+            mainCamera.transform.position = new Vector3(mainCamera.transform.position.x, maximumDownRight.y, mainCamera.transform.position.z);
         }
-        if (Camera.main.transform.position.y > maximumUp)
+        if (mainCamera.transform.position.y > maximumUp)
         {
-            Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, maximumUp, Camera.main.transform.position.z);
+            mainCamera.transform.position = new Vector3(mainCamera.transform.position.x, maximumUp, mainCamera.transform.position.z);
         }
     }
 }
