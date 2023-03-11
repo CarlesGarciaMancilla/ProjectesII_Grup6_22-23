@@ -59,6 +59,16 @@ public class menustage : MonoBehaviour
                 options.SetActive(false);
                 Time.timeScale = 1;
                 break;
+            case "speed":
+                if(Time.timeScale == 1) 
+                { 
+                Time.timeScale = 2;
+                }
+                else if (Time.timeScale == 2)
+                {
+                    Time.timeScale = 1;
+                }
+                break;
             case "mute":
                 if (audioGame.isPlaying)
                 {

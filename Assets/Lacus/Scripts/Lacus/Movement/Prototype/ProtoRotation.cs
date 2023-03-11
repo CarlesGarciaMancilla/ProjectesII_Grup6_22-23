@@ -21,12 +21,12 @@ public class ProtoRotation : MonoBehaviour
 
         if (col == objectCollider)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && Time.timeScale != 0f)
             {
                 rotationAngle += 90f;
                 objectAudio.Play();
             }
-            else if (Input.GetMouseButtonDown(1))
+            else if (Input.GetMouseButtonDown(1) && Time.timeScale != 0f)
             {
                 rotationAngle -= 90f;
                 objectAudio.Play();
