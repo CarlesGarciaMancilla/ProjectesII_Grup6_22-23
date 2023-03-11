@@ -41,8 +41,6 @@ public class LacusMovement : MonoBehaviour
 
         camInitialPos = mainCamera.transform.position;
 
-        Debug.Log(camInitialPos);
-
         initialPosition = transform.position;
         ForwardDestination();
 
