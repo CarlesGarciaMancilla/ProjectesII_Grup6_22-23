@@ -26,7 +26,6 @@ public class menustage : MonoBehaviour
     {
         reset.SetActive(true);
         sceneName = SceneManager.GetActiveScene().name;
-        Screen.SetResolution(720, 1000, FullScreenMode.Windowed);
         StartCoroutine(Transition());
     }
 

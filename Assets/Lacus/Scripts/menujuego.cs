@@ -14,6 +14,7 @@ public class menujuego : MonoBehaviour
     public GameObject menuCredits;
     public GameObject prefabTransition;
     public GameObject LevelSelector;
+    bool resPC;
     public Button level1;
     public Button level2;
     public Button level3;
@@ -31,7 +32,8 @@ public class menujuego : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Screen.SetResolution(720, 1000, FullScreenMode.Windowed);
+        Screen.SetResolution(720, 1080, FullScreenMode.FullScreenWindow);
+        resPC = true;
         StartCoroutine(Transition());
         level2.interactable = false;
         level3.interactable = false;
@@ -120,6 +122,18 @@ public class menujuego : MonoBehaviour
             case "options":
                 menuOptions.SetActive(true);
                 menuPanel.SetActive(false);
+                break;
+            case "resolution":
+                if (resPC == true)
+                {
+                    Screen.SetResolution(1080, 1920, FullScreenMode.FullScreenWindow);
+                    resPC = false;
+                }
+                else if (resPC == false) 
+                {
+                    Screen.SetResolution(720, 1080, FullScreenMode.FullScreenWindow);
+                    resPC = true;    
+                }
                 break;
             case "credits":
                 menuCredits.SetActive(true);
