@@ -23,7 +23,7 @@ public class LacusCheckTile : MonoBehaviour
     {
         // Colisions Amb Tiles
 
-        if (!LacusS.isMoving)
+        if (!Lacus.isMoving)
             return;
 
         if (collider.CompareTag("Battery"))
@@ -38,7 +38,7 @@ public class LacusCheckTile : MonoBehaviour
 
         else if (collider.CompareTag("Stop"))
         {
-            LacusS.isMoving = false;
+            Lacus.isMoving = false;
             LacusS.batteryLeft--;
             StopSound.Play();
         }
@@ -47,7 +47,7 @@ public class LacusCheckTile : MonoBehaviour
         {
             // Change to next scene
             // Canviar la linea de sota
-            LacusS.isMoving = false;
+            Lacus.isMoving = false;
             menu.SetActive(true);
         }
         else if (collider.CompareTag("Tile"))

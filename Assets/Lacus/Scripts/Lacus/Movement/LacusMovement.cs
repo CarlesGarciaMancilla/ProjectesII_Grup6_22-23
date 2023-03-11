@@ -4,8 +4,8 @@ using UnityEngine;
 using DG.Tweening;
 using System.Security.Cryptography;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
-using UnityEngine.SceneManagement;
-
+using UnityEngine.SceneManagement;
+
 public class LacusMovement : MonoBehaviour
 {
     //public Transform lacusParent;
@@ -25,7 +25,7 @@ public class LacusMovement : MonoBehaviour
 
     private Vector3 camInitialPos;
 
-    public Camera mainCamera;
+    [HideInInspector] public bool isMoving = false;
 
 
     // Start is called before the first frame update
@@ -35,15 +35,16 @@ public class LacusMovement : MonoBehaviour
         sceneName = SceneManager.GetActiveScene().name;
         keyr = GameObject.Find("reset");
         keyspacep = GameObject.Find("space");
+        camInitialPos = Camera.main.transform.position;
 
-        ableToForward = true;
-        mainCamera = Camera.main;
 
         camInitialPos = mainCamera.transform.position;
 
+        mainCamera = Camera.main;
         initialPosition = transform.position;
         ForwardDestination();
-
+        //ResetLacus();
+        //ResetLacus();
     }
 
     // Update is called once per frame
@@ -71,63 +72,44 @@ public class LacusMovement : MonoBehaviour
     // ------------------------------
     // Funció principal de Moviment
     // ------------------------------
-    IEnumerator ToDestinationMovementVEdu()
-    {
-        // Degut al Lerp i com esta montat el bucle, el Lerp matxaca la posició del Lacus fent que quan
-        // el Lacus xoca contra una paret no es faci el reset. Per tant, per la Alpha es reverteix al moviment pas a pas
-        while (lacusStats.isMoving)
-        {
-            float duration = 1f;
-            float currentDuration = 0f;
-            Vector3 start = Lacus.transform.position;
-            Vector3 dest = destination.transform.position;
-            while (currentDuration < duration)
-            {
-                currentDuration = Mathf.Min(currentDuration + Time.deltaTime, duration);
-                float ratio = currentDuration / duration;
-                Lacus.transform.position = Vector3.Lerp(start, dest, ratio);
-                mainCamera.transform.position = Lacus.transform.position + Vector3.back * 10f;
-                yield return null;
-            }
-        }
-
+    IEnumerator ToDestinationMovementV3()
+    {
+        while (isMoving)
+        {
+            float duration = 1f;
+            float currentDuration = 0f;
+            Vector3 start = Lacus.transform.position;
+            Vector3 dest = destination.transform.position;
+            while (currentDuration < duration)
+            {
+                currentDuration = Mathf.Min(currentDuration + Time.deltaTime, duration);
+                float ratio = currentDuration / duration;
+                Lacus.transform.position = Vector3.Lerp(start, dest, ratio);
+                Camera.main.transform.position = Lacus.transform.position + Vector3.back * 10f;
+                yield return null;
+            }
+        }
+
     }
-
-    IEnumerator ToDestinationMovementV3()
-    {
-        while (lacusStats.isMoving)
-        {
-            Tween tweenX = Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
-            Tween tweenY = Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
-
-            yield return tweenX.WaitForCompletion();
-            yield return tweenY.WaitForCompletion();
-
-            mainCamera.transform.DOMoveX(destination.transform.position.x, 1f, false);
-            mainCamera.transform.DOMoveY(destination.transform.position.y, 1f, false);
-        }
-
-    }
-
-    IEnumerator ToDestinationMovementV2()
-    {
-        
+    IEnumerator ToDestinationMovementV2()
+    {
+        
         Tween tweenX = Lacus.transform.DOLocalMoveX(destination.transform.position.x, 1f, false);
-        Tween tweenY = Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
-
-        yield return tweenX.WaitForCompletion();
-        yield return tweenY.WaitForCompletion();
-
-        mainCamera.transform.DOMoveX(destination.transform.position.x, 0.35f, false);
-        mainCamera.transform.DOMoveY(destination.transform.position.y, 0.35f, false);
-
-        // Comprobar si en els stops s'atura
-        if (lacusStats.isMoving)
-        {
-
-            StartCoroutine(ToDestinationMovementV2());
-        }
-
+        Tween tweenY = Lacus.transform.DOLocalMoveY(destination.transform.position.y, 1f, false);
+
+        yield return tweenX.WaitForCompletion();
+        yield return tweenY.WaitForCompletion();
+
+        Camera.main.transform.DOMoveX(destination.transform.position.x, 0.35f, false);
+        Camera.main.transform.DOMoveY(destination.transform.position.y, 0.35f, false);
+
+        // Comprobar si en els stops s'atura
+        if (isMoving)
+        {
+
+            StartCoroutine(ToDestinationMovementV2());
+        }
+
     }
 
     // Iniciador del Moviment i on hi accedeix el bucle per avançar
@@ -135,17 +117,17 @@ public class LacusMovement : MonoBehaviour
     {
         if (keyspacep.activeSelf == false)
         { 
-            if (!lacusStats.isMoving)
-            {
-                keyspacep.SetActive(true);
-                lacusStats.isMoving = true;
+            if (!isMoving)
+            {
+                keyspacep.SetActive(true);
+                isMoving = true;
                 StartCoroutine(ToDestinationMovementV3());
 
             }
         }
     }
-    
-    // Funció avançar Destination
+    
+    // Funció avançar Destination
     public void ForwardDestination()
     {
         destination.transform.localPosition = new Vector3(destination.transform.localPosition.x + 1.6f, 0f, 0f);
@@ -161,16 +143,17 @@ public class LacusMovement : MonoBehaviour
     // Mirar en un futur els problemes del reset
     public void ResetLacus()
     {
-        lacusStats.isMoving = false;
+        isMoving = false;
         keyspacep.SetActive(true);
         transform.DOComplete(false);
-        mainCamera.transform.DOComplete(false);
-        // Diria que s'ha de fer aixo per que es pugi fer reset a la bateria
-        lacusStats.ResetBattery();
-        // No va la recarrega del destination
-        destinationBattery.FillTempBattery();
         transform.position = initialPosition;
         ResetDestinationPosition();
-        mainCamera.transform.position = camInitialPos;
+        Camera.main.transform.position = camInitialPos;
+
+        // Diria que s'ha de fer aixo per que es pugi fer reset a la bateria
+        lacusStats.ResetBattery();
+
+        // No va la recarrega del destination
+        destinationBattery.FillTempBattery();
     }
 }

@@ -2,35 +2,24 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class ProtoRotation : MonoBehaviour
 {
-    private GameObject Lacus;
-    [SerializeField] private LacusStats LacusS;
     [SerializeField] private LacusMovement LacusM;
     [SerializeField] private Transform destination;
-    private Camera mainCamera;
+    [SerializeField] private Transform Lacus;
+
     private float rotationAngle = 0;
 
-    private void Start()
-    {
-        // Agafar el LacusStats Principal
-        Lacus = GameObject.FindGameObjectWithTag("Player");
-        LacusS = Lacus.GetComponent<LacusStats>();
-
-        mainCamera = Camera.main;
-
-    }
 
     public void ClickRotation(Transform _gameObject, Collider2D objectCollider, LayerMask objectLayer, AudioSource objectAudio)
     {
         Vector2 mousePosScreenSpace = Input.mousePosition;
-        Vector2 mousePosWorldSpace = mainCamera.ScreenToWorldPoint(mousePosScreenSpace);
+        Vector2 mousePosWorldSpace = Camera.main.ScreenToWorldPoint(mousePosScreenSpace);
 
         Collider2D col = Physics2D.OverlapPoint(mousePosWorldSpace, objectLayer);
 
-        if (col == objectCollider && LacusS.isMoving == false)
+        if (col == objectCollider)
         {
             if (Input.GetMouseButtonDown(0))
             {

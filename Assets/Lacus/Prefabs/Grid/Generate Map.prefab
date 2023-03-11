@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19c2541f774d3bc4185adac65ac4ad09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldCoords: {fileID: 1792408533264988541, guid: 6643ebc39dc9cef42b56b43784394053, type: 3}
+  worldCoords: {fileID: 0}
   levelName: Level_1
   normalTile: {fileID: 343057456601112246, guid: da794e831c1da4f469018c9a0c53a2fa, type: 3}
   arrow: {fileID: 3422180045459200256, guid: 7be8f8c35cf340848b45265a14d00b59, type: 3}

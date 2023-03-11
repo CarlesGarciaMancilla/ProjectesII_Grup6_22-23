@@ -8,7 +8,8 @@ using System.Runtime.CompilerServices;
 public class LacusMovementPrediction : MonoBehaviour
 {
     [SerializeField] private LacusStats stats;
-    [SerializeField] private LacusMovement lacusM;
+    //[SerializeField] GameObject tile;
+    //[SerializeField] private bool locked;
 
     [HideInInspector] private int tempBattery;
 
@@ -31,23 +32,23 @@ public class LacusMovementPrediction : MonoBehaviour
             {
                 FillTempBattery();
             }
-            else if (collider.CompareTag("Stop"))
+            if (collider.CompareTag("Stop"))
             {
                 tempBattery--;
             }
-            else if (collider.CompareTag("End"))
+            if (collider.CompareTag("End"))
             {
                 tempBattery--;
             }
-            else if (collider.CompareTag("Arrow"))
+            if (collider.CompareTag("Arrow"))
             {
                 tempBattery--;
             }
-            else if (collider.CompareTag("Tile"))
+            if (collider.CompareTag("Tile"))
             {
                 tempBattery--;
             }
-            else if (collider.CompareTag("Button"))
+            if (collider.CompareTag("Button"))
             {
                 tempBattery--;
             }
