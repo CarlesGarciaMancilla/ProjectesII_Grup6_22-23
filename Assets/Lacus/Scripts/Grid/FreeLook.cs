@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class FreeLook : MonoBehaviour
 {
     [SerializeField] private ReadLevelFile file;
+    private GameObject Lacus;
+    private LacusStats LacusS;
 
     private Vector3 initialPosition = new Vector3(-1.0f, -1.0f, -1.0f);
     private Vector3 displacement;
@@ -19,6 +22,8 @@ public class FreeLook : MonoBehaviour
 
     void Start()
     {
+
+
         maximumDownRight = file.FarthestWallPosition();
 
         // Correcció de la generació de tiles
@@ -29,7 +34,16 @@ public class FreeLook : MonoBehaviour
 
     private void Update()
     {
-        CameraMovement();
+        if (Lacus == null)
+        {
+            Lacus = GameObject.FindGameObjectWithTag("Player");
+            LacusS = Lacus.GetComponent<LacusStats>();
+        }
+
+        if (LacusS.isMoving == false)
+        {
+            CameraMovement();
+        }
     }
 
 
