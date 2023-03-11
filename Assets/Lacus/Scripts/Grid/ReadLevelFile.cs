@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class ReadLevelFile : MonoBehaviour
 {
-    [SerializeField] private Transform worldCoords;
+    private Camera mainCamera;
     [SerializeField] public string levelName;
 
     [SerializeField] private GameObject normalTile;
@@ -29,20 +29,16 @@ public class ReadLevelFile : MonoBehaviour
     [SerializeField] private GameObject HorizontalWall;
     [SerializeField] private GameObject VerticalWall;
 
-
     float x = 0f; // Posició Tiles X
     float y = 0f; // Posició Tiles Y
     float leftMargin = 0.4f; // Alineació horitzontal
     float topMargin = -0.55f; // Alineació vertical
 
-    private void Awake()
-    {
-        
-    }
-
     void Start()
     {
-        worldCoords.transform.position = new Vector3(2, -3, -10);
+        mainCamera = Camera.main;
+
+        mainCamera.transform.position = new Vector3(2, -3, -10);
         GenerateWalls();
         GenerateMap();
     }
