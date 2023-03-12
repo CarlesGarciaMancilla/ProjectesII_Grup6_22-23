@@ -31,15 +31,6 @@ public class Buttons : MonoBehaviour
         }
     }
 
-    /*private void OnTriggerExit2D(Collider2D collider)
-    {
-        if (collider.CompareTag("Player"))
-        {
-            Debug.Log("EXIT BUTTON");
-            isPressed = false;
-        }
-    }*/
-
     void ChangeSprite()
     {
         if (GetComponent<SpriteRenderer>().sprite == buttonOff)

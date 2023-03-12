@@ -29,23 +29,6 @@ public class OnOffArrow : MonoBehaviour
         }
 
         numLinks = GetActiveLinks();
-        /*if (generateMap == null)
-        {
-            generateMap = GameObject.Find("Generate Map");
-            buttonManager = generateMap.GetComponent<ButtonManager>();
-        }
-
-        for (int i = 0; i < buttonManager.ListButtons.Count; i++)
-        {
-            if (ID == buttonManager.ListButtons[i].GetComponent<Buttons>().ID)
-            {
-                if (buttonManager.ListButtons[i].GetComponent<Buttons>().isPressed)
-                {
-                    ChangeSprite();
-                }
-            }
-            
-        }*/
         
 
     }
@@ -59,9 +42,7 @@ public class OnOffArrow : MonoBehaviour
                 links++;
             }
         }
-
         ChangeSprite();
-
 
         return links;
     }
@@ -80,18 +61,5 @@ public class OnOffArrow : MonoBehaviour
             gameObject.tag = "Arrow";
             GetComponent<SpriteRenderer>().sprite = arrowOn;
         }
-
-        /*if(GetComponent<SpriteRenderer>().sprite == arrowOn)
-        {
-            Debug.Log("Changed Sprite to OFF");
-            gameObject.tag = "Tile";
-            GetComponent<SpriteRenderer>().sprite = arrowOff;
-        }
-        else if (GetComponent<SpriteRenderer>().sprite == arrowOff && numLinks > 0)
-        {
-            Debug.Log("Changed Sprite to ON");
-            gameObject.tag = "Arrow";
-            GetComponent<SpriteRenderer>().sprite = arrowOn;
-        }*/
     }
 }
