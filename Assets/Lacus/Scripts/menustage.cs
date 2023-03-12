@@ -109,43 +109,45 @@ public class menustage : MonoBehaviour
                 if (!PlayerPrefs.HasKey("tuto_4"))
                 {
                     PlayerPrefs.SetInt("tuto_4", 1);
-                }
-                SceneManager.LoadScene("Tutorial_4");
+                }               
+                SceneManager.LoadScene("Level_1");
                 break;
             case "Tutorial_4":
                 if (!PlayerPrefs.HasKey("lev_1"))
                 {
                     PlayerPrefs.SetInt("lev_1", 1);
                 }
-                SceneManager.LoadScene("Level_1");
+                SceneManager.LoadScene("Level_4");               
                 break;
             case "Level_1":
                 if (!PlayerPrefs.HasKey("lev_2"))
                 {
                     PlayerPrefs.SetInt("lev_2", 1);
                 }
-                SceneManager.LoadScene("Level_2");
+                SceneManager.LoadScene("Level_3");
                 break;
             case "Level_2":
                 if (!PlayerPrefs.HasKey("lev_3"))
                 {
                     PlayerPrefs.SetInt("lev_3", 1);
                 }
-                SceneManager.LoadScene("Level_3");
+                SceneManager.LoadScene("Level_5");
+
                 break;
             case "Level_3":
                 if (!PlayerPrefs.HasKey("lev_4"))
                 {
                     PlayerPrefs.SetInt("lev_4", 1);
                 }
-                SceneManager.LoadScene("Level_4");
+                SceneManager.LoadScene("Tutorial_4");               
                 break;
             case "Level_4":
                 if (!PlayerPrefs.HasKey("lev_5"))
                 {
                     PlayerPrefs.SetInt("lev_5", 1);
                 }
-                SceneManager.LoadScene("Level_5");
+                SceneManager.LoadScene("Level_2");
+                
                 break;
             case "Level_5":
                 if (!PlayerPrefs.HasKey("lev_6"))
@@ -155,11 +157,11 @@ public class menustage : MonoBehaviour
                 SceneManager.LoadScene("Level_6");
                 break;
             case "Level_6":
-                if (!PlayerPrefs.HasKey("lev_7"))
-                {
-                    PlayerPrefs.SetInt("lev_7", 1);
-                }
-                SceneManager.LoadScene("Level_7");
+                ////if (!PlayerPrefs.HasKey("lev_7"))
+                ////{
+                ////    PlayerPrefs.SetInt("lev_7", 1);
+                ////}
+                ////SceneManager.LoadScene("Level_7");
                 break;
             case "Level_7":              
                 break;

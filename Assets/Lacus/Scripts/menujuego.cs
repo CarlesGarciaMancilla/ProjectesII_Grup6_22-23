@@ -159,23 +159,24 @@ public class menujuego : MonoBehaviour
                 break;
             case "level4":
                 // LevelSelector.SetActive(false);
-                StartCoroutine(SceneLoad4());
+                StartCoroutine(SceneLoad5());
                 break;
             case "level5":
                 // LevelSelector.SetActive(false);
-                StartCoroutine(SceneLoad5());
+                StartCoroutine(SceneLoad7());
                 break;
             case "level6":
                 // LevelSelector.SetActive(false);
-                StartCoroutine(SceneLoad6());
+                StartCoroutine(SceneLoad4());
+                
                 break;
             case "level7":
                 // LevelSelector.SetActive(false);
-                StartCoroutine(SceneLoad7());
+                StartCoroutine(SceneLoad8());
                 break;
             case "level8":
                 // LevelSelector.SetActive(false);
-                StartCoroutine(SceneLoad8());
+                StartCoroutine(SceneLoad6());
                 break;
             case "level9":
                 // LevelSelector.SetActive(false);
@@ -187,7 +188,7 @@ public class menujuego : MonoBehaviour
                 break;
             case "level11":
                 // LevelSelector.SetActive(false);
-                StartCoroutine(SceneLoad11());
+                //(SceneLoad11());
                 break;
             case "mute":
                 if (audioS.isPlaying) 
