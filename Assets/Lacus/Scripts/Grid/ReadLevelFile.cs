@@ -265,6 +265,7 @@ public class ReadLevelFile : MonoBehaviour
 
         List<GameObject> onOffArrows = new List<GameObject>();
         List<GameObject> buttons = new List<GameObject>();
+        List<GameObject> autoArrows = new List<GameObject>();
 
         int currentID = 0;
 
@@ -286,7 +287,8 @@ public class ReadLevelFile : MonoBehaviour
                     }
                 case '^': // Arrow That Changes Clockwise
                     {
-                        Instantiate(autoArrow, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
+                        GameObject obj = Instantiate(autoArrow, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
+                        buttonManager.ListAutoArrows.Add(obj);
                         break;
                     }
                 case '_': // Normal tile

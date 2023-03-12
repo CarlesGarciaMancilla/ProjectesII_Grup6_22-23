@@ -8,6 +8,7 @@ public class ButtonManager : MonoBehaviour
 {
     public List<GameObject> ListButtons;
     public List<GameObject> ListOnOffArrows;
+    public List<GameObject> ListAutoArrows;
 
     public void DeactivateSprites()
     {
@@ -24,5 +25,10 @@ public class ButtonManager : MonoBehaviour
 
             ListOnOffArrows[i].GetComponent<OnOffArrow>().numLinks = 0;
         }
+        for (int i = 0; i < ListAutoArrows.Count; i++)
+        {
+            ListAutoArrows[i].transform.Rotate(0, 0, 0);
+        }
+
     }
 }
