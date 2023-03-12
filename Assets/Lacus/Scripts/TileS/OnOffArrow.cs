@@ -1,40 +1,56 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class OnOffArrow : MonoBehaviour
 {
-    [SerializeField] public Buttons button;
-    [SerializeField] Sprite arrowOn;
-    [SerializeField] Sprite arrowOff;
-    [SerializeField] GameObject fletxa_button;
+    public int ID;
+    private ButtonManager buttonManager;
+    private GameObject generateMap;
+
+    [SerializeField] public Sprite arrowOn;
+    [SerializeField] public Sprite arrowOff;
+    [SerializeField] public GameObject fletxa_button;
     [SerializeField] GameObject lights;
     [SerializeField] ParticleSystem spark;
-    private int i = 0;
-    // Start is called before the first frame update
-    void Start()
+
+
+    private void Update()
     {
+        /*if (generateMap == null)
+        {
+            generateMap = GameObject.Find("Generate Map");
+            buttonManager = generateMap.GetComponent<ButtonManager>();
+        }
+
+        for (int i = 0; i < buttonManager.ListButtons.Count; i++)
+        {
+            if (ID == buttonManager.ListButtons[i].GetComponent<Buttons>().ID)
+            {
+                if (buttonManager.ListButtons[i].GetComponent<Buttons>().isPressed)
+                {
+                    ChangeSprite();
+                }
+            }
+            
+        }*/
+        
 
     }
-
-    // Update is called once per frame
-    void Update()
+    public void ChangeSprite()
     {
-        if (button.isPressed)//is On
+        if(GetComponent<SpriteRenderer>().sprite == arrowOn)
         {
-            this.gameObject.GetComponent<SpriteRenderer>().sprite = arrowOn;
-            lights.SetActive(true);
-            if(i == 0)
-            spark.Play();
-            fletxa_button.tag = "Arrow";
-            i++;
+            Debug.Log("Changed Sprite to OFF");
+            gameObject.tag = "Tile";
+            GetComponent<SpriteRenderer>().sprite = arrowOff;
         }
-        else// is Off
+        else if (GetComponent<SpriteRenderer>().sprite == arrowOff)
         {
-            i = 0;
-            this.gameObject.GetComponent<SpriteRenderer>().sprite = arrowOff;
-            lights.SetActive(false);
-            fletxa_button.tag = "Tile";
+            Debug.Log("Changed Sprite to ON");
+            gameObject.tag = "Arrow";
+            GetComponent<SpriteRenderer>().sprite = arrowOn;
         }
     }
 }

@@ -29,6 +29,8 @@ public class ReadLevelFile : MonoBehaviour
     [SerializeField] private GameObject HorizontalWall;
     [SerializeField] private GameObject VerticalWall;
 
+    private ButtonManager buttonManager;
+
 
     float x = 0f; // Posició Tiles X
     float y = 0f; // Posició Tiles Y
@@ -42,6 +44,8 @@ public class ReadLevelFile : MonoBehaviour
 
     void Start()
     {
+        buttonManager = GetComponent<ButtonManager>();
+        
         worldCoords.transform.position = new Vector3(2, -3, -10);
         GenerateWalls();
         GenerateMap();
@@ -85,9 +89,15 @@ public class ReadLevelFile : MonoBehaviour
             {
                 if (mapFile[j] == c)
                 {
+                    // Dividit entre 2 pels espais en blanc
                     tiles.Add(new Vector2(columnCounter / 2, i));
                 }
 
+                // Ignorar els chars identificadors
+                if(mapFile[j] == '0' || mapFile[j] == '1' || mapFile[j] == '2' || mapFile[j] == '3' || mapFile[j] == '4' || mapFile[j] == '5' || mapFile[j] == '6' || mapFile[j] == '7' || mapFile[j] == '8' || mapFile[j] == '9')
+                {
+                    columnCounter--;
+                }
                 columnCounter++;
                 j++;
             }
@@ -253,8 +263,11 @@ public class ReadLevelFile : MonoBehaviour
 
         string line = ReadFile();
 
-        List<OnOffArrow> onOffArrows = new List<OnOffArrow>();
-        Buttons arrowsButton = null;
+        List<GameObject> onOffArrows = new List<GameObject>();
+        List<GameObject> buttons = new List<GameObject>();
+
+        int currentID = 0;
+
         foreach (char tile in line)
         {
             switch (tile)
@@ -267,7 +280,8 @@ public class ReadLevelFile : MonoBehaviour
                 case '>': // Arrow Button
                     {
                         GameObject obj = Instantiate(onOffArrow, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
-                        onOffArrows.Add(obj.GetComponent<OnOffArrow>());
+                        obj.GetComponent<OnOffArrow>().ID = currentID;
+                        buttonManager.ListOnOffArrows.Add(obj);
                         break;
                     }
                 case '^': // Arrow That Changes Clockwise
@@ -294,7 +308,8 @@ public class ReadLevelFile : MonoBehaviour
                 case '?': // Button
                     {
                         GameObject obj = Instantiate(button, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
-                        arrowsButton = obj.GetComponent<Buttons>();
+                        obj.GetComponent<Buttons>().ID = currentID;
+                        buttonManager.ListButtons.Add(obj);
                         break;
                     }
                 case '!': // Deactivated Arrow
@@ -322,8 +337,22 @@ public class ReadLevelFile : MonoBehaviour
                     {
                         break;
                     }
-
-
+                case '0': // Assignar currentID
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                    {
+                        // Convertir char a int
+                        currentID = tile - '0';
+                        x--;
+                        break;
+                    }
                 // En el cas de fer més caselles, seguir la estructura
 
                 case ' ': // Usat per legibilitat al txt
@@ -350,9 +379,23 @@ public class ReadLevelFile : MonoBehaviour
             x++;
         }
 
+        /*// Botons mirent fletxes
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            for (int j = 0; j < onOffArrows.Count; j++)
+            {
+                onOffArrows[i].button = buttons[j];
+            }
+        }*/
+
+
+
+
+
+        /*// Fletxes miren Botons
         foreach (var arr in onOffArrows)
         {
             arr.button = arrowsButton;
-        }
+        }*/
     }
 }
