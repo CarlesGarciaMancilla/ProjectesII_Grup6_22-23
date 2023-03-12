@@ -5,12 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Lacus/Scenes/Menu.unity
     guid: cb25b813016ea0a469e2f1605cfb9b3c
@@ -44,7 +38,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Lacus/Scenes/Level_6.unity
     guid: ec9c77216e18659439a65ab0c965e925
-  - enabled: 1
-    path: Assets/Lacus/Scenes/Level_7.unity
-    guid: 3bb454f13c1bee648861802c7573c03c
   m_configObjects: {}
