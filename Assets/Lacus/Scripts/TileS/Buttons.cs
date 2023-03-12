@@ -6,32 +6,42 @@ using DG.Tweening;
 
 public class Buttons : MonoBehaviour
 {
-    public bool isPressed;
+    public int ID;
+
+    public bool _isPressed;
+
     public Sprite buttonOn;
     public Sprite buttonOff;
     [SerializeField] GameObject lights;
     [SerializeField] private AudioSource buttonOnOffSound;
+
+    public bool isPressed
+    {
+        get { return _isPressed; }
+        set { _isPressed = value; }
+    }
+
+    // Codi per apagar encendre el boto
     void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.CompareTag("Player"))
         {
-            if (isPressed)
-            {
-                Debug.Log("Button off");
-                isPressed = false;
-                this.gameObject.GetComponent<SpriteRenderer>().sprite=buttonOff;
-                lights.SetActive(false);
-                buttonOnOffSound.Play();
-            }
-            if (!isPressed)
-            {
-                Debug.Log("Button on");
-                isPressed = true;
-                this.gameObject.GetComponent<SpriteRenderer>().sprite = buttonOn;
-                lights.SetActive(true);
-                buttonOnOffSound.Play();
-            }
+            isPressed = !isPressed;
+            ChangeSprite();
         }
     }
+
+    void ChangeSprite()
+    {
+        if (GetComponent<SpriteRenderer>().sprite == buttonOff)
+        {
+            GetComponent<SpriteRenderer>().sprite = buttonOn;
+        }
+        else if(GetComponent<SpriteRenderer>().sprite == buttonOn)
+        {
+            GetComponent<SpriteRenderer>().sprite = buttonOff;
+        }
+    }
+
 
 }

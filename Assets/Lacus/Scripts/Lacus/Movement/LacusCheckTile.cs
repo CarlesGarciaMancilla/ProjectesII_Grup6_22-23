@@ -33,7 +33,7 @@ public class LacusCheckTile : MonoBehaviour
 
         else if (collider.CompareTag("Button"))
         {
-            // Activates / Deactivates the button
+            LacusS.batteryLeft--;
         }
 
         else if (collider.CompareTag("Stop"))

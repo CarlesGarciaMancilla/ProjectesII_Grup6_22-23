@@ -25,10 +25,20 @@ public class LacusMovement : MonoBehaviour
 
     public Camera mainCamera;
 
+    private GameObject generateMap;
+    private ButtonManager buttonManager;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
+        if (generateMap == null)
+        {
+            generateMap = GameObject.Find("Generate Map");
+            buttonManager = generateMap.GetComponent<ButtonManager>();
+        }
+
         // Aixo NO va aqui
         sceneName = SceneManager.GetActiveScene().name;
         keyr = GameObject.Find("reset");
@@ -169,5 +179,9 @@ public class LacusMovement : MonoBehaviour
         transform.position = initialPosition;
         ResetDestinationPosition();
         mainCamera.transform.position = camInitialPos;
+
+        // Desactiva tots els interactuables de la escena, per ara, nomes botons i fletxes activables
+        buttonManager.DeactivateSprites();
+
     }
 }

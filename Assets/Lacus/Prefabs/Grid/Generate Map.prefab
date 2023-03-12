@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1919615391208795161}
   - component: {fileID: 1919615391208795162}
+  - component: {fileID: 3949604257755391798}
   m_Layer: 0
   m_Name: Generate Map
   m_TagString: Untagged
@@ -61,3 +62,17 @@ MonoBehaviour:
   BotRightWall: {fileID: 3839649157458614915, guid: cc1daa3e450b01746ae839e69ed9e12e, type: 3}
   HorizontalWall: {fileID: 7540536976370952461, guid: 5d8945d76a3eab441a622d1422d753ea, type: 3}
   VerticalWall: {fileID: 8898316894452641634, guid: 4947dc51c77e1bd4fa8844dd31d71657, type: 3}
+--- !u!114 &3949604257755391798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919615391208795163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f6089fad29ca64f83602a87e836503, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ListButtons: []
+  ListOnOffArrows: []
