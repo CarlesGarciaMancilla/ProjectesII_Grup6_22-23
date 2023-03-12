@@ -378,24 +378,5 @@ public class ReadLevelFile : MonoBehaviour
             }
             x++;
         }
-
-        /*// Botons mirent fletxes
-        for (int i = 0; i < buttons.Count; i++)
-        {
-            for (int j = 0; j < onOffArrows.Count; j++)
-            {
-                onOffArrows[i].button = buttons[j];
-            }
-        }*/
-
-
-
-
-
-        /*// Fletxes miren Botons
-        foreach (var arr in onOffArrows)
-        {
-            arr.button = arrowsButton;
-        }*/
     }
 }
