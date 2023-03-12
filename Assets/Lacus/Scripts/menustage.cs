@@ -65,11 +65,12 @@ public class menustage : MonoBehaviour
                     {
                         Time.timeScale = 2;
                     }
+                    else if (Time.timeScale == 2)
+                    {
+                        Time.timeScale = 1;
+                    }
                 }
-                else if (Time.timeScale == 2)
-                {
-                    Time.timeScale = 1;
-                }
+                
                 break;
             case "mute":
                 if (audioGame.isPlaying)
