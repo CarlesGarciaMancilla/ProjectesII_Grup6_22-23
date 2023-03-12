@@ -26,20 +26,19 @@ public class Buttons : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
-            Debug.Log("ENTER BUTTON");
-            isPressed = true;
+            isPressed = !isPressed;
             ChangeSprite();
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collider)
+    /*private void OnTriggerExit2D(Collider2D collider)
     {
         if (collider.CompareTag("Player"))
         {
             Debug.Log("EXIT BUTTON");
             isPressed = false;
         }
-    }
+    }*/
 
     void ChangeSprite()
     {
