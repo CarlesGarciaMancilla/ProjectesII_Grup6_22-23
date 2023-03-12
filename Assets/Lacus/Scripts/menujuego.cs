@@ -98,19 +98,19 @@ public class menujuego : MonoBehaviour
                 {
                     level8.interactable = true;
                 }
-                break;
+                
 
                 if (PlayerPrefs.GetInt("lev_5") == 1)
                 {
                     level9.interactable = true;
                 }
-                break;
+               
 
                 if (PlayerPrefs.GetInt("lev_6") == 1)
                 {
                     level10.interactable = true;
                 }
-                break;
+             
 
                 if (PlayerPrefs.GetInt("lev_7") == 1)
                 {
