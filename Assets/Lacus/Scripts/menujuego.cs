@@ -188,7 +188,7 @@ public class menujuego : MonoBehaviour
                 break;
             case "level11":
                 // LevelSelector.SetActive(false);
-                //(SceneLoad11());
+                StartCoroutine(SceneLoad11());
                 break;
             case "mute":
                 if (audioS.isPlaying) 
@@ -296,7 +296,7 @@ public class menujuego : MonoBehaviour
         prefabTransition.SetActive(true);
         animator.SetTrigger("StartTransition");
         yield return new WaitForSeconds(transitionTime);
-        SceneManager.LoadScene("Level_7");
+        SceneManager.LoadScene("Level_8");
     }
 
     // Fer les SceneLoad AIXI, NO facis 70 mil funcions que es practicament lo mateix y que nomes canvi 1 cosa, es fica un parametre a la funcio i et serveix per totes les coses

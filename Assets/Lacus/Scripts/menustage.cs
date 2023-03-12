@@ -157,11 +157,11 @@ public class menustage : MonoBehaviour
                 SceneManager.LoadScene("Level_6");
                 break;
             case "Level_6":
-                ////if (!PlayerPrefs.HasKey("lev_7"))
-                ////{
-                ////    PlayerPrefs.SetInt("lev_7", 1);
-                ////}
-                ////SceneManager.LoadScene("Level_7");
+                if (!PlayerPrefs.HasKey("lev_7"))
+                {
+                    PlayerPrefs.SetInt("lev_7", 1);
+                }
+                SceneManager.LoadScene("Level_8");
                 break;
             case "Level_7":              
                 break;
