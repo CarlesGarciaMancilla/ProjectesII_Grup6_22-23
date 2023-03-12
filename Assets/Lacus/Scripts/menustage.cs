@@ -59,9 +59,12 @@ public class menustage : MonoBehaviour
                 Time.timeScale = 1;
                 break;
             case "speed":
-                if(Time.timeScale == 1) 
-                { 
-                Time.timeScale = 2;
+                if (Time.timeScale != 0)
+                {
+                    if (Time.timeScale == 1)
+                    {
+                        Time.timeScale = 2;
+                    }
                 }
                 else if (Time.timeScale == 2)
                 {
@@ -170,13 +173,17 @@ public class menustage : MonoBehaviour
 
     public void SpaceActive() 
     {
-        space.SetActive(false);
-       
+        if (Time.timeScale != 0)
+        {
+            space.SetActive(false);
+        }
     }
     public void ResetActive() 
     {
-        reset.SetActive(false);
-       
+        if (Time.timeScale != 0)
+        {
+            reset.SetActive(false);
+        }
     }
    
 

@@ -7,6 +7,7 @@ public class AutoArrow : MonoBehaviour
     float rotationAngle = 0;
 
     private ProtoRotation rotationScript;
+    [SerializeField] private ParticleSystem autoArrowParticles;
 
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -15,6 +16,7 @@ public class AutoArrow : MonoBehaviour
             rotationAngle -= 90f;
             this.transform.Rotate(0f, 0f, rotationAngle, Space.World);
             rotationAngle = 0f;
+            autoArrowParticles.Play();
 
         }
     }
