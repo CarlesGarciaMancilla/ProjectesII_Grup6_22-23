@@ -17,7 +17,12 @@ public class OnOffArrow : MonoBehaviour
     [SerializeField] public GameObject fletxa_button;
     [SerializeField] GameObject lights;
     [SerializeField] ParticleSystem spark;
+    bool isOn;
 
+    private void Start()
+    {
+        isOn = false;
+    }
 
     private void Update()
     {
@@ -51,14 +56,26 @@ public class OnOffArrow : MonoBehaviour
         if (numLinks == 0)
         {
             Debug.Log("Changed Sprite to OFF");
+            if (isOn)
+            {
+                spark.Play();
+            }
+            isOn = false;
             gameObject.tag = "Tile";
             GetComponent<SpriteRenderer>().sprite = arrowOff;
+            lights.SetActive(false);
         }
         else if (numLinks > 0)
         {
             Debug.Log("Changed Sprite to ON");
+            if (isOn == false)
+            {
+                spark.Play();
+            }
+            isOn = true;
             gameObject.tag = "Arrow";
             GetComponent<SpriteRenderer>().sprite = arrowOn;
+            lights.SetActive(true);
         }
     }
 }
