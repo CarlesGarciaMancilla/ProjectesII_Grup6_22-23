@@ -55,7 +55,6 @@ public class OnOffArrow : MonoBehaviour
     {
         if (numLinks == 0)
         {
-            Debug.Log("Changed Sprite to OFF");
             if (isOn)
             {
                 spark.Play();
@@ -67,7 +66,6 @@ public class OnOffArrow : MonoBehaviour
         }
         else if (numLinks > 0)
         {
-            Debug.Log("Changed Sprite to ON");
             if (isOn == false)
             {
                 spark.Play();

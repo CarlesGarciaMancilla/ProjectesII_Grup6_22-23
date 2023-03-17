@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using Unity.Mathematics;
+//using Unity.Mathematics;
 using UnityEngine;
 
 public class ReadLevelFile : MonoBehaviour
@@ -30,7 +30,6 @@ public class ReadLevelFile : MonoBehaviour
     [SerializeField] private GameObject VerticalWall;
 
     private ButtonManager buttonManager;
-
 
     float x = 0f; // Posició Tiles X
     float y = 0f; // Posició Tiles Y
@@ -94,7 +93,8 @@ public class ReadLevelFile : MonoBehaviour
                 }
 
                 // Ignorar els chars identificadors
-                if(mapFile[j] == '0' || mapFile[j] == '1' || mapFile[j] == '2' || mapFile[j] == '3' || mapFile[j] == '4' || mapFile[j] == '5' || mapFile[j] == '6' || mapFile[j] == '7' || mapFile[j] == '8' || mapFile[j] == '9')
+                if(mapFile[j] == '0' || mapFile[j] == '1' || mapFile[j] == '2' || mapFile[j] == '3' || mapFile[j] == '4' || mapFile[j] == '5' || mapFile[j] == '6' || mapFile[j] == '7' || mapFile[j] == '8' || mapFile[j] == '9' 
+                    || mapFile[j] == '!' || mapFile[j] == '¡' || mapFile[j] == '?' || mapFile[j] == '¿')
                 {
                     columnCounter--;
                 }
@@ -263,31 +263,37 @@ public class ReadLevelFile : MonoBehaviour
 
         string line = ReadFile();
 
-        List<GameObject> onOffArrows = new List<GameObject>();
-        List<GameObject> buttons = new List<GameObject>();
-        List<GameObject> autoArrows = new List<GameObject>();
+        //List<GameObject> onOffArrows = new List<GameObject>();
+        //List<GameObject> buttons = new List<GameObject>();
+        //List<GameObject> autoArrows = new List<GameObject>();
 
         int currentID = 0;
 
+        Quaternion importantTilessOrientation = new Quaternion(0, 0, 0, 0);
+
         foreach (char tile in line)
         {
+
+            int randomIntRotation = UnityEngine.Random.Range(0,4);
+            Quaternion currentRotation = new Quaternion(0, 0 + 90 * randomIntRotation, 0, 0);
+
             switch (tile)
             {
                 case '<': // Arrow
                     {
-                        Instantiate(arrow, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
+                        Instantiate(arrow, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), currentRotation);
                         break;
                     }
                 case '>': // Arrow Button
                     {
-                        GameObject obj = Instantiate(onOffArrow, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
+                        GameObject obj = Instantiate(onOffArrow, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), currentRotation);
                         obj.GetComponent<OnOffArrow>().ID = currentID;
                         buttonManager.ListOnOffArrows.Add(obj);
                         break;
                     }
                 case '^': // Arrow That Changes Clockwise
                     {
-                        GameObject obj = Instantiate(autoArrow, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
+                        GameObject obj = Instantiate(autoArrow, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), importantTilessOrientation);
                         buttonManager.ListAutoArrows.Add(obj);
                         break;
                     }
@@ -303,20 +309,15 @@ public class ReadLevelFile : MonoBehaviour
                     }
                 case 'L': // Lacus
                     {
-                        Instantiate(lacus, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
+                        Instantiate(lacus, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), currentRotation);
                         Instantiate(normalTile, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
                         break;
                     }
-                case '?': // Button
+                case 'b': // Button
                     {
                         GameObject obj = Instantiate(button, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
                         obj.GetComponent<Buttons>().ID = currentID;
                         buttonManager.ListButtons.Add(obj);
-                        break;
-                    }
-                case '!': // Deactivated Arrow
-                    {
-                        Instantiate(arrow, new Vector3(x - leftMargin - x * (1 - sprite.transform.localScale.x), y - topMargin - y * (1 - sprite.transform.localScale.y), 0), Quaternion.identity);
                         break;
                     }
                 case 'F': // Exit
@@ -352,6 +353,32 @@ public class ReadLevelFile : MonoBehaviour
                     {
                         // Convertir char a int
                         currentID = tile - '0';
+                        x--;
+                        break;
+                    }
+                case '!': // Rotació Right
+                    {
+                        importantTilessOrientation = Quaternion.Euler(0, 0, 0);
+                        x--;
+                        break;
+                    }
+                case '¡': // Rotació Up
+                    {
+                        Debug.Log("ASCII NOT ¡");
+                        importantTilessOrientation = Quaternion.Euler(0, 90, 0);
+                        x--;
+                        break;
+                    }
+                case '?':// Rotació Left
+                    {
+                        importantTilessOrientation = Quaternion.Euler(0, 180, 0);
+                        x--;
+                        break;
+                    }
+                case '¿':// Rotació Down
+                    {
+                        Debug.Log("ASCII NOT ¿");
+                        importantTilessOrientation = Quaternion.Euler(0, 270, 0);
                         x--;
                         break;
                     }
