@@ -15,6 +15,7 @@ public class LacusMovement : MonoBehaviour
     private Vector3 initialPosition;
     [SerializeField] private Collider2D destinationCollider;
     [SerializeField] private LacusMovementPrediction destinationBattery;
+    [SerializeField] private Animator lacusAnimator;
     private ProtoRotation rotationScript;
 
     public GameObject keyspacep;
@@ -71,6 +72,15 @@ public class LacusMovement : MonoBehaviour
         if (keyr.activeSelf == false) 
         {
             SceneManager.LoadScene(sceneName);
+        }
+
+        if (lacusStats.isMoving)
+        {
+            lacusAnimator.SetBool("isWalking", true);
+        }
+        else
+        {
+            lacusAnimator.SetBool("isWalking", false);
         }
  
     }
