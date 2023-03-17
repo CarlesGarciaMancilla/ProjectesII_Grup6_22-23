@@ -34,12 +34,12 @@ public class ProtoRotation : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0) && Time.timeScale != 0)
             {
-                rotationAngle += 90f;
+                rotationAngle -= 90f;
                 objectAudio.Play();
             }
             else if (Input.GetMouseButtonDown(1) && Time.timeScale != 0)
             {
-                rotationAngle -= 90f;
+                rotationAngle += 90f;
                 objectAudio.Play();
             }
             _gameObject.Rotate(0f, 0f, rotationAngle, Space.World);
