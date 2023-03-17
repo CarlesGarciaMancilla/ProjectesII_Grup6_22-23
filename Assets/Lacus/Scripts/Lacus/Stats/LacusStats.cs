@@ -26,6 +26,14 @@ public class LacusStats : MonoBehaviour
 
     void Update()
     {
-        
+        CheckIsMoving();
+    }
+
+    private void CheckIsMoving()
+    {
+        if (batteryLeft == 0)
+        {
+            isMoving = false;
+        }
     }
 }
