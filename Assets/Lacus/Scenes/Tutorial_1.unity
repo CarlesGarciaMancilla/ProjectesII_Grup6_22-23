@@ -1425,6 +1425,9 @@ MonoBehaviour:
   space: {fileID: 62366498}
   reset: {fileID: 630101269}
   options: {fileID: 1730872191}
+  speed: {fileID: 1353460991}
+  wantedColor: {r: 1, g: 1, b: 1, a: 0.5882353}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!82 &493380712
 AudioSource:
   m_ObjectHideFlags: 0

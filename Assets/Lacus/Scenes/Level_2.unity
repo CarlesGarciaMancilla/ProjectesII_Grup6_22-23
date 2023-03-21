@@ -3448,6 +3448,9 @@ MonoBehaviour:
   space: {fileID: 54338838}
   reset: {fileID: 1081157975}
   options: {fileID: 1132905003}
+  speed: {fileID: 1026069310}
+  wantedColor: {r: 1, g: 1, b: 1, a: 0.5882353}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &1117265416
 Transform:
   m_ObjectHideFlags: 0
@@ -5509,3 +5512,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ListButtons: []
   ListOnOffArrows: []
+  ListAutoArrows: []

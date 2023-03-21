@@ -3051,6 +3051,9 @@ MonoBehaviour:
   space: {fileID: 1375640842}
   reset: {fileID: 1961129664}
   options: {fileID: 596408027}
+  speed: {fileID: 1242400232}
+  wantedColor: {r: 1, g: 1, b: 1, a: 0.5882353}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &1205170858
 Transform:
   m_ObjectHideFlags: 0
