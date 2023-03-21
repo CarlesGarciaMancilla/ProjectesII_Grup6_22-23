@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
+
 
 public class menustage : MonoBehaviour
 {
@@ -19,6 +19,10 @@ public class menustage : MonoBehaviour
     public GameObject space;
     public GameObject reset;
     public GameObject options;
+    public Button speed;
+    public Color wantedColor;
+    public Color defaultColor;
+    ColorBlock cb;
 
 
     // Start is called before the first frame update
@@ -27,11 +31,39 @@ public class menustage : MonoBehaviour
         reset.SetActive(true);
         sceneName = SceneManager.GetActiveScene().name;
         StartCoroutine(Transition());
+        ColorBlock cb = speed.colors;
+        
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Time.timeScale == 2)
+        {
+            cb.normalColor = wantedColor;
+            cb.highlightedColor = wantedColor;
+            cb.pressedColor = wantedColor;
+            cb.selectedColor = wantedColor;
+            cb.disabledColor = wantedColor;
+            cb.colorMultiplier = 1;
+            speed.colors = cb;
+        }
+        else if (Time.timeScale == 1)
+        {
+            cb.normalColor = defaultColor;
+            cb.highlightedColor = defaultColor;
+            cb.pressedColor = defaultColor;
+            cb.selectedColor = defaultColor;
+            cb.disabledColor = defaultColor;
+            cb.colorMultiplier = 1;
+            speed.colors = cb;
+
+        }
+
+
+
 
     }
     public void GestionClickMenuFinal(string menuf)
@@ -188,7 +220,6 @@ public class menustage : MonoBehaviour
             reset.SetActive(false);
         }
     }
-   
 
 
 
